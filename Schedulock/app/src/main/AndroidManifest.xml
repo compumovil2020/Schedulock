@@ -9,8 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".registrar_calendario"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".Fragments.CalendariosFragment"></activity>
+        <activity android:name=".NavigationDrawer" />
+        <activity android:name=".Fragments.registrar_calendario" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
