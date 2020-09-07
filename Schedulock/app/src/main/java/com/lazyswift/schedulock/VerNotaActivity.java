@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.lazyswift.schedulock.Modelo.EditarNotaActivity;
-
 public class VerNotaActivity extends AppCompatActivity {
 
     @Override

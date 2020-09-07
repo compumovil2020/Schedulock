@@ -25,7 +25,7 @@ public class VerDiaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_dia);
 
-        recyclerViewActividades = findViewById(R.id.list_actividades);
+        recyclerViewActividades = findViewById(R.id.list_actividades_dia);
         imgAdd = findViewById(R.id.btn_add_act);
         listaActividades = new ArrayList<>();
 
@@ -46,7 +46,7 @@ public class VerDiaActivity extends AppCompatActivity {
 
     public void mostrarData(){
         recyclerViewActividades.setLayoutManager(new LinearLayoutManager(getBaseContext()));
-        adapterActividad = new AdapterActividad(getBaseContext(), listaActividades);
+        adapterActividad = new AdapterActividad(this, listaActividades);
         recyclerViewActividades.setAdapter(adapterActividad);
 
         adapterActividad.setOnClickListener(new View.OnClickListener() {

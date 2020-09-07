@@ -29,7 +29,7 @@ public class NotasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notas);
 
-        recyclerViewNotas = findViewById(R.id.list_calendarios);
+        recyclerViewNotas = findViewById(R.id.list_notas);
         imgAdd = findViewById(R.id.btn_add_calendar);
         listaNotas = new ArrayList<>();
 

@@ -39,7 +39,7 @@ public class AdapterNota extends RecyclerView.Adapter<AdapterNota.ViewHolder> im
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String nombre = model.get(position).nombre;
-        String actividad = model.get(position).actividad.nombre;
+        String actividad = model.get(position).actividad != null ? model.get(position).actividad.nombre : "";
 
         holder.nombre.setText(nombre);
         holder.actividad.setText(actividad);
