@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class registrar_calendario extends AppCompatActivity {
+public class RegistrarCalendario extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
