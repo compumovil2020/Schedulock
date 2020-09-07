@@ -9,20 +9,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.lazyswift.schedulock.Modelo.Calendario;
+import com.lazyswift.schedulock.Modelo.Actividad;
+import com.lazyswift.schedulock.Modelo.Nota;
 import com.lazyswift.schedulock.R;
 
 import java.util.ArrayList;
 
-public class AdapterCalendario extends RecyclerView.Adapter<AdapterCalendario.ViewHolder> implements View.OnClickListener{
+public class AdapterNota extends RecyclerView.Adapter<AdapterNota.ViewHolder> implements View.OnClickListener{
 
     LayoutInflater inflater;
-    ArrayList<Calendario> model;
+    ArrayList<Nota> model;
 
     //listener
     private View.OnClickListener listener;
 
-    public AdapterCalendario(Context context, ArrayList<Calendario> model){
+    public AdapterNota(Context context, ArrayList<Nota> model){
         this.inflater = LayoutInflater.from(context);
         this.model = model;
     }
@@ -30,7 +31,7 @@ public class AdapterCalendario extends RecyclerView.Adapter<AdapterCalendario.Vi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.card_calendario, parent, false);
+        View view = inflater.inflate(R.layout.card_nota, parent, false);
         view.setOnClickListener(this);
         return new ViewHolder(view);
     }
@@ -38,9 +39,10 @@ public class AdapterCalendario extends RecyclerView.Adapter<AdapterCalendario.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String nombre = model.get(position).nombre;
-        String etiqueta = model.get(position).etiqueta;
+        String actividad = model.get(position).actividad.nombre;
+
         holder.nombre.setText(nombre);
-        holder.etiqueta.setText(etiqueta);
+        holder.actividad.setText(actividad);
     }
 
     @Override
@@ -57,12 +59,12 @@ public class AdapterCalendario extends RecyclerView.Adapter<AdapterCalendario.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView nombre, etiqueta;
+        TextView nombre, actividad;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            nombre = itemView.findViewById(R.id.tv_nom_calendario);
-            etiqueta = itemView.findViewById(R.id.tv_etiqueta);
+            nombre = itemView.findViewById(R.id.tv_nom_nota);
+            actividad = itemView.findViewById(R.id.tv_actividad);
         }
     }
 

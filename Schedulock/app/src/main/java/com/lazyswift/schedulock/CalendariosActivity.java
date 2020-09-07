@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import com.lazyswift.schedulock.Adapters.AdapterCalendario;
 import com.lazyswift.schedulock.Modelo.Calendario;
@@ -16,6 +19,7 @@ public class CalendariosActivity extends AppCompatActivity {
 
     AdapterCalendario adapterCalendario;
     RecyclerView recyclerViewCalendarios;
+    ImageView imgAdd;
     ArrayList<Calendario> listaCalendarios;
 
     @Override
@@ -24,6 +28,7 @@ public class CalendariosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_calendarios);
 
         recyclerViewCalendarios = findViewById(R.id.list_calendarios);
+        imgAdd = findViewById(R.id.btn_add_calendar);
         listaCalendarios = new ArrayList<>();
 
         //cargar lista
@@ -32,12 +37,13 @@ public class CalendariosActivity extends AppCompatActivity {
         mostrarData();
 
 
+
     }
 
     public void cargarLista(){
         for(int i = 1; i < 6; i++)
         {
-            listaCalendarios.add(new Calendario("Calendario "+i, "Categoria "+i));
+            listaCalendarios.add(new Calendario("Calendario "+i, "Etiqueta "+i));
         }
     }
 
@@ -49,10 +55,14 @@ public class CalendariosActivity extends AppCompatActivity {
         adapterCalendario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String nombre = listaCalendarios.get(recyclerViewCalendarios.getChildAdapterPosition(view)).nombre;
-                String categoria = listaCalendarios.get(recyclerViewCalendarios.getChildAdapterPosition(view)).categoria;
+            startActivity(new Intent(getBaseContext(), VerCalendarioActivity.class));
             }
         });
+    }
+
+    public void goAddCalendar(View v)
+    {
+        startActivity(new Intent(this, RegistrarCalendario.class));
     }
 
 }
