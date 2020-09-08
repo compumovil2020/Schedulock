@@ -7,7 +7,7 @@
     tools:context=".MostrarRuta">
 
     <ImageView
-        android:id="@+id/ibFibonacci"
+        android:id="@+id/imageRutas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/mostrar_ruta"

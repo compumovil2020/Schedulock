@@ -7,10 +7,9 @@
     tools:context=".MostrarMarker">
 
     <ImageView
-        android:id="@+id/ibFibonacci"
+        android:id="@+id/mostrar_marker"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:onClick="goMostrarRuta"
         android:src="@drawable/mostrar_marker"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,6 +18,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         tools:src="@drawable/mostrar_marker" />
+
+    <ImageView
+        android:id="@+id/buttonPasarRuta"
+        android:layout_width="37dp"
+        android:layout_height="27dp"
+        android:onClick="goMostrarRuta"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.347"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.406"
+        tools:src="@drawable/direcciones" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
