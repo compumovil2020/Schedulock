@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -35,5 +36,234 @@
             android:onClick="goMenuDeslizable"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        tools:ignore="MissingConstraints">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_weight="0.3">
+            <TextView
+                android:id="@+id/Logros"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="¡LOGROS!"
+                android:textAlignment="center"
+                android:textColor="#070707"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+            <FrameLayout
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center">
+
+                <ProgressBar
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:rotation="90"
+                    android:progress="78"
+                    android:layout_marginTop="20dp"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:progressDrawable="@drawable/forma_progreso_nivel_circular"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Progreso"
+                    android:textAlignment="center"
+                    android:layout_marginTop="50dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="84%"
+                    android:textAlignment="center"
+                    android:layout_marginTop="85dp"/>
+            </FrameLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="#BFF5E5">
+
+                    <TextView
+                        android:id="@+id/puntos"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:text="Lista de logros"
+                        android:textColor="#070707"
+                        android:textSize="14sp"
+                        android:layout_weight="0.5"
+                         />
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:text="Puntaje "
+                        android:textAlignment="textEnd"
+                        android:layout_weight="0.5"
+                        android:textColor="#070707"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="#74F894">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:drawableLeft="@drawable/icono_trofeo_rellenado"
+                        android:text="Título del Logro"
+                        android:textAlignment="center"
+                        android:layout_weight="0.5"
+                        android:textColor="#070707"
+                        android:textSize="14sp" />
+
+                        <TextView
+
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:text="+ 990 pts"
+                            android:textAlignment="textEnd"
+                            android:layout_weight="0.5"
+                            android:textColor="#070707"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:text="Descripción cómo completar logro"
+                        android:textAlignment="center"
+                        android:layout_weight="0.5"
+                        android:textColor="#070707"
+                        android:textSize="14sp" />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="3dp"
+                    android:background="@drawable/forma_rectangulo_bordes_redondeados"
+                    android:layout_marginTop="10dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="#74F894">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:drawableLeft="@drawable/icono_trofeo_rellenado"
+                            android:text="Título del Logro"
+                            android:textAlignment="center"
+                            android:layout_weight="0.5"
+                            android:textColor="#070707"
+                            android:textSize="14sp" />
+
+                        <TextView
+
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:text="+ 1300 pts"
+                            android:textAlignment="textEnd"
+                            android:layout_weight="0.5"
+                            android:textColor="#070707"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:text="Descripción cómo completar logro"
+                        android:textAlignment="center"
+                        android:layout_weight="0.5"
+                        android:textColor="#070707"
+                        android:textSize="14sp" />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="3dp"
+                    android:background="@drawable/forma_rectangulo_bordes_redondeados"
+                    android:layout_marginTop="10dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="#74F894">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:drawableLeft="@drawable/icono_trofeo_rellenado"
+                            android:text="Título del Logro"
+                            android:textAlignment="center"
+                            android:layout_weight="0.5"
+                            android:textColor="#070707"
+                            android:textSize="14sp" />
+
+                        <TextView
+
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:text="+ 289 pts"
+                            android:textAlignment="textEnd"
+                            android:layout_weight="0.5"
+                            android:textColor="#070707"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:text="Descripción cómo completar logro"
+                        android:textAlignment="center"
+                        android:layout_weight="0.5"
+                        android:textColor="#070707"
+                        android:textSize="14sp" />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="3dp"
+                    android:background="@drawable/forma_rectangulo_bordes_redondeados"
+                    android:layout_marginTop="10dp"/>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
+
