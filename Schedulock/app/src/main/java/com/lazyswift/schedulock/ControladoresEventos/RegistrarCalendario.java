@@ -1,10 +1,12 @@
-package com.lazyswift.schedulock;
+package com.lazyswift.schedulock.ControladoresEventos;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class registrar_calendario extends AppCompatActivity {
+import com.lazyswift.schedulock.R;
+
+public class RegistrarCalendario extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">Schedulock</string>
+    <string-array name="arreglo_niveles_importancia">
+        <item>Bajo</item>
+        <item>Medio</item>
+        <item>Alto</item>
+    </string-array>
+    <string-array name="arreglo_tiempo_recordatorio">
+        <item>5 Minutos Antes</item>
+        <item>10 Minutos Antes</item>
+        <item>30 Minutos Antes</item>
+        <item>1 Hora Antes</item>
+        <item>2 Horas Antes</item>
+    </string-array>
+    <string-array name="arreglo_frecuencia_recordatorio">
+        <item>Cada 5 Minutos</item>
+        <item>Cada 10 Minutos</item>
+        <item>Cada 20 Minutos</item>
+        <item>Cada 30 Minutos</item>
+    </string-array>
 </resources>

@@ -9,8 +9,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".registrar_calendario"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".ControladoresEventos.VerPerfilMasInformacion"></activity>
+        <activity android:name=".ControladoresEventos.VerPerfilInformacionPerfil" />
+        <activity android:name=".ControladoresEventos.VerPerfil" />
+        <activity android:name=".ControladoresEventos.RegistrarActividad" />
+        <activity android:name=".ControladoresEventos.MenuDeslizableActivity" />
+        <activity android:name=".ControladoresEventos.NotasActivity" />
+        <activity android:name=".ControladoresEventos.AgregarNotaActivity" />
+        <activity android:name=".ControladoresEventos.MostrarRuta" />
+        <activity android:name=".ControladoresEventos.MostrarMarker" />
+        <activity android:name=".ControladoresEventos.Mapa" />
+        <activity android:name=".ControladoresEventos.RegistrarCalendario" />
+        <activity android:name=".ControladoresEventos.CalendariosActivity" />
+        <activity android:name=".ControladoresEventos.EditarNotaActivity" />
+        <activity android:name=".ControladoresEventos.VerNotaActivity" />
+        <activity android:name=".ControladoresEventos.ChatActivity" />
+        <activity android:name=".ControladoresEventos.VerDiaActivity" />
+        <activity android:name=".ControladoresEventos.VerCalendarioActivity" />
+        <activity android:name=".ControladoresEventos.RegistrarUsuario" />
+        <activity android:name=".ControladoresEventos.MenuPrincipalActivity" />
+        <activity android:name=".ControladoresEventos.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
