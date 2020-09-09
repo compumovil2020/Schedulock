@@ -175,6 +175,7 @@
                         android:id="@+id/regist"
                         android:background="@drawable/fondo_boton_iniciar_sesion"
                         android:text="Registrarme"
+                        android:onClick="onClickRegistrarse"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:textColor="@android:color/white" />
@@ -198,6 +199,7 @@
                         android:id="@+id/signin"
                         android:background="@drawable/fondo_boton_iniciar_sesion"
                         android:text="INICIAR SESIÓN"
+                        android:onClick="onClickIniciarSesion"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:layout_marginBottom="20dp"

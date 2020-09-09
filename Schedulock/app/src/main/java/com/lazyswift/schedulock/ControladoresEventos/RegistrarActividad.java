@@ -56,7 +56,7 @@ public class RegistrarActividad extends AppCompatActivity implements DatePickerD
         this.btnSeleccionarFechaInicio.setText(fechaSelecionada);
     }
 
-    public void onClickAgregarActividad(View v){
+    public void onClickGuardarActividad(View v){
         startActivity(new Intent(this, VerActividad.class));
     }
 }

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@drawable/fondo_login"
     tools:context="com.lazyswift.schedulock.ControladoresEventos.Login">
     <TextView
@@ -18,26 +19,24 @@
         />
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/forma_rectangulo_bordes_redondeados"
+        android:gravity="center"
         android:orientation="vertical">
 
-        <LinearLayout
-
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/formas_fondo"
-            android:gravity="center"
-            android:orientation="vertical">
-
+            android:layout_height="match_parent">
             <LinearLayout
 
                 android:layout_width="match_parent"
-                android:layout_height="450dp"
+                android:layout_height="match_parent"
                 android:layout_marginTop="20dp"
                 android:orientation="vertical">
 
@@ -46,7 +45,7 @@
                     android:layout_width="180dp"
                     android:layout_height="35dp"
                     android:layout_marginLeft="90dp"
-                    android:layout_marginBottom="50dp"
+                    android:layout_marginBottom="20dp"
                     android:drawableRight="@drawable/icono_canlendario"
                     android:text="Schedulock"
                     android:textAlignment="center"
@@ -85,7 +84,7 @@
                     android:textColorHint="#606060"
                     android:textSize="14sp" />
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp">
@@ -104,29 +103,28 @@
                         android:text="Recuperar Contraseña" />
                 </LinearLayout>
 
-                <ImageButton
-                    android:id="@+id/btnIniciarSesion"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="90dp"
-                    android:layout_marginEnd="25dp"
-                    android:background="@drawable/fondo_boton_iniciar_sesion"
-                    android:src="@drawable/icono_flecha_iniciar_sesion"
-                    android:onClick="onClickiniciarSesion"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="30dp">
+                    <ImageButton
+                        android:id="@+id/btnIniciarSesion"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="end"
+                        android:background="@drawable/fondo_boton_iniciar_sesion"
+                        android:src="@drawable/icono_flecha_iniciar_sesion"
+                        android:onClick="onClickiniciarSesion"/>
+                </LinearLayout>
 
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="40dp"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
                     <ImageButton
                         android:id="@+id/btnRegFacebook"
                         android:layout_width="50dp"
@@ -150,7 +148,6 @@
                         android:layout_height="50dp"
                         android:layout_gravity="end"
                         android:layout_marginTop="90dp"
-                        android:layout_marginEnd="25dp"
                         android:background="@drawable/fondo_boton_iniciar_sesion"
                         android:src="@drawable/icono_twitter"/>
                 </LinearLayout>
@@ -174,8 +171,13 @@
                     android:background="@drawable/fondo_boton_iniciar_sesion"
                     android:text="Regístrarme"
                     android:textColor="@android:color/white"
-                    android:onClick="onClickRegistrarse"/>
+                    android:onClick="onClickRegistrarse"
+                    android:layout_marginBottom="40dp"/>
+
+
             </LinearLayout>
-        </LinearLayout>
+        </ScrollView>
+
+
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>

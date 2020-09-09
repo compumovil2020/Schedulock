@@ -18,4 +18,7 @@ public class RegistrarCalendario extends AppCompatActivity {
     public void onClickGuardar(View v){
         startActivity(new Intent(this, VerCalendarioActivity.class));
     }
+    public void goMenuDeslizable(View v){
+        startActivity(new Intent(this, MenuDeslizableActivity.class));
+    }
 }
