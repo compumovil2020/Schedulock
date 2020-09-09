@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MostrarMarker">
+    tools:context=".ControladoresEventos.MostrarMarker">
 
     <ImageView
         android:id="@+id/mostrar_marker"

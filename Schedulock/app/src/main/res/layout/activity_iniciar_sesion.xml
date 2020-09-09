@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondo_login"
-    tools:context="com.lazyswift.schedulock.Login">
+    tools:context="com.lazyswift.schedulock.ControladoresEventos.Login">
     <TextView
         android:id="@+id/textoinicial"
         android:layout_width="match_parent"

@@ -1,8 +1,10 @@
-package com.lazyswift.schedulock;
+package com.lazyswift.schedulock.ControladoresEventos;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.lazyswift.schedulock.R;
 
 public class RegistrarUsuario extends AppCompatActivity {
 

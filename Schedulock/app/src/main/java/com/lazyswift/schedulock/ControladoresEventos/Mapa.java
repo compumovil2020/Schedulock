@@ -1,10 +1,12 @@
-package com.lazyswift.schedulock;
+package com.lazyswift.schedulock.ControladoresEventos;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.lazyswift.schedulock.R;
 
 public class Mapa extends AppCompatActivity {
 

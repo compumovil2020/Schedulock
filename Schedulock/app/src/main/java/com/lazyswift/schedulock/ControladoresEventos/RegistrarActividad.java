@@ -1,4 +1,4 @@
-package com.lazyswift.schedulock;
+package com.lazyswift.schedulock.ControladoresEventos;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
+
+import com.lazyswift.schedulock.R;
 
 import java.util.Calendar;
 

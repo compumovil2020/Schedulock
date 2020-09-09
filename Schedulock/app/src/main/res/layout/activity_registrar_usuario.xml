@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondo_login"
-    tools:context="com.lazyswift.schedulock.RegistrarUsuario">
+    tools:context="com.lazyswift.schedulock.ControladoresEventos.RegistrarUsuario">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

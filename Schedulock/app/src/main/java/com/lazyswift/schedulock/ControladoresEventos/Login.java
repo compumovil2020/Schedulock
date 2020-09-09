@@ -1,4 +1,4 @@
-package com.lazyswift.schedulock;
+package com.lazyswift.schedulock.ControladoresEventos;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.lazyswift.schedulock.R;
+
 public class Login extends AppCompatActivity {
 
     private ImageButton btnIniciarSesion;
@@ -14,7 +16,7 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.iniciar_sesion_layout);
+        setContentView(R.layout.activity_iniciar_sesion);
         btnIniciarSesion = findViewById(R.id.btnIniciarSesion);
         btnIniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override

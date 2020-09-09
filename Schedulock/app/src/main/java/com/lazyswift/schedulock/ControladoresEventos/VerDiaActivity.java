@@ -1,4 +1,4 @@
-package com.lazyswift.schedulock;
+package com.lazyswift.schedulock.ControladoresEventos;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +11,7 @@ import android.widget.ImageView;
 
 import com.lazyswift.schedulock.Adapters.AdapterActividad;
 import com.lazyswift.schedulock.Modelo.Actividad;
+import com.lazyswift.schedulock.R;
 
 import java.util.ArrayList;
 

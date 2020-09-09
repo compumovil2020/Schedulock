@@ -1,10 +1,12 @@
-package com.lazyswift.schedulock;
+package com.lazyswift.schedulock.ControladoresEventos;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.lazyswift.schedulock.R;
 
 public class MenuDeslizableActivity extends AppCompatActivity {
 
@@ -32,6 +34,11 @@ public class MenuDeslizableActivity extends AppCompatActivity {
 
     public void goLogros(View v){
         //startActivity(new Intent(this, Logros.class));
+    }
+
+    public void goVerPerfil(View v){
+        Intent actividadVerPerfil = new Intent(this, VerPerfil.class);
+        startActivity(actividadVerPerfil);
     }
 
     public void goBack(View v){
