@@ -8,6 +8,7 @@ import android.view.View;
 
 public class MenuPrincipalActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,5 +17,10 @@ public class MenuPrincipalActivity extends AppCompatActivity {
 
     public void goMenuDeslizable(View v){
         startActivity(new Intent(this, MenuDeslizableActivity.class));
+    }
+
+    public void iniciarPrueba(View v){
+        Intent actividad = new Intent(this,RegistrarActividad.class);
+        startActivity(actividad);
     }
 }

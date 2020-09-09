@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MenuDeslizableActivity"></activity>
+        <activity android:name=".VerPerfil"></activity>
+        <activity android:name=".RegistrarActividad" />
+        <activity android:name=".MenuDeslizableActivity" />
         <activity android:name=".NotasActivity" />
         <activity android:name=".AgregarNotaActivity" />
         <activity android:name=".MostrarRuta" />
