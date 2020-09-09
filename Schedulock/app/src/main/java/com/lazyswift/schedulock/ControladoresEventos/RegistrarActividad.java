@@ -12,6 +12,7 @@ import android.widget.DatePicker;
 import android.widget.ListView;
 
 import com.lazyswift.schedulock.R;
+import com.lazyswift.schedulock.VerActividad;
 
 import java.util.Calendar;
 
@@ -53,5 +54,9 @@ public class RegistrarActividad extends AppCompatActivity implements DatePickerD
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
         String fechaSelecionada = year+"/"+month+"/"+dayOfMonth;
         this.btnSeleccionarFechaInicio.setText(fechaSelecionada);
+    }
+
+    public void onClickAgregarActividad(View v){
+        startActivity(new Intent(this, VerActividad.class));
     }
 }

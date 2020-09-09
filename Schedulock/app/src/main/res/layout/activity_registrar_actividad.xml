@@ -27,7 +27,7 @@
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@drawable/ic_menu_black"
+            android:src="@drawable/icono_menu_hamburguesa"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -107,6 +107,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:text="Selecciona una fecha"
+                    android:background="#AACCAB"
                     android:id="@+id/btnSeleccionarFechaInicio"
                     android:onClick="mostrarDatePickerFechaInicio"/>
                 <TextView
@@ -119,6 +120,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:text="Selecciona una fecha"
+                    android:background="#C8918D"
                     android:id="@+id/btnSeleccionarFechaFin"
                     android:onClick="mostrarDatePickerFechaInicio"/>
             </LinearLayout>
@@ -215,7 +217,8 @@
                 android:layout_marginTop="20dp"
                 android:background="#2196F3"
                 android:drawableLeft="@drawable/icono_guardar"
-                android:text="Guardar Actividad"/>
+                android:text="Guardar Actividad"
+                android:onClick="onClickGuardarActividad"/>
         </LinearLayout>
     </ScrollView>
 

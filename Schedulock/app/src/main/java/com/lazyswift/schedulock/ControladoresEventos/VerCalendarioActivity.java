@@ -67,5 +67,8 @@ public class VerCalendarioActivity extends AppCompatActivity {
         startActivity(new Intent(this, MenuDeslizableActivity.class));
     }
 
+    public void onClickAgregarActividad(View v){
+        startActivity(new Intent(this, RegistrarActividad.class));
+    }
 
 }

@@ -18,4 +18,12 @@ public class VerPerfilInformacionPerfil extends AppCompatActivity {
     public void goMenuDeslizable(View v){
         startActivity(new Intent(this, MenuDeslizableActivity.class));
     }
+
+    public void onClickInformacionPerfil(View v){
+        startActivity(new Intent(this, VerPerfilInformacionPerfil.class));
+    }
+
+    public void onClickMasInformacion(View v){
+        startActivity(new Intent(this, VerPerfilMasInformacion.class));
+    }
 }

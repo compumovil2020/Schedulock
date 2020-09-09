@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.lazyswift.schedulock.R;
+import com.lazyswift.schedulock.VerLogros;
 
 public class MenuDeslizableActivity extends AppCompatActivity {
 
@@ -17,7 +18,7 @@ public class MenuDeslizableActivity extends AppCompatActivity {
     }
 
     public void goPerfil(View v){
-        //startActivity(new Intent(this, Perfil.class));
+        startActivity(new Intent(this, VerPerfil.class));
     }
 
     public void goMenuPrincipal(View v){
@@ -29,11 +30,12 @@ public class MenuDeslizableActivity extends AppCompatActivity {
     }
 
     public void goNotas(View v){
+
         startActivity(new Intent(this, NotasActivity.class));
     }
 
     public void goLogros(View v){
-        //startActivity(new Intent(this, Logros.class));
+        startActivity(new Intent(this, VerLogros.class));
     }
 
     public void goVerPerfil(View v){

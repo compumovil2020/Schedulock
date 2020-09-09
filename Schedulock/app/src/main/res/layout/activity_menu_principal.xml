@@ -25,9 +25,9 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/ic_menu_black"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/icono_menu_hamburguesa"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -60,7 +60,8 @@
                 android:layout_height="80dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/forma_rectangulo_bordes_redondeados"
-                android:padding="15dp">
+                android:padding="15dp"
+                android:onClick="onClickVerMapa">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -85,19 +86,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_weight="0.3"
-                    android:text="Notas"
-                    android:textSize="12sp"
+                    android:text="Calendarios"
+                    android:textSize="10sp"
                     android:textAllCaps="false"
-                    android:onClick="iniciarPrueba"
+                    android:background="#E45F56"
+                    android:layout_marginRight="5dp"
+                    android:onClick="onClickVerCalendarios"
                     android:drawableStart="@drawable/icono_canlendario"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_weight="0.3"
                     android:text="Notas"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="#E3D55E"
                     android:textSize="12sp"
                     android:textAllCaps="false"
                     android:drawableLeft="@drawable/icono_notas"
+                    android:onClick="onClickVerNotas"
                     />
 
                 <Button
@@ -105,6 +112,9 @@
                     android:layout_height="60dp"
                     android:layout_weight="0.3"
                     android:text="Logros"
+                    android:background="#5CBF60"
+                    android:layout_marginLeft="5dp"
+                    android:onClick="onClickVerLogros"
                     android:textSize="12sp"
                     android:textAllCaps="false"
                     android:drawableLeft="@drawable/icono_estrella_trofeo"/>
@@ -208,6 +218,7 @@
                                     android:layout_height="match_parent"
                                     android:text="Ver"
                                     android:textAllCaps="false"
+                                    android:onClick="onClickVerActividad"
                                     android:background="@drawable/forma_rectangulo_bordes_redondeados"
                                     android:drawableRight="@drawable/icono_mayor_que"/>
 
@@ -284,6 +295,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:text="Ver"
+                                    android:onClick="onClickVerActividad"
                                     android:textAllCaps="false"
                                     android:background="@drawable/forma_rectangulo_bordes_redondeados"
                                     android:drawableRight="@drawable/icono_mayor_que"/>
@@ -361,6 +373,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:text="Ver"
+                                    android:onClick="onClickVerActividad"
                                     android:textAllCaps="false"
                                     android:background="@drawable/forma_rectangulo_bordes_redondeados"
                                     android:drawableRight="@drawable/icono_mayor_que"/>
@@ -438,6 +451,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:text="Ver"
+                                    android:onClick="onClickVerActividad"
                                     android:textAllCaps="false"
                                     android:background="@drawable/forma_rectangulo_bordes_redondeados"
                                     android:drawableRight="@drawable/icono_mayor_que"/>

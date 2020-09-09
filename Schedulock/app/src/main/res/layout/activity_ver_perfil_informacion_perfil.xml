@@ -27,7 +27,7 @@
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@drawable/ic_menu_black"
+            android:src="@drawable/icono_menu_hamburguesa"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -70,7 +70,8 @@
             android:text="Información del perfil"
             android:padding="5dp"
             android:textAlignment="center"
-            android:layout_weight="0.5"/>
+            android:layout_weight="0.5"
+            android:onClick="onClickInformacionPerfil"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -78,7 +79,8 @@
             android:padding="5dp"
             android:text="Mas información"
             android:textAlignment="center"
-            android:layout_weight="0.5"/>
+            android:layout_weight="0.5"
+            android:onClick="onClickMasInformacion"/>
 
     </LinearLayout>
 
@@ -151,10 +153,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Masculino"/>
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Otro"/>
 
             </LinearLayout>
             <LinearLayout

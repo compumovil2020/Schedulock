@@ -16,6 +16,10 @@ public class Mapa extends AppCompatActivity {
         setContentView(R.layout.activity_mapa);
     }
 
+    public void goMenuDeslizable(View v){
+        startActivity(new Intent(this, MenuDeslizableActivity.class));
+    }
+
     public void goMostrarMarker(View v){
         startActivity(new Intent(this, MostrarMarker.class));
     }

@@ -29,9 +29,9 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/ic_menu_black"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/icono_menu_hamburguesa"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -53,7 +53,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout4"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.20"
             app:layout_constraintStart_toStartOf="parent"
@@ -62,15 +62,17 @@
 
             <ImageView
                 android:id="@+id/imageView4"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.447"
-                android:src="@drawable/ic_account"
+                android:background="@drawable/forma_imagen_circular"
+                android:src="@drawable/icono_usuario"
+                android:padding="10dp"
                 android:onClick="goVerPerfil"/>
 
             <TextView
@@ -108,10 +110,10 @@
 
                 <ImageView
                     android:id="@+id/imageView6"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_marginLeft="30dp"
-                    android:src="@drawable/ic_home"
+                    android:src="@drawable/icono_casa"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -139,8 +141,8 @@
 
                 <ImageView
                     android:id="@+id/imageView7"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_marginLeft="30dp"
                     android:src="@drawable/ic_calendar"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -170,10 +172,10 @@
 
                 <ImageView
                     android:id="@+id/imageView8"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_marginLeft="30dp"
-                    android:src="@drawable/ic_note"
+                    android:src="@drawable/icono_nota_delineado"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -197,14 +199,14 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:onClick="goPerfil">
+                android:onClick="goLogros">
 
                 <ImageView
                     android:id="@+id/imageView9"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_marginLeft="30dp"
-                    android:src="@drawable/ic_logro"
+                    android:src="@drawable/icono_trofeo_rellenado"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
