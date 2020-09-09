@@ -33,4 +33,8 @@ public class MenuDeslizableActivity extends AppCompatActivity {
     public void goLogros(View v){
         //startActivity(new Intent(this, Logros.class));
     }
+
+    public void goBack(View v){
+        finishAffinity();
+    }
 }
