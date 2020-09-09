@@ -35,6 +35,6 @@ public class MenuDeslizableActivity extends AppCompatActivity {
     }
 
     public void goBack(View v){
-        finishAffinity();
+        finish();
     }
 }
