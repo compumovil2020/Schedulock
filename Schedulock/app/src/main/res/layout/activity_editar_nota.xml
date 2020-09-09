@@ -154,7 +154,8 @@
                 android:src="@drawable/ic_check_filled"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="aceptar_cancelar"/>
 
             <ImageView
                 android:layout_width="40dp"
@@ -163,7 +164,8 @@
                 android:src="@drawable/ic_cancel_filled"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/checkBtn"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="aceptar_cancelar"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -65,4 +65,8 @@ public class CalendariosActivity extends AppCompatActivity {
         startActivity(new Intent(this, RegistrarCalendario.class));
     }
 
+    public void goMenuDeslizable(View v){
+        startActivity(new Intent(this, MenuDeslizableActivity.class));
+    }
+
 }

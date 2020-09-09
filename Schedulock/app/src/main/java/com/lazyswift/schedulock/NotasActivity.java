@@ -68,4 +68,8 @@ public class NotasActivity extends AppCompatActivity {
         startActivity(new Intent(this, AgregarNotaActivity.class));
     }
 
+    public void goMenuDeslizable(View v){
+        startActivity(new Intent(this, MenuDeslizableActivity.class));
+    }
+
 }

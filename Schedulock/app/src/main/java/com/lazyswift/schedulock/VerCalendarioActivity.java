@@ -65,5 +65,9 @@ public class VerCalendarioActivity extends AppCompatActivity {
         startActivity(new Intent(this, VerDiaActivity.class));
     }
 
+    public void goMenuDeslizable(View v){
+        startActivity(new Intent(this, MenuDeslizableActivity.class));
+    }
+
 
 }

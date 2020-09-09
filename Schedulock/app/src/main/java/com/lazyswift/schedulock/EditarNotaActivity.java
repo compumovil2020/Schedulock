@@ -19,4 +19,9 @@ public class EditarNotaActivity extends AppCompatActivity {
     public void goMenuDeslizable(View v){
         startActivity(new Intent(this, MenuDeslizableActivity.class));
     }
+
+    public void aceptar_cancelar(View v){
+        finish();
+    }
+
 }

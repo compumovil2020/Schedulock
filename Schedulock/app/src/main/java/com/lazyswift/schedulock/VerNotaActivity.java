@@ -18,4 +18,13 @@ public class VerNotaActivity extends AppCompatActivity {
     {
         startActivity(new Intent(this, EditarNotaActivity.class));
     }
+
+    public void goMenuDeslizable(View v){
+        startActivity(new Intent(this, MenuDeslizableActivity.class));
+    }
+
+    public void aceptar_cancelar(View v){
+        finish();
+    }
+
 }
