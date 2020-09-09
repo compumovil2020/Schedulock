@@ -6,13 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class VerPerfil extends AppCompatActivity {
+public class VerPerfilMasInformacion extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ver_perfil);
+        setContentView(R.layout.activity_ver_perfil_mas_informacion);
     }
+
     public void goMenuDeslizable(View v){
         startActivity(new Intent(this, MenuDeslizableActivity.class));
     }
