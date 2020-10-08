@@ -1,4 +1,4 @@
-package com.lazyswift.schedulock;
+package com.lostvayneg.schedulock;
 
 import org.junit.Test;
 
