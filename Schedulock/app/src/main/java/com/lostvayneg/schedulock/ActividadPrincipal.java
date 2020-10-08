@@ -18,30 +18,32 @@ import androidx.appcompat.widget.Toolbar;
 
 public class ActividadPrincipal extends AppCompatActivity {
 
-    private AppBarConfiguration mAppBarConfiguration;
+    private AppBarConfiguration listaFragmentos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.actividad_principal);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        DrawerLayout drawer = findViewById(R.id.menu_lateral);
-        NavigationView navigationView = findViewById(R.id.vista_navegacion);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.frg_menu_principal)
-                .setDrawerLayout(drawer)
+        //Inflacion de elementos
+        //Barra superior de la app
+        Toolbar barraNavegacion = findViewById(R.id.barra_navegacion);
+        setSupportActionBar(barraNavegacion);
+        //Menu lateral
+        DrawerLayout menuLateral = findViewById(R.id.menu_lateral);
+        //Panel del lateral
+        NavigationView vistaNavegacion = findViewById(R.id.vista_navegacion);
+        listaFragmentos = new AppBarConfiguration.Builder(R.id.frg_menu_principal)
+                .setDrawerLayout(menuLateral)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.vista_fragmentos);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+        NavController controladorNavegacion = Navigation.findNavController(this, R.id.vista_fragmentos);
+        NavigationUI.setupActionBarWithNavController(this, controladorNavegacion, listaFragmentos);
+        NavigationUI.setupWithNavController(vistaNavegacion, controladorNavegacion);
     }
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.vista_fragmentos);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+        NavController controladorNavegacion = Navigation.findNavController(this, R.id.vista_fragmentos);
+        return NavigationUI.navigateUp(controladorNavegacion, listaFragmentos)
                 || super.onSupportNavigateUp();
     }
 }
