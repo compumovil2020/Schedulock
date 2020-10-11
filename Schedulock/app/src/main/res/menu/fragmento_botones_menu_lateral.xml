@@ -8,4 +8,7 @@
             android:id="@+id/frg_menu_principal"
             android:title="Principal" />
     </group>
+    <item
+        android:id="@+id/frg_cerrar_sesion"
+        android:title="Cerrar Sesion" />
 </menu>
