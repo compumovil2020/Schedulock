@@ -10,20 +10,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.lostvayneg.schedulock.Entidades.Calendario;
+import com.lostvayneg.schedulock.Entidades.Nota;
 import com.lostvayneg.schedulock.R;
 
 import java.util.ArrayList;
 
-public class AdaptadorListaCalendarios extends RecyclerView.Adapter<AdaptadorListaCalendarios.ViewHolder> implements View.OnClickListener{
+public class AdaptadorListaNotas extends RecyclerView.Adapter<AdaptadorListaNotas.ViewHolder> implements View.OnClickListener{
 
     private LayoutInflater inflater;
-    private ArrayList<Calendario> model;
+    private ArrayList<Nota> model;
 
     //listener
     private View.OnClickListener listener;
 
-    public AdaptadorListaCalendarios(Context context, ArrayList<Calendario> model){
+    public AdaptadorListaNotas(Context context, ArrayList<Nota> model){
         this.inflater = LayoutInflater.from(context);
         this.model = model;
     }
@@ -31,7 +31,7 @@ public class AdaptadorListaCalendarios extends RecyclerView.Adapter<AdaptadorLis
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.item_calendario, parent, false);
+        View view = inflater.inflate(R.layout.item_nota, parent, false);
         view.setOnClickListener(this);
         return new ViewHolder(view);
     }
@@ -39,9 +39,10 @@ public class AdaptadorListaCalendarios extends RecyclerView.Adapter<AdaptadorLis
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String nombre = model.get(position).getNombre();
-        String etiqueta = model.get(position).getEtiqueta();
+        String actividad = model.get(position).getActividad() != null ? model.get(position).getActividad().getNombre() : "";
+
         holder.nombre.setText(nombre);
-        holder.etiqueta.setText(etiqueta);
+        holder.actividad.setText(actividad);
     }
 
     @Override
@@ -58,12 +59,12 @@ public class AdaptadorListaCalendarios extends RecyclerView.Adapter<AdaptadorLis
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView nombre, etiqueta;
+        TextView nombre, actividad;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            nombre = itemView.findViewById(R.id.tv_nom_calendario);
-            etiqueta = itemView.findViewById(R.id.tv_etiqueta);
+            nombre = itemView.findViewById(R.id.tv_nom_nota);
+            actividad = itemView.findViewById(R.id.tv_actividad);
         }
     }
 

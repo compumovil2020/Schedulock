@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Controladores_de_Eventos.FragmentoVerCalendarios">
+    tools:context=".Controladores_de_Eventos.FragmentoVerNotas">
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,22 +19,22 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
+            android:id="@+id/constraintLayout3"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:padding="5dp"
-            app:layout_constraintBottom_toTopOf="@+id/list_calendarios"
+            app:layout_constraintBottom_toTopOf="@id/list_notas"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.1"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tv_notas_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingLeft="15dp"
-                android:text="Calendarios"
+                android:text="Notas"
                 android:textSize="24dp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -41,21 +42,10 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.9" />
 
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.1"
-                android:src="@drawable/icono_ordenar_resultados" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list_calendarios"
+            android:id="@+id/list_notas"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -64,11 +54,13 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
-            android:id="@+id/btn_add_calendar"
+            android:id="@+id/btn_add_nota"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/icono_mas_relleno"
+            android:onClick="goAddNote"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginRight="10dp" />

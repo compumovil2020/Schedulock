@@ -17,6 +17,12 @@
         <action
             android:id="@+id/ir_de_menu_principal_a_ver_calendarios"
             app:destination="@id/frg_ver_calendarios" />
+        <action
+            android:id="@+id/ir_de_menu_principal_a_ver_notas"
+            app:destination="@id/frg_ver_notas" />
+        <action
+            android:id="@+id/ir_de_menu_principal_a_ver_logros"
+            app:destination="@id/frg_ver_logros" />
     </fragment>
 
     <fragment
@@ -32,10 +38,121 @@
         <action
             android:id="@+id/ir_de_ver_calendarios_a_ver_calendario"
             app:destination="@id/frg_ver_calendario" />
+        <action
+            android:id="@+id/ir_de_ver_calendarios_a_agregar_calendario"
+            app:destination="@id/frg_agregar_calendario" />
     </fragment>
     <fragment
         android:id="@+id/frg_ver_calendario"
         android:name="com.lostvayneg.schedulock.Controladores_de_Eventos.FragmentoVerCalendario"
-        android:label="Calendarios"
-        tools:layout="@layout/fragmento_ver_calendario"/>
+        android:label="Calendario"
+        tools:layout="@layout/fragmento_ver_calendario">
+        <action
+            android:id="@+id/ir_de_ver_calendario_a_ver_dia"
+            app:destination="@id/frg_ver_dia" />
+        <action
+            android:id="@+id/ir_de_ver_calendario_a_agregar_actividad"
+            app:destination="@id/frg_agregar_actividad" />
+        <action
+            android:id="@+id/ir_de_ver_calendario_a_ver_actividad"
+            app:destination="@id/frg_ver_actividad" />
+    </fragment>
+    <fragment
+        android:id="@+id/frg_ver_dia"
+        android:name="com.lostvayneg.schedulock.Controladores_de_Eventos.FragmentoVerDia"
+        android:label="Dia"
+        tools:layout="@layout/fragmento_ver_dia">
+        <action
+            android:id="@+id/ir_de_ver_dia_a_agregar_actividad"
+            app:destination="@id/frg_agregar_actividad" />
+        <action
+            android:id="@+id/ir_de_ver_dia_a_ver_actividad"
+            app:destination="@id/frg_ver_actividad" />
+    </fragment>
+    <fragment
+        android:id="@+id/frg_agregar_actividad"
+        android:name="com.lostvayneg.schedulock.Controladores_de_Eventos.FragmentoAgregarActividad"
+        android:label="Actividad Nueva"
+        tools:layout="@layout/fragmento_agregar_actividad">
+        <action
+            android:id="@+id/ir_de_agregar_actividad_a_ver_actividad"
+            app:destination="@id/frg_ver_actividad" />
+    </fragment>
+    <fragment
+        android:id="@+id/frg_ver_actividad"
+        android:name="com.lostvayneg.schedulock.Controladores_de_Eventos.FragmentoVerActividad"
+        android:label="Actividad"
+        tools:layout="@layout/fragmento_ver_actividad">
+        <action
+            android:id="@+id/ir_de_ver_actividad_a_ver_mapa"
+            app:destination="@id/frg_ver_mapa" />
+        <action
+            android:id="@+id/ir_de_ver_actividad_a_chat_actividad"
+            app:destination="@id/frg_chat_actividad" />
+    </fragment>
+    <fragment
+        android:id="@+id/frg_chat_actividad"
+        android:name="com.lostvayneg.schedulock.Controladores_de_Eventos.FragmentoChatActividad"
+        android:label="Chat de la Actividad"
+        tools:layout="@layout/fragmento_chat_actividad"/>
+    <fragment
+        android:id="@+id/frg_ver_notas"
+        android:name="com.lostvayneg.schedulock.Controladores_de_Eventos.FragmentoVerNotas"
+        android:label="Chat de la Actividad"
+        tools:layout="@layout/fragmento_ver_notas">
+        <action
+            android:id="@+id/ir_de_ver_notas_a_agregar_nota"
+            app:destination="@id/frg_agregar_nota" />
+        <action
+            android:id="@+id/ir_de_ver_notas_a_ver_nota"
+            app:destination="@id/frg_ver_nota" />
+    </fragment>
+    <fragment
+        android:id="@+id/frg_agregar_nota"
+        android:name="com.lostvayneg.schedulock.Controladores_de_Eventos.FragmentoAgregarNota"
+        android:label="Nota Nueva"
+        tools:layout="@layout/fragmento_agregar_nota">
+        <action
+            android:id="@+id/ir_de_agregar_nota_a_ver_nota"
+            app:destination="@id/frg_ver_nota" />
+    </fragment>
+    <fragment
+        android:id="@+id/frg_ver_nota"
+        android:name="com.lostvayneg.schedulock.Controladores_de_Eventos.FragmentoVerNota"
+        android:label="Nota"
+        tools:layout="@layout/fragmento_ver_nota">
+        <action
+            android:id="@+id/ir_de_ver_nota_a_editar_nota"
+            app:destination="@id/frg_editar_nota" />
+    </fragment>
+    <fragment
+        android:id="@+id/frg_editar_nota"
+        android:name="com.lostvayneg.schedulock.Controladores_de_Eventos.FragmentoEditarNota"
+        android:label="Editar Nota"
+        tools:layout="@layout/fragmento_editar_nota">
+        <action
+            android:id="@+id/ir_de_editar_nota_a_ver_nota"
+            app:destination="@id/frg_ver_nota" />
+    </fragment>
+    <fragment
+        android:id="@+id/frg_agregar_calendario"
+        android:name="com.lostvayneg.schedulock.Controladores_de_Eventos.FragmentoAgregarCalendario"
+        android:label="Nuevo Calendario"
+        tools:layout="@layout/fragmento_agregar_calendario">
+        <action
+            android:id="@+id/ir_de_agregar_calendario_a_ver_calendario"
+            app:destination="@id/frg_ver_calendario" />
+    </fragment>
+    <fragment
+        android:id="@+id/frg_ver_logros"
+        android:name="com.lostvayneg.schedulock.Controladores_de_Eventos.FragmentoVerLogros"
+        android:label="Nuevo Calendario"
+        tools:layout="@layout/fragmento_ver_logros">
+    </fragment>
+    <fragment
+        android:id="@+id/frg_ver_perfil"
+        android:name="com.lostvayneg.schedulock.Controladores_de_Eventos.FragmentoVerPerfil"
+        android:label="Perfil"
+        tools:layout="@layout/fragmento_ver_perfil">
+    </fragment>
 </navigation>

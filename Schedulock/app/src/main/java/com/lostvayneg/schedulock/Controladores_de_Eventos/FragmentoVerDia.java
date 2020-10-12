@@ -17,13 +17,12 @@ import com.lostvayneg.schedulock.R;
 
 import java.util.ArrayList;
 
-public class FragmentoVerCalendario extends Fragment {
+public class FragmentoVerDia extends Fragment {
 
     private AdaptadorListaActividades adapterActividad;
     private RecyclerView recyclerViewActividades;
     private ImageView imgAdd;
     private ArrayList<Actividad> listaActividades;
-    private ImageView btnCalendario;
     private View pantalla;
 
     @Override
@@ -31,27 +30,20 @@ public class FragmentoVerCalendario extends Fragment {
                              Bundle savedInstanceState) {
 
         // Se infla el elemento por el cual se van a obtener los elementos de la pantalla.
-        pantalla = inflater.inflate(R.layout.fragmento_ver_calendario, container, false);
+        pantalla = inflater.inflate(R.layout.fragmento_ver_dia, container, false);
 
         //Para obtener elementos de la pantalla se usa el view pantalla antes del metodo find view by id
-        recyclerViewActividades = pantalla.findViewById(R.id.list_actividades);
-        imgAdd = pantalla.findViewById(R.id.btn_add_act);
+        recyclerViewActividades = pantalla.findViewById(R.id.list_actividades_dia);
+        imgAdd = pantalla.findViewById(R.id.btn_agregar_actividad_en_dia);
         listaActividades = new ArrayList<>();
-        btnCalendario = pantalla.findViewById(R.id.img_calendar);
-
-        btnCalendario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.ir_de_ver_calendario_a_ver_dia);
-            }
-        });
 
         imgAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.ir_de_ver_calendario_a_agregar_actividad);
+                Navigation.findNavController(v).navigate(R.id.ir_de_ver_dia_a_agregar_actividad);
             }
         });
+
         //cargar lista
         cargarLista();
         //Mostrar datos
@@ -63,7 +55,7 @@ public class FragmentoVerCalendario extends Fragment {
     public void cargarLista(){
         for(int i = 1; i < 6; i++)
         {
-            listaActividades.add(new Actividad("Actividad "+i, "Categoria "+i, "07/09/2020 10:00", "07/09/2020 12:00"));
+            listaActividades.add(new Actividad("Actividad "+i, "Categoria "+i, "10:00", "12:00"));
         }
     }
 
@@ -75,7 +67,7 @@ public class FragmentoVerCalendario extends Fragment {
         adapterActividad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.ir_de_ver_calendario_a_ver_actividad);
+                Navigation.findNavController(view).navigate(R.id.ir_de_ver_dia_a_ver_actividad);
             }
         });
     }

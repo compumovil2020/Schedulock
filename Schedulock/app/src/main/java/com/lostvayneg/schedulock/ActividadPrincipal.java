@@ -1,11 +1,6 @@
 package com.lostvayneg.schedulock;
 
 import android.os.Bundle;
-import android.view.View;
-import android.view.Menu;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
@@ -32,7 +27,12 @@ public class ActividadPrincipal extends AppCompatActivity {
         DrawerLayout menuLateral = findViewById(R.id.menu_lateral);
         //Panel del lateral
         NavigationView vistaNavegacion = findViewById(R.id.vista_navegacion);
-        listaFragmentos = new AppBarConfiguration.Builder(R.id.frg_menu_principal)
+        listaFragmentos = new AppBarConfiguration.Builder(
+                R.id.frg_ver_perfil,
+                R.id.frg_menu_principal,
+                R.id.frg_ver_calendarios,
+                R.id.frg_ver_notas,
+                R.id.frg_ver_logros)
                 .setDrawerLayout(menuLateral)
                 .build();
         NavController controladorNavegacion = Navigation.findNavController(this, R.id.vista_fragmentos);

@@ -5,9 +5,26 @@
     <group
         android:checkableBehavior="single">
         <item
+            android:id="@+id/frg_ver_perfil"
+            android:title="Ver Perfil" />
+        <item
             android:id="@+id/frg_menu_principal"
-            android:title="Principal" />
+            android:title="Menu Principal" />
     </group>
+    <group
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/frg_ver_calendarios"
+            android:title="Mis Calendarios" />
+        <item
+            android:id="@+id/frg_ver_notas"
+            android:title="Mis Notas" />
+        <item
+            android:id="@+id/frg_ver_logros"
+            android:title="Mis Logros" />
+    </group>
+
+
     <item
         android:id="@+id/frg_cerrar_sesion"
         android:title="Cerrar Sesion" />

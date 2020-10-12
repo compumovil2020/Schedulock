@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 public class AdaptadorListaActividades extends RecyclerView.Adapter<AdaptadorListaActividades.ViewHolder> implements View.OnClickListener{
 
-    LayoutInflater inflater;
-    ArrayList<Actividad> model;
+    private LayoutInflater inflater;
+    private ArrayList<Actividad> model;
 
     //listener
     private View.OnClickListener listener;

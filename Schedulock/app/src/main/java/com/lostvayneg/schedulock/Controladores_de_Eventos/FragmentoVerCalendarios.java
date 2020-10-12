@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,6 +24,7 @@ public class FragmentoVerCalendarios extends Fragment {
     private RecyclerView recyclerViewCalendarios;
     private ImageView imgAdd;
     private ArrayList<Calendario> listaCalendarios;
+    private ImageView btnAgregarCalendario;
     private View pantalla;
 
     @Override
@@ -43,6 +43,15 @@ public class FragmentoVerCalendarios extends Fragment {
         cargarLista();
         //Mostrar datos
         mostrarData();
+
+        btnAgregarCalendario = pantalla.findViewById(R.id.btn_add_calendar);
+
+        btnAgregarCalendario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.ir_de_ver_calendarios_a_agregar_calendario);
+            }
+        });
 
         return pantalla;
     }
@@ -68,8 +77,4 @@ public class FragmentoVerCalendarios extends Fragment {
         });
     }
 
-    public void goAddCalendar(View v)
-    {
-        //startActivity(new Intent(this, RegistrarCalendario.class));
-    }
 }
