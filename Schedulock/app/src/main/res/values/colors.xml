@@ -3,4 +3,8 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="color_schedulock_azul">#128CC3</color>
+    <color name="color_schedulock_botones">#339E8E</color>
+    <color name="color_schedulock_base_azul"></color>
+    <color name="color_schedulock_base_morado"></color>
 </resources>

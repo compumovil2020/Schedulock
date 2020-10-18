@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/tam_superior_barra_lateral"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="#5E0606"
+    android:background="@color/schedulock_azul"
     android:gravity="bottom"
     android:orientation="vertical"
     android:padding="16dp"
@@ -12,10 +11,12 @@
 
     <ImageView
         android:id="@+id/img_usuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_gravity="center"
-        app:srcCompat="@mipmap/icono_schedulock_round" />
+        android:padding="5dp"
+        android:background="@drawable/forma_imagen_circular"
+        android:src="@mipmap/icono_schedulock" />
 
     <TextView
         android:id="@+id/txt_nombre_usuario"
