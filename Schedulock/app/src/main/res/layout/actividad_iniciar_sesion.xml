@@ -55,7 +55,7 @@
 
                 <EditText
 
-                    android:id="@+id/email"
+                    android:id="@+id/email_user_iniciar_sesion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -70,7 +70,7 @@
                     android:textSize="14sp" />
 
                 <EditText
-                    android:id="@+id/password"
+                    android:id="@+id/password_user_iniciar_sesion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -88,14 +88,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:gravity="center">
-
-                    <Switch
-                        android:id="@+id/cbx_recordar_sesion"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="10dp"
-                        android:text="Recordar Sesión"
-                        tools:ignore="UseSwitchCompatOrMaterialXml" />
                     <Switch
                         android:id="@+id/cbx_recuperar_contraseña"
                         android:layout_width="wrap_content"

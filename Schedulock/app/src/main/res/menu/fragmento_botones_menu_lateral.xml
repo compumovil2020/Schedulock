@@ -27,5 +27,5 @@
 
     <item
         android:id="@+id/frg_cerrar_sesion"
-        android:title="Cerrar Sesion" />
+        android:title="Cerrar Sesion"/>
 </menu>
