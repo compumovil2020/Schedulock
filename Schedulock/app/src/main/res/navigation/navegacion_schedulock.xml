@@ -23,6 +23,12 @@
         <action
             android:id="@+id/ir_de_menu_principal_a_ver_logros"
             app:destination="@id/frg_ver_logros" />
+        <action
+            android:id="@+id/ir_de_menu_principal_a_ver_perfil"
+            app:destination="@id/frg_ver_perfil" />
+        <action
+            android:id="@+id/ir_a_menu_principal"
+            app:destination="@id/frg_menu_principal" />
     </fragment>
 
     <fragment

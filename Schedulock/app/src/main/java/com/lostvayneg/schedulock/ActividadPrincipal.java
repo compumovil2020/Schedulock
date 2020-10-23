@@ -14,6 +14,7 @@ import com.lostvayneg.schedulock.Controladores_de_Eventos.Login;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -28,6 +29,7 @@ public class ActividadPrincipal extends AppCompatActivity implements NavigationV
     private FirebaseAuth mAuth;
     private NavigationView vistaNavegacion;
     private NavController controladorNavegacion;
+    private DrawerLayout menuLateral;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,7 @@ public class ActividadPrincipal extends AppCompatActivity implements NavigationV
         Toolbar barraNavegacion = findViewById(R.id.barra_navegacion);
         setSupportActionBar(barraNavegacion);
         //Menu lateral
-        DrawerLayout menuLateral = findViewById(R.id.menu_lateral);
+        menuLateral = findViewById(R.id.menu_lateral);
         //Panel del lateral
         vistaNavegacion = findViewById(R.id.vista_navegacion);
         vistaNavegacion.setNavigationItemSelectedListener(this);
@@ -53,7 +55,6 @@ public class ActividadPrincipal extends AppCompatActivity implements NavigationV
                 .build();
         controladorNavegacion = Navigation.findNavController(this, R.id.vista_fragmentos);
         NavigationUI.setupActionBarWithNavController(this, controladorNavegacion, listaFragmentos);
-        NavigationUI.setupWithNavController(vistaNavegacion, controladorNavegacion);
     }
 
     @Override
@@ -66,12 +67,30 @@ public class ActividadPrincipal extends AppCompatActivity implements NavigationV
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.frg_cerrar_sesion:
-                Log.i("SDSDF","SDASA");
-                Toast.makeText(ActividadPrincipal.this,"Funciona",Toast.LENGTH_LONG).show();
-                break;
+            case R.id.frg_ver_perfil:
+                controladorNavegacion.navigate(R.id.ir_de_menu_principal_a_ver_perfil);
+                menuLateral.closeDrawer(GravityCompat.START);
+                return true;
+            case R.id.frg_menu_principal:
+                controladorNavegacion.navigate(R.id.ir_a_menu_principal);
+                menuLateral.closeDrawer(GravityCompat.START);
+                return true;
             case R.id.frg_ver_calendarios:
+                controladorNavegacion.navigate(R.id.ir_de_menu_principal_a_ver_calendarios);
+                menuLateral.closeDrawer(GravityCompat.START);
+                return true;
+            case R.id.frg_ver_notas:
+                controladorNavegacion.navigate(R.id.ir_de_menu_principal_a_ver_notas);
+                menuLateral.closeDrawer(GravityCompat.START);
+                return true;
+            case R.id.frg_ver_logros:
                 controladorNavegacion.navigate(R.id.ir_de_menu_principal_a_ver_logros);
+                menuLateral.closeDrawer(GravityCompat.START);
+                return true;
+            case R.id.frg_cerrar_sesion:
+                mAuth.signOut();
+                Intent actividadLogin = new Intent(this, Login.class);
+                startActivity(actividadLogin);
                 return true;
         }
         return true;
