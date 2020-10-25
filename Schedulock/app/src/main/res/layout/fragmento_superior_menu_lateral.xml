@@ -6,6 +6,7 @@
     android:background="@color/color_schedulock_botones"
     android:gravity="bottom"
     android:orientation="vertical"
+
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
@@ -22,7 +23,7 @@
         android:id="@+id/txt_nombre_usuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Usuario"
+        android:text="@string/nombre_usuario"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:gravity="center_horizontal" />
 

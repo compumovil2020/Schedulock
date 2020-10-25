@@ -69,7 +69,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawablePadding="10dp"
-                        android:id="@+id/nombre_usuario"
+                        android:id="@+id/nombre_usuario_registrarse"
                         android:drawableLeft="@drawable/icono_usuario"
                         android:layout_marginEnd="20dp"
                         android:layout_marginStart="20dp"
@@ -83,7 +83,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawablePadding="10dp"
-                        android:id="@+id/correo"
+                        android:id="@+id/email_Registrarse"
                         android:drawableLeft="@drawable/icono_correo"
                         android:layout_marginEnd="20dp"
                         android:layout_marginStart="20dp"
@@ -96,7 +96,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawablePadding="10dp"
-                        android:id="@+id/email"
+                        android:id="@+id/edad_usuario_registrarse"
                         android:drawableLeft="@drawable/icono_calendario"
                         android:layout_marginEnd="20dp"
                         android:layout_marginStart="20dp"
@@ -105,33 +105,44 @@
                         android:textSize="14sp"
                         android:textColorHint="#606060"
                         android:inputType="text"/>
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
 
-                        <androidx.appcompat.widget.AppCompatRadioButton
+                        <RadioGroup
+                            android:id="@+id/genero_registrarse"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Femenino"
-                            android:id="@+id/cbx_femenino"
-                            android:layout_marginTop="20dp"
-                            android:layout_marginLeft="30dp" />
-                        <androidx.appcompat.widget.AppCompatRadioButton
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Masculino"
-                            android:id="@+id/cbx_masculino"
-                            android:layout_marginTop="20dp"
-                            android:layout_marginLeft="30dp" />
-                        <androidx.appcompat.widget.AppCompatRadioButton
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Otro"
-                            android:id="@+id/cbx_otro"
-                            android:layout_marginTop="20dp"
-                            android:layout_marginLeft="30dp" />
-                    </LinearLayout>
+                            android:layout_height="match_parent"
+                            android:orientation="vertical" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Género"
+                                android:textSize="18dp"
+                                android:layout_marginLeft="22dp" />
+
+                            <RadioButton
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Femenino"
+                                android:id="@+id/cbx_femenino"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginLeft="20dp" />
+                            <RadioButton
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Masculino"
+                                android:id="@+id/cbx_masculino"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginLeft="20dp" />
+                            <RadioButton
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Otro"
+                                android:id="@+id/cbx_otro"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginLeft="20dp" />
+
+
+                        </RadioGroup>
 
 
                     <EditText
@@ -140,7 +151,7 @@
                         android:layout_marginTop="10dp"
                         android:drawableLeft="@drawable/icono_candado"
                         android:layout_marginEnd="20dp"
-                        android:id="@+id/contrseña"
+                        android:id="@+id/password_registrarse"
                         android:layout_marginStart="20dp"
                         android:textSize="14sp"
                         android:drawablePadding="10dp"
@@ -154,11 +165,11 @@
                         android:layout_marginTop="10dp"
                         android:drawableLeft="@drawable/icono_candado"
                         android:layout_marginEnd="20dp"
-                        android:id="@+id/recordar_contraseña"
+                        android:id="@+id/confirmar_Password"
                         android:layout_marginStart="20dp"
                         android:textSize="14sp"
                         android:drawablePadding="10dp"
-                        android:hint="Recordar contraseña"
+                        android:hint="Confirmar contraseña"
                         android:padding="20dp"
                         android:textColorHint="#606060"
                         android:inputType="textPassword"/>
@@ -171,10 +182,9 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="40dp"
                         android:layout_marginRight="40dp"
-                        android:id="@+id/regist"
+                        android:id="@+id/btn_registrar_nuevo_usuario"
                         android:background="@drawable/forma_boton_schedulock"
                         android:text="Registrarme"
-                        android:onClick="onClickRegistrarse"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:textColor="@android:color/white" />
