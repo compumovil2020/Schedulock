@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "246498636920-q2187svjkmi2gspik427s6eo5od3iueq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lazyswift.schedulock",
+            "certificate_hash": "f970823936c0a07fa9c73cffdf4b3fad9dcee1ff"
+          }
+        },
+        {
           "client_id": "246498636920-9g7vg9s88vio4q50g856jlhfof7qdac0.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

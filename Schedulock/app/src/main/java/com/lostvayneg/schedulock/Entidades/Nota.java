@@ -1,18 +1,15 @@
 package com.lostvayneg.schedulock.Entidades;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Nota
 {
     private String nombre;
-    private Actividad actividad;
+    private List<Object> adjuntos;
 
-    public Nota(String nombre) {
-        this.nombre = nombre;
-        actividad = null;
-    }
-
-    public Nota(String nombre, Actividad actividad) {
-        this.nombre = nombre;
-        this.actividad = actividad;
+    public Nota() {
+        this.adjuntos = new ArrayList<>();
     }
 
     public String getNombre() {
@@ -23,11 +20,11 @@ public class Nota
         this.nombre = nombre;
     }
 
-    public Actividad getActividad() {
-        return actividad;
+    public List<Object> getAdjuntos() {
+        return adjuntos;
     }
 
-    public void setActividad(Actividad actividad) {
-        this.actividad = actividad;
+    public void setAdjuntos(List<Object> adjuntos) {
+        this.adjuntos = adjuntos;
     }
 }

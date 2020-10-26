@@ -88,23 +88,23 @@ public class ActividadPrincipal extends AppCompatActivity implements NavigationV
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.frg_ver_perfil:
-                controladorNavegacion.navigate(R.id.ir_de_menu_principal_a_ver_perfil);
+                controladorNavegacion.navigate(R.id.frg_ver_perfil);
                 menuLateral.closeDrawer(GravityCompat.START);
                 return true;
             case R.id.frg_menu_principal:
-                controladorNavegacion.navigate(R.id.ir_a_menu_principal);
+                controladorNavegacion.navigate(R.id.frg_menu_principal);
                 menuLateral.closeDrawer(GravityCompat.START);
                 return true;
             case R.id.frg_ver_calendarios:
-                controladorNavegacion.navigate(R.id.ir_de_menu_principal_a_ver_calendarios);
+                controladorNavegacion.navigate(R.id.frg_ver_calendarios);
                 menuLateral.closeDrawer(GravityCompat.START);
                 return true;
             case R.id.frg_ver_notas:
-                controladorNavegacion.navigate(R.id.ir_de_menu_principal_a_ver_notas);
+                controladorNavegacion.navigate(R.id.frg_ver_notas);
                 menuLateral.closeDrawer(GravityCompat.START);
                 return true;
             case R.id.frg_ver_logros:
-                controladorNavegacion.navigate(R.id.ir_de_menu_principal_a_ver_logros);
+                controladorNavegacion.navigate(R.id.frg_ver_logros);
                 menuLateral.closeDrawer(GravityCompat.START);
                 return true;
             case R.id.frg_cerrar_sesion:
