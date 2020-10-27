@@ -1,7 +1,44 @@
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
-    android:layout_width="match_parent"
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
     android:layout_height="match_parent"
-    tools:context="com.lostvayneg.schedulock.Controladores_de_Eventos.FragmentoVerMapa" />
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.lostvayneg.schedulock.Controladores_de_Eventos.FragmentoVerMapa" />
+
+    <EditText
+        android:id="@+id/searchMap"
+        android:layout_height="40dp"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_margin="30dp"
+        android:background="@drawable/roundcorner"
+        android:inputType="text"
+        android:imeOptions="actionSend"
+        android:hint="Ingrese una dirección"/>
+
+    <ImageView
+        android:id="@+id/imageLocation"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/roundcorner"
+        android:src="@drawable/ic_location" />
+
+    <CheckBox
+        android:id="@+id/checkBoxHoy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:text="Hoy"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="100dp"/>
+
+</FrameLayout>

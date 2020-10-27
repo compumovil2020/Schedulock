@@ -43,6 +43,7 @@
                     android:layout_marginTop="10dp"
                     android:text="Titulo:"/>
                 <EditText
+                    android:id="@+id/editNombre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Escriba el titulo de la actividad"/>
@@ -54,6 +55,7 @@
                     android:layout_marginTop="10dp"
                     android:text="Categoria:"/>
                 <EditText
+                    android:id="@+id/editCategoria"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Escriba la categoria de la actividad"/>
@@ -63,8 +65,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="Titulo:"/>
+                    android:text="Descripcion:"/>
                 <EditText
+                    android:id="@+id/editDescripcion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Agrega una breve descripcion de la actividad"/>
@@ -115,9 +118,10 @@
                     android:layout_marginTop="10dp"
                     android:text="Ubicación:"/>
                 <EditText
+                    android:id="@+id/editDireccion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Escriba el titulo de la actividad"/>
+                    android:hint="Ingrese un lugar o direccion"/>
 
                 <TextView
                     android:layout_width="wrap_content"

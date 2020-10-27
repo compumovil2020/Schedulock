@@ -2,7 +2,6 @@ package com.lostvayneg.schedulock.Controladores_de_Eventos;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -29,25 +28,24 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.lostvayneg.schedulock.ActividadPrincipal;
 import com.lostvayneg.schedulock.Entidades.Usuario;
 import com.lostvayneg.schedulock.R;
+import com.lostvayneg.schedulock.Utilidades.Acceso_Base_Datos;
 
 public class Login extends AppCompatActivity {
     private FirebaseAuth autenticacionFB;
     private EditText email;
-    private  EditText password;
+    private EditText password;
     private ImageButton btn_iniciar_con_google;
     private GoogleSignInClient clienteGoogle;
     private int RC_SIGN_IN = 1;
 
-    private FirebaseDatabase baseDatos;
-    private DatabaseReference referenciaBD;
-    public static final String rutaUsuarios="usuarios/";
+    private Acceso_Base_Datos baseDatos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.actividad_iniciar_sesion);
         autenticacionFB = FirebaseAuth.getInstance();
-        baseDatos= FirebaseDatabase.getInstance();
+        baseDatos= new Acceso_Base_Datos();
         email= findViewById(R.id.email_user_iniciar_sesion);
         password= findViewById(R.id.password_user_iniciar_sesion);
         btn_iniciar_con_google=findViewById(R.id.btn_iniciar_con_google);
@@ -102,8 +100,7 @@ public class Login extends AppCompatActivity {
                     nuevoUsuario.setEmail(usuario.getEmail());
                     nuevoUsuario.setEdad("Sin llenar");
                     nuevoUsuario.setGenero("Sin llenar");
-                    referenciaBD = baseDatos.getReference(rutaUsuarios + usuarioFB.getUid());
-                    referenciaBD.setValue(nuevoUsuario);
+                    baseDatos.registrarNuevoUsuario(nuevoUsuario, usuarioFB.getUid());
                     updateUI(usuarioFB);
                 }
                 else{

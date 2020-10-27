@@ -1,12 +1,19 @@
 package com.lostvayneg.schedulock.Controladores_de_Eventos;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -24,6 +31,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.lostvayneg.schedulock.ActividadPrincipal;
 import com.lostvayneg.schedulock.Entidades.Usuario;
 import com.lostvayneg.schedulock.R;
+import com.lostvayneg.schedulock.Utilidades.Acceso_Base_Datos;
+import com.lostvayneg.schedulock.Utilidades.Permisos;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 public class RegistrarUsuario extends AppCompatActivity {
     private EditText email_Registrarse;
@@ -31,12 +43,14 @@ public class RegistrarUsuario extends AppCompatActivity {
     private EditText confirmar_Password;
     private FirebaseAuth autenticacionFB;
     private Button btnRegistrarse;
-    private FirebaseDatabase baseDatos;
-    private DatabaseReference referenciaBD;
-    public static final String rutaUsuarios="usuarios/";
     private EditText nombre_Registrarse;
     private EditText edad_Registrarse;
     private RadioGroup genero_Registrarse;
+    private Acceso_Base_Datos baseDatos;
+    private ImageView imagen_perfil;
+    private static final int IMAGE_PICKER_REQUEST = 2;
+    private Permisos permisos;
+    private Uri uriFotoPerfil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,18 +60,40 @@ public class RegistrarUsuario extends AppCompatActivity {
         password_Registrarse=findViewById(R.id.password_registrarse);
         confirmar_Password=findViewById(R.id.confirmar_Password);
         this.autenticacionFB = FirebaseAuth.getInstance();
-        baseDatos= FirebaseDatabase.getInstance();
+        baseDatos = new Acceso_Base_Datos();
         btnRegistrarse=findViewById(R.id.btn_registrar_nuevo_usuario);
         nombre_Registrarse=findViewById(R.id.nombre_usuario_registrarse);
         edad_Registrarse = findViewById(R.id.edad_usuario_registrarse);
         genero_Registrarse = findViewById(R.id.genero_registrarse);
         genero_Registrarse.check(R.id.cbx_otro);
+        imagen_perfil = findViewById(R.id.btn_seleccionar_imagen_registrar_usuario);
+        uriFotoPerfil = null;
+        permisos = new Permisos();
+
         btnRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 registrarNuevoUsuario(view);
             }
         });
+
+        imagen_perfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(permisos.solicitarPermisoSeleccionarImagen((Activity) v.getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE,"Se necesita aceeso a la galería",IMAGE_PICKER_REQUEST)){
+                    seleccionarImagen();
+                }
+                else{
+                }
+            }
+        });
+
+    }
+
+    private void seleccionarImagen(){
+        Intent pickImage = new Intent(Intent.ACTION_PICK);
+        pickImage.setType("image/*");
+        startActivityForResult(pickImage, IMAGE_PICKER_REQUEST);
 
     }
 
@@ -94,8 +130,10 @@ public class RegistrarUsuario extends AppCompatActivity {
                                 else
                                     generoIn = "Otro";
                                 nuevoUsuario.setGenero(generoIn);
-                                referenciaBD = baseDatos.getReference(rutaUsuarios + user.getUid());
-                                referenciaBD.setValue(nuevoUsuario);
+                                if(uriFotoPerfil != null){
+                                    baseDatos.guardarFotoPerfil(uriFotoPerfil, user.getUid());
+                                }
+                                baseDatos.registrarNuevoUsuario(nuevoUsuario, user.getUid());
                                 updateUI(user);
                             } else {
                                 // If sign in fails, display a message to the user.
@@ -175,6 +213,38 @@ public class RegistrarUsuario extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults)
+    {
+        switch (requestCode) {
+            case IMAGE_PICKER_REQUEST: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    seleccionarImagen();
+                } else {
+                }
+                return;
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case IMAGE_PICKER_REQUEST:
+                if(resultCode == RESULT_OK){
+                    try {
+                        final Uri imageUri = data.getData();
+                        uriFotoPerfil = imageUri;
+                        final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                        final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                        imagen_perfil.setImageBitmap(selectedImage);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }break;
+        }
+    }
     public void onClickIniciarSesion(View v){
         startActivity(new Intent(this, Login.class));
     }

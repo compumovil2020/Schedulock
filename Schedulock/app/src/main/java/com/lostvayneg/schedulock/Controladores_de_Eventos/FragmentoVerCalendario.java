@@ -11,11 +11,14 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.lostvayneg.schedulock.Adaptadores.AdaptadorListaActividades;
 import com.lostvayneg.schedulock.Entidades.Actividad;
+import com.lostvayneg.schedulock.Entidades.Localizacion;
 import com.lostvayneg.schedulock.R;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class FragmentoVerCalendario extends Fragment {
 
@@ -63,7 +66,17 @@ public class FragmentoVerCalendario extends Fragment {
     public void cargarLista(){
         for(int i = 1; i < 6; i++)
         {
-            listaActividades.add(new Actividad("Actividad "+i, "Categoria "+i, "07/09/2020 10:00", "07/09/2020 12:00"));
+            Actividad act1 = new Actividad();
+            act1.setNombre("Nombre vacio");
+            act1.setFrencuenciaR("Una vez");
+            act1.setPrioridad("Alta");
+            act1.setDescripcion("Ejemplo");
+            act1.setRecordatorio("30 Minutos Antes");
+            act1.setCategoria("1");
+            act1.setInicio(new Date());
+            act1.setFin(new Date());
+            act1.setLocalizacion(new Localizacion(2.1867, -75.6233));
+            listaActividades.add(act1);
         }
     }
 

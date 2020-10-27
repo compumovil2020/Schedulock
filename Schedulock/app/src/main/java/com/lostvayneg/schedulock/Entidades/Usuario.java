@@ -12,8 +12,10 @@ public class Usuario {
     private long experiencia;
     private List<Calendario> calendarios;
     private List<Logro> logros;
+    private List<Nota> notas;
 
     public Usuario() {
+        this.notas = new ArrayList<>();
         this.calendarios = new ArrayList<>();
         this.logros = new ArrayList<>();
     }

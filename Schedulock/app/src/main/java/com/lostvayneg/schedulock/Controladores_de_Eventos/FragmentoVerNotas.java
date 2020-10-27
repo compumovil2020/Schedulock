@@ -11,12 +11,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.google.android.gms.maps.model.LatLng;
 import com.lostvayneg.schedulock.Adaptadores.AdaptadorListaNotas;
 import com.lostvayneg.schedulock.Entidades.Actividad;
 import com.lostvayneg.schedulock.Entidades.Nota;
 import com.lostvayneg.schedulock.R;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class FragmentoVerNotas extends Fragment {
 
@@ -52,10 +54,10 @@ public class FragmentoVerNotas extends Fragment {
     public void cargarLista(){
         for(int i = 1; i < 6; i++)
         {
-            if (i%2 == 0)
-                listaNotas.add(new Nota("Nota "+i, new Actividad("Actividad "+i, "categoria "+i, "07/09/2020 10:00", "07/09/2020 12:00")));
-            else
-                listaNotas.add(new Nota("Nota "+i));
+            //if (i%2 == 0)
+                //listaNotas.add(new Nota("Nota "+i, new Actividad("Actividad "+i, "Categoria "+i, new Date(), new Date(),"prueba","alta","30 min antes","diaria",new LatLng(2.1867, -75.6233))));
+            //else
+                //listaNotas.add(new Nota("Nota "+i));
         }
     }
 

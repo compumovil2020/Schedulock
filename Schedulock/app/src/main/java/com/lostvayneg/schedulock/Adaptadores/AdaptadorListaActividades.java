@@ -39,8 +39,8 @@ public class AdaptadorListaActividades extends RecyclerView.Adapter<AdaptadorLis
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String nombre = model.get(position).getNombre();
         String categoria = model.get(position).getCategoria();
-        String fechaInicio = model.get(position).getInicio();
-        String fechaFin = model.get(position).getFin();
+        String fechaInicio = model.get(position).getInicio().toString();
+        String fechaFin = model.get(position).getFin().toString();
 
         holder.nombre.setText(nombre);
         holder.categoria.setText(categoria);
