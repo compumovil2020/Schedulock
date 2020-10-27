@@ -41,17 +41,25 @@
                         android:textColor="#5C67AE"
                         android:textSize="18sp"
                         android:textStyle="bold" />
+                    <androidx.cardview.widget.CardView
+                        app:cardCornerRadius="50dp"
+                        app:cardElevation="0dp"
+                        android:layout_width="100dp"
+                        android:background="#717171"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center">
+                        <ImageView
+                            android:id="@+id/btn_seleccionar_imagen_registrar_usuario"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:background="@drawable/forma_imagen_circular"
+                            android:src="@drawable/icono_agregar_foto_perfil"
+                            android:padding="2dp"
+                            android:scaleType="centerCrop"
+                            android:inputType="textPersonName"/>
+                    </androidx.cardview.widget.CardView>
 
-                    <ImageView
-                        android:id="@+id/btn_seleccionar_imagen_registrar_usuario"
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/forma_imagen_circular"
-                        android:src="@drawable/icono_agregar_foto_perfil"
-                        android:padding="10dp"
-                        android:textColorHint="#606060"
-                        android:inputType="textPersonName"/>
                     <TextView
                         android:id="@+id/textoinicial"
                         android:layout_width="match_parent"
