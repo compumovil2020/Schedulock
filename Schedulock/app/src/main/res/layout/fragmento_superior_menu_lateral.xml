@@ -11,7 +11,7 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:id="@+id/img_usuario"
+        android:id="@+id/img_foto_perfil_usuario"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"

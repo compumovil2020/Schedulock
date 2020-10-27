@@ -2,6 +2,7 @@ package com.lostvayneg.schedulock.Controladores_de_Eventos;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -22,12 +23,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.UploadTask;
 import com.lostvayneg.schedulock.ActividadPrincipal;
 import com.lostvayneg.schedulock.Entidades.Usuario;
 import com.lostvayneg.schedulock.R;
@@ -51,6 +54,7 @@ public class RegistrarUsuario extends AppCompatActivity {
     private static final int IMAGE_PICKER_REQUEST = 2;
     private Permisos permisos;
     private Uri uriFotoPerfil;
+    private ProgressDialog progresoRegistro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +73,7 @@ public class RegistrarUsuario extends AppCompatActivity {
         imagen_perfil = findViewById(R.id.btn_seleccionar_imagen_registrar_usuario);
         uriFotoPerfil = null;
         permisos = new Permisos();
+        progresoRegistro = new ProgressDialog(this);
 
         btnRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,9 +120,14 @@ public class RegistrarUsuario extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
-                                FirebaseUser user = autenticacionFB.getCurrentUser();
 
-                                Usuario nuevoUsuario = new Usuario();
+                                progresoRegistro.setTitle("Creando usuario");
+                                progresoRegistro.setMessage("Espere por favor mientras se registra");
+                                progresoRegistro.setCancelable(false);
+                                progresoRegistro.show();
+                                final FirebaseUser user = autenticacionFB.getCurrentUser();
+
+                                final Usuario nuevoUsuario = new Usuario();
                                 nuevoUsuario.setNombre(nombreIn);
                                 nuevoUsuario.setEmail(emailIn);
                                 nuevoUsuario.setEdad(edad);
@@ -132,9 +142,21 @@ public class RegistrarUsuario extends AppCompatActivity {
                                 nuevoUsuario.setGenero(generoIn);
                                 if(uriFotoPerfil != null){
                                     baseDatos.guardarFotoPerfil(uriFotoPerfil, user.getUid());
+                                    baseDatos.referenciaSBD = baseDatos.storageBD.getReference(baseDatos.RUTA_IMAGENES).child(user.getUid());
+                                    baseDatos.referenciaSBD.putFile(uriFotoPerfil).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                            baseDatos.registrarNuevoUsuario(nuevoUsuario, user.getUid());
+                                            progresoRegistro.dismiss();
+                                            updateUI(user);
+                                        }
+                                    });
                                 }
-                                baseDatos.registrarNuevoUsuario(nuevoUsuario, user.getUid());
-                                updateUI(user);
+                                else{
+                                    baseDatos.registrarNuevoUsuario(nuevoUsuario, user.getUid());
+                                    updateUI(user);
+                                }
+
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Toast.makeText(RegistrarUsuario.this, "El correo ingresado ya esta registrado",

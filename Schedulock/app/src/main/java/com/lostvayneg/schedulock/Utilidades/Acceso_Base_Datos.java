@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -14,6 +15,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -21,21 +23,23 @@ import com.lostvayneg.schedulock.Controladores_de_Eventos.Login;
 import com.lostvayneg.schedulock.Entidades.Actividad;
 import com.lostvayneg.schedulock.Entidades.Usuario;
 
+import java.io.File;
+import java.io.IOException;
 import java.security.AccessController;
 import java.util.ArrayList;
 
 public class Acceso_Base_Datos {
 
-    private FirebaseDatabase baseDatos;
-    private FirebaseStorage storageBD;
-    private DatabaseReference referenciaBD;
+    public FirebaseDatabase baseDatos;
+    public FirebaseStorage storageBD;
+    public DatabaseReference referenciaBD;
     private Autenticacion_Firebase autenticacionFB;
     public static final String RUTA_USUARIOS ="usuarios/";
     public static final String RUTA_ACTIVIDADES ="actividades/";
     public static final String RUTA_IMAGENES = "fotos_perfil/";
     private ArrayList<Actividad> listaActividades;
     private FirebaseUser usuario;
-    private StorageReference referenciaSBD;
+    public StorageReference referenciaSBD;
 
     public Acceso_Base_Datos(){
         baseDatos = FirebaseDatabase.getInstance();
@@ -105,5 +109,25 @@ public class Acceso_Base_Datos {
             }
         });
         return estadoTarea[0];
+    }
+
+    public File obtenerFotoPerfil() throws IOException {
+        File localFile = File.createTempFile("images", "jpg");
+        referenciaSBD = storageBD.getReference(RUTA_IMAGENES).child(usuario.getUid());
+        referenciaSBD.getFile(localFile)
+                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        // Successfully downloaded data to local file
+                        // ...
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle failed download
+                // ...
+            }
+        });
+        return localFile;
     }
 }
