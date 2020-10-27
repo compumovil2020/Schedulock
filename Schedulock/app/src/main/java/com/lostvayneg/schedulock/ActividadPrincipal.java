@@ -163,7 +163,6 @@ public class ActividadPrincipal extends AppCompatActivity implements NavigationV
                     txt_nombre_usuario.setText(usuarioConsultado.getNombre());
                     txt_correo_usuario.setText(currentUser.getEmail());
                     try {
-                        File fotoUsuario = base_datos.obtenerFotoPerfil();
                         final File localFile = File.createTempFile("images", "jpg");
 
                         referenciaSBD = storageBD.getReference(RUTA_IMAGENES).child(currentUser.getUid());
@@ -180,15 +179,13 @@ public class ActividadPrincipal extends AppCompatActivity implements NavigationV
                                 }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception exception) {
-                                // Handle failed download
-                                // ...
+                                cargaDatosUsuario.dismiss();
                             }
                         });
 
                     } catch (IOException e) {
-                        cargaDatosUsuario.dismiss();
-                    }
 
+                    }
 
                 }
 
