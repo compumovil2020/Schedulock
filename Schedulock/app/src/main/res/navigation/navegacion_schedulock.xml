@@ -23,6 +23,9 @@
         <action
             android:id="@+id/ir_de_menu_principal_a_ver_logros"
             app:destination="@id/frg_ver_logros" />
+        <action
+            android:id="@+id/ir_de_menu_principal_a_ver_perfil"
+            app:destination="@id/frg_ver_perfil" />
     </fragment>
 
     <fragment
@@ -37,7 +40,11 @@
         tools:layout="@layout/fragmento_ver_calendarios">
         <action
             android:id="@+id/ir_de_ver_calendarios_a_ver_calendario"
-            app:destination="@id/frg_ver_calendario" />
+            app:destination="@id/frg_ver_calendario"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/ir_de_ver_calendarios_a_agregar_calendario"
             app:destination="@id/frg_agregar_calendario" />

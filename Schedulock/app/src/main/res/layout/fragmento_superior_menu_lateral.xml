@@ -3,25 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/tam_superior_barra_lateral"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="#5E0606"
+    android:background="@drawable/fondo_barra_lateral_superior"
     android:gravity="bottom"
     android:orientation="vertical"
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <ImageView
-        android:id="@+id/img_usuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        app:srcCompat="@mipmap/icono_schedulock_round" />
+    <androidx.cardview.widget.CardView
+        app:cardCornerRadius="50dp"
+        app:cardElevation="0dp"
+        android:layout_width="100dp"
+        android:background="#717171"
+        android:layout_height="100dp"
+        android:layout_gravity="center">
+        <ImageView
+            android:id="@+id/img_foto_perfil_usuario"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/icono_schedulock" />
+    </androidx.cardview.widget.CardView>
+
+
 
     <TextView
         android:id="@+id/txt_nombre_usuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Usuario"
+        android:text="@string/nombre_usuario"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:gravity="center_horizontal" />
 

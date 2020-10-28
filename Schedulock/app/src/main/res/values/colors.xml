@@ -3,4 +3,12 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="color_schedulock_azul">#128CC3</color>
+    <color name="color_schedulock_iconos">#339E8E</color>
+    <color name="color_schedulock_base_azul">#128CC3</color>
+    <color name="color_schedulock_base_verde">#339E8E</color>
+    <color name="color_texto_gris_claro">#606060</color>
+    <color name="color_titulos_azul">#3C73E3</color>
+    <color name="color_blanco">#FFF</color>
+
 </resources>

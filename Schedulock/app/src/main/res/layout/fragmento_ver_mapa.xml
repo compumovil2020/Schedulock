@@ -1,7 +1,52 @@
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
-    android:layout_width="match_parent"
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
     android:layout_height="match_parent"
-    tools:context="com.lostvayneg.schedulock.Controladores_de_Eventos.FragmentoVerMapa" />
+    android:layout_width="match_parent"
+    android:background="@drawable/fondo_login"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.lostvayneg.schedulock.Controladores_de_Eventos.FragmentoVerMapa" />
+
+    <EditText
+        android:id="@+id/searchMap"
+        android:layout_height="40dp"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_margin="30dp"
+        android:background="@drawable/fondo_boton_schedulock"
+        android:inputType="text"
+        android:imeOptions="actionSend"
+        android:hint="Ingrese una dirección"/>
+
+    <ImageView
+        android:id="@+id/imageLocation"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="40dp"
+        android:padding="5dp"
+        android:background="@drawable/fondo_boton_schedulock"
+        android:src="@drawable/ic_location" />
+
+    <CheckBox
+        android:id="@+id/checkBoxHoy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:backgroundTint="@color/color_blanco"
+        android:background="@drawable/fondo_boton_schedulock"
+        android:text="Hoy"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:textColor="@color/color_schedulock_iconos"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="100dp"/>
+
+</FrameLayout>

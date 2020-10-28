@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Schedulock</string>
+    <string name="nombre_usuario" >SA</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
     <string-array name="arreglo_niveles_importancia">
         <item>Bajo</item>
         <item>Medio</item>

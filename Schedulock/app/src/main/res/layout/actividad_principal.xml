@@ -17,6 +17,10 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        app:itemTextColor="@color/color_blanco"
+        app:itemIconTint="@color/color_blanco"
+        app:itemIconSize="@dimen/tam_iconos_barra_lateral"
+        android:background="@drawable/fondo_barra_lateral_inferior"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/fragmento_superior_menu_lateral"
         app:menu="@menu/fragmento_botones_menu_lateral" />

@@ -55,7 +55,7 @@ public class FragmentoVerDia extends Fragment {
     public void cargarLista(){
         for(int i = 1; i < 6; i++)
         {
-            listaActividades.add(new Actividad("Actividad "+i, "Categoria "+i, "10:00", "12:00"));
+            listaActividades.add(new Actividad());
         }
     }
 

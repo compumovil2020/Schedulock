@@ -39,9 +39,7 @@ public class AdaptadorListaCalendarios extends RecyclerView.Adapter<AdaptadorLis
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String nombre = model.get(position).getNombre();
-        String etiqueta = model.get(position).getEtiqueta();
         holder.nombre.setText(nombre);
-        holder.etiqueta.setText(etiqueta);
     }
 
     @Override

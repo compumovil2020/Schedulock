@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "246498636920",
+    "firebase_url": "https://schedulock-lazyswift.firebaseio.com",
+    "project_id": "schedulock-lazyswift",
+    "storage_bucket": "schedulock-lazyswift.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:246498636920:android:c1d49ce225e7bb2102a98d",
+        "android_client_info": {
+          "package_name": "com.lazyswift.schedulock"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "246498636920-q2187svjkmi2gspik427s6eo5od3iueq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lazyswift.schedulock",
+            "certificate_hash": "f970823936c0a07fa9c73cffdf4b3fad9dcee1ff"
+          }
+        },
+        {
+          "client_id": "246498636920-9g7vg9s88vio4q50g856jlhfof7qdac0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lazyswift.schedulock",
+            "certificate_hash": "e8ad0e838120e1e40f8adf8abc7a875cf5beaf3d"
+          }
+        },
+        {
+          "client_id": "246498636920-s9hbo9d8rddnancd7tps4rpstmbcata6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_5cPX2ZQA9LdjG0j-w01cocLXbBanXaI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "246498636920-s9hbo9d8rddnancd7tps4rpstmbcata6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
