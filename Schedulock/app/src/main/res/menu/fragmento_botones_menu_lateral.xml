@@ -3,29 +3,35 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <group
-        android:checkableBehavior="single">
+        android:checkableBehavior="none">
         <item
             android:id="@+id/frg_ver_perfil"
-            android:title="Ver Perfil" />
+            android:title="Ver Perfil"
+            android:icon="@drawable/icono_usuario"/>
         <item
             android:id="@+id/frg_menu_principal"
-            android:title="Menu Principal" />
+            android:title="Menu Principal"
+            android:icon="@drawable/icono_menu_principal"/>
     </group>
     <group
-        android:checkableBehavior="single">
+        android:checkableBehavior="none">
         <item
             android:id="@+id/frg_ver_calendarios"
-            android:title="Mis Calendarios" />
+            android:title="Mis Calendarios"
+            android:icon="@drawable/icono_calendario"/>
         <item
             android:id="@+id/frg_ver_notas"
-            android:title="Mis Notas" />
+            android:title="Mis Notas"
+            android:icon="@drawable/icono_notas"/>
         <item
             android:id="@+id/frg_ver_logros"
-            android:title="Mis Logros" />
+            android:title="Mis Logros"
+            android:icon="@drawable/icono_estrella_trofeo"/>
     </group>
 
 
     <item
         android:id="@+id/frg_cerrar_sesion"
-        android:title="Cerrar Sesion"/>
+        android:title="Cerrar Sesion"
+        android:icon="@drawable/icono_cerrar_sesion"/>
 </menu>

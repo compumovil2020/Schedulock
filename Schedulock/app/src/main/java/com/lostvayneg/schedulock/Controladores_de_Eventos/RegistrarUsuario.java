@@ -154,6 +154,7 @@ public class RegistrarUsuario extends AppCompatActivity {
                                 }
                                 else{
                                     baseDatos.registrarNuevoUsuario(nuevoUsuario, user.getUid());
+                                    progresoRegistro.dismiss();
                                     updateUI(user);
                                 }
 

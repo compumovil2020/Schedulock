@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="10dp"
     android:background="@drawable/fondo_login"
     tools:context=".Controladores_de_Eventos.RegistrarUsuario">
 
@@ -11,41 +12,37 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerHorizontal="true">
+        <TextView
+            android:id="@+id/Registrar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:text="¡REGÍSTRATE!"
+            android:gravity="center"
+            android:textColor="@color/color_blanco"
+            android:textSize="18sp"
+            android:textStyle="bold" />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="20dp"
             android:orientation="vertical"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
             android:gravity="center"
             android:background="@drawable/forma_rectangulo_bordes_redondeados">
 
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     >
-
-                    <TextView
-                        android:id="@+id/Registrar"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="9dp"
-                        android:text="¡REGISTRATE!"
-                        android:gravity="center"
-                        android:textColor="#5C67AE"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
                     <androidx.cardview.widget.CardView
+                        android:layout_marginTop="20dp"
                         app:cardCornerRadius="50dp"
                         app:cardElevation="0dp"
                         android:layout_width="100dp"
-                        android:background="#717171"
                         android:layout_height="100dp"
                         android:layout_gravity="center">
                         <ImageView
@@ -53,11 +50,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
-                            android:background="@drawable/forma_imagen_circular"
+                            android:background="@drawable/fondo_icono_schedulock"
                             android:src="@drawable/icono_agregar_foto_perfil"
                             android:padding="2dp"
                             android:scaleType="centerCrop"
-                            android:inputType="textPersonName"/>
+                            android:inputType="textPersonName"
+                            tools:ignore="UseAppTint" />
                     </androidx.cardview.widget.CardView>
 
                     <TextView
@@ -69,7 +67,7 @@
                         android:textSize="12sp"
                         android:layout_marginTop="9dp"
                         android:textStyle="bold"
-                        android:textColor="#605E5E"
+                        android:textColor="@color/color_texto_gris_claro"
                         />
 
                     <EditText
@@ -79,12 +77,13 @@
                         android:id="@+id/nombre_usuario_registrarse"
                         android:drawableLeft="@drawable/icono_usuario"
                         android:layout_marginEnd="20dp"
+                        android:drawableTint="@color/color_schedulock_iconos"
                         android:layout_marginStart="20dp"
                         android:hint="Nombre"
                         android:gravity="center_horizontal"
                         android:padding="20dp"
                         android:textSize="14sp"
-                        android:textColorHint="#606060"
+                        android:textColorHint="@color/color_texto_gris_claro"
                         android:inputType="text"/>
 
                     <EditText
@@ -93,13 +92,14 @@
                         android:drawablePadding="10dp"
                         android:id="@+id/email_Registrarse"
                         android:drawableLeft="@drawable/icono_correo"
+                        android:drawableTint="@color/color_schedulock_iconos"
                         android:layout_marginEnd="20dp"
                         android:layout_marginStart="20dp"
                         android:hint="Email "
                         android:gravity="center_horizontal"
                         android:padding="20dp"
                         android:textSize="14sp"
-                        android:textColorHint="#606060"
+                        android:textColorHint="@color/color_texto_gris_claro"
                         android:inputType="text"/>
                     <EditText
                         android:layout_width="match_parent"
@@ -113,7 +113,8 @@
                         android:gravity="center_horizontal"
                         android:padding="20dp"
                         android:textSize="14sp"
-                        android:textColorHint="#606060"
+                        android:textColorHint="@color/color_texto_gris_claro"
+                        android:drawableTint="@color/color_schedulock_iconos"
                         android:inputType="number"/>
 
                         <RadioGroup
@@ -134,12 +135,14 @@
                                 android:layout_height="wrap_content"
                                 android:text="Femenino"
                                 android:id="@+id/cbx_femenino"
+                                android:textColor="@color/color_texto_gris_claro"
                                 android:layout_marginTop="10dp"
                                 android:layout_marginLeft="20dp" />
                             <RadioButton
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Masculino"
+                                android:textColor="@color/color_texto_gris_claro"
                                 android:id="@+id/cbx_masculino"
                                 android:layout_marginTop="10dp"
                                 android:layout_marginLeft="20dp" />
@@ -147,6 +150,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Otro"
+                                android:textColor="@color/color_texto_gris_claro"
                                 android:id="@+id/cbx_otro"
                                 android:layout_marginTop="10dp"
                                 android:layout_marginLeft="20dp" />
@@ -167,8 +171,9 @@
                         android:textSize="14sp"
                         android:drawablePadding="10dp"
                         android:hint="Contraseña"
+                        android:drawableTint="@color/color_schedulock_iconos"
                         android:padding="20dp"
-                        android:textColorHint="#606060"
+                        android:textColorHint="@color/color_texto_gris_claro"
                         android:inputType="textPassword"/>
                     <EditText
                         android:layout_width="match_parent"
@@ -182,24 +187,25 @@
                         android:gravity="center_horizontal"
                         android:drawablePadding="10dp"
                         android:hint="Confirmar contraseña"
+                        android:drawableTint="@color/color_schedulock_iconos"
                         android:padding="20dp"
-                        android:textColorHint="#606060"
+                        android:textColorHint="@color/color_texto_gris_claro"
                         android:inputType="textPassword"/>
 
 
 
                     <Button
-                        android:layout_width="200dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="40dp"
                         android:layout_marginRight="40dp"
                         android:layout_marginTop="20dp"
                         android:id="@+id/btn_registrar_nuevo_usuario"
-                        android:background="@drawable/forma_boton_schedulock"
+                        android:background="@drawable/fondo_boton_schedulock"
                         android:text="Registrarme"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
                         android:textColor="@android:color/white" />
 
                     <TextView
@@ -208,7 +214,7 @@
                         android:layout_gravity="center"
                         android:text="Ya tengo una cuenta"
                         android:textAlignment="center"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/color_texto_gris_claro"
                         android:layout_marginTop="20dp"
                         android:textStyle="bold" />
 
@@ -219,7 +225,7 @@
                         android:layout_marginLeft="40dp"
                         android:layout_marginRight="40dp"
                         android:id="@+id/signin"
-                        android:background="@drawable/forma_boton_schedulock"
+                        android:background="@drawable/fondo_boton_schedulock"
                         android:text="INICIAR SESIÓN"
                         android:onClick="onClickIniciarSesion"
                         android:paddingLeft="10dp"
@@ -234,20 +240,6 @@
 
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/celular"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:drawableLeft="@drawable/icono_celular"
-            android:drawablePadding="10dp"
-            android:hint="Celular"
-            android:inputType="textPassword"
-            android:padding="20dp"
-            android:textColorHint="#606060"
-            android:textSize="14sp" />
     </LinearLayout>
 
 </RelativeLayout>

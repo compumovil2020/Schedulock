@@ -1,5 +1,6 @@
 package com.lostvayneg.schedulock;
 
+import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -97,11 +98,8 @@ public class ActividadPrincipal extends AppCompatActivity implements NavigationV
                 .build();
         controladorNavegacion = Navigation.findNavController(this, R.id.vista_fragmentos);
         NavigationUI.setupActionBarWithNavController(this, controladorNavegacion, listaFragmentos);
-        FirebaseUser currentUser = autenticacionFB.getCurrentUser();
         base_datos = new Acceso_Base_Datos();
         storageBD = FirebaseStorage.getInstance();
-        cargaDatosUsuario = new ProgressDialog(this);
-        updateUI(currentUser);
     }
 
     @Override
@@ -146,6 +144,9 @@ public class ActividadPrincipal extends AppCompatActivity implements NavigationV
     @Override
     protected void onStart() {
         super.onStart();
+        FirebaseUser currentUser = autenticacionFB.getCurrentUser();
+        cargaDatosUsuario = new ProgressDialog(this);
+        updateUI(currentUser);
     }
 
     private void updateUI(final FirebaseUser currentUser){
@@ -162,16 +163,14 @@ public class ActividadPrincipal extends AppCompatActivity implements NavigationV
                     Usuario usuarioConsultado = dataSnapshot.getValue(Usuario.class);
                     txt_nombre_usuario.setText(usuarioConsultado.getNombre());
                     txt_correo_usuario.setText(currentUser.getEmail());
+                    final File localFile;
                     try {
-                        final File localFile = File.createTempFile("images", "jpg");
-
+                        localFile = File.createTempFile("images", "jpg");
                         referenciaSBD = storageBD.getReference(RUTA_IMAGENES).child(currentUser.getUid());
                         referenciaSBD.getFile(localFile)
                                 .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                                     @Override
                                     public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                        // Successfully downloaded data to local file
-                                        // ...
                                         final Bitmap selectedImage = BitmapFactory.decodeFile(localFile.getPath());
                                         img_perfil_usuario.setImageBitmap(selectedImage);
                                         cargaDatosUsuario.dismiss();
@@ -182,10 +181,10 @@ public class ActividadPrincipal extends AppCompatActivity implements NavigationV
                                 cargaDatosUsuario.dismiss();
                             }
                         });
-
                     } catch (IOException e) {
 
                     }
+
 
                 }
 

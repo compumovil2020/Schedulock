@@ -80,10 +80,10 @@ public class Login extends AppCompatActivity {
     private void handleSingInResult(Task<GoogleSignInAccount> tareaCompletada){
         try {
             GoogleSignInAccount usuario = tareaCompletada.getResult(ApiException.class);
-            Toast.makeText(Login.this, "Se pudo", Toast.LENGTH_LONG).show();
+            Toast.makeText(Login.this, "Se inicio sesión con google", Toast.LENGTH_LONG).show();
             IniciarSesionFirebaseConGoogle(usuario);
         } catch (ApiException e) {
-            Toast.makeText(Login.this, "No se pudo", Toast.LENGTH_LONG).show();
+            Toast.makeText(Login.this, "No se ha podido iniciar sesión con google", Toast.LENGTH_LONG).show();
             IniciarSesionFirebaseConGoogle(null);
         }
     }

@@ -129,4 +129,11 @@ public class Actividad {
                 ", colaboradores=" + colaboradores +
                 '}';
     }
+
+    public String toStringFechaInicio(){
+        return (inicio.getYear() + "/" + inicio.getMonth() +"/" +inicio.getDate()+" "+inicio.getHours()+":"+inicio.getMinutes());
+    }
+    public String toStringFechaFin(){
+        return (fin.getYear() + "/" + fin.getMonth() +"/" +fin.getDate()+" "+fin.getHours()+":"+fin.getMinutes());
+    }
 }

@@ -3,10 +3,8 @@
     android:shape="rectangle" android:padding="10dp">
     <gradient android:angle="0"
         android:startColor="#3DD598"
-        android:endColor="@color/color_schedulock_botones"/>
+        android:endColor="@color/color_schedulock_iconos"/>
     <corners
-        android:bottomRightRadius="50dp"
-        android:bottomLeftRadius="50dp"
-        android:topLeftRadius="50dp"
-        android:topRightRadius="50dp"/>
+        android:bottomRightRadius="30dp"
+        android:topRightRadius="30dp"/>
 </shape>

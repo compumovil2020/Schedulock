@@ -4,444 +4,159 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="10dp"
+    android:background="@drawable/fondo_login"
     tools:context=".Controladores_de_Eventos.FragmentoMenuPrincipal">
 
-    <ScrollView
-        android:layout_width="fill_parent"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
-        tools:ignore="UselessParent">
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:background="@drawable/forma_rectangulo_bordes_redondeados">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dashboard Schedulock"
+            android:textColor="@color/color_texto_gris_claro"
+            android:textSize="16sp"/>
 
         <LinearLayout
+            android:id="@+id/btn_ver_mapa_desde_menu"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dashboard Schedulock"
-                android:textColor="#5E5E5E"
-                android:textSize="20sp"/>
+            android:layout_height="80dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/color_blanco"
+            android:padding="5dp">
 
             <LinearLayout
-                android:id="@+id/btn_ver_mapa_desde_menu"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/forma_rectangulo_bordes_redondeados"
-                android:padding="15dp">
-
-                <LinearLayout
+                android:layout_height="match_parent">
+                <FrameLayout
+                    android:background="@drawable/forma_rectangulo_bordes_redondeados"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-                    <TextView
+                    <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:scaleType="center"
+                        android:src="@mipmap/imagen_mapa_minimalista"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Mapa de actividades"
-                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:drawableTint="@color/color_blanco"
+                        android:textColor="@color/color_blanco"
                         android:drawableTop="@drawable/icono_estrella_trofeo"/>
-                </LinearLayout>
+
+                </FrameLayout>
 
             </LinearLayout>
 
-            <LinearLayout
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/color_blanco"
+            android:padding="5dp">
+
+            <Button
+                android:id="@+id/btn_ver_calendarios_desde_menu"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp">
-
-                <Button
-                    android:id="@+id/btn_ver_calendarios_desde_menu"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_weight="0.3"
-                    android:text="Calendarios"
-                    android:textSize="10sp"
-                    android:textAllCaps="false"
-                    android:background="#E45F56"
-                    android:layout_marginRight="5dp"
-                    android:drawableLeft="@drawable/icono_calendario"
-                    android:layout_marginEnd="5dp" />
-                <Button
-                    android:id="@+id/btn_ver_notas_desde_menu"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_weight="0.3"
-                    android:text="Notas"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:background="#E3D55E"
-                    android:textSize="12sp"
-                    android:textAllCaps="false"
-                    android:drawableLeft="@drawable/icono_notas" />
-
-                <Button
-                    android:id="@+id/btn_ver_logros_desde_menu"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_weight="0.3"
-                    android:text="Logros"
-                    android:background="#5CBF60"
-                    android:layout_marginLeft="5dp"
-                    android:textSize="12sp"
-                    android:textAllCaps="false"
-                    android:drawableLeft="@drawable/icono_estrella_trofeo"/>
-
-            </LinearLayout>
-
-            <LinearLayout
+                android:layout_height="60dp"
+                android:layout_weight="0.3"
+                android:text="Calendarios"
+                android:drawableTint="@color/color_blanco"
+                android:textColor="@color/color_blanco"
+                android:textSize="10sp"
+                android:padding="10dp"
+                android:textAllCaps="false"
+                android:background="@drawable/fondo_icono_schedulock"
+                android:drawableLeft="@drawable/icono_calendario"
+                />
+            <Button
+                android:id="@+id/btn_ver_notas_desde_menu"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:orientation="horizontal">
+                android:layout_height="60dp"
+                android:layout_weight="0.3"
+                android:text="Notas"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:textColor="@color/color_blanco"
+                android:drawableTint="@color/color_blanco"
+                android:background="@drawable/fondo_icono_schedulock"
+                android:textSize="12sp"
+                android:textAllCaps="false"
+                android:padding="10dp"
+                android:drawableLeft="@drawable/icono_notas" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Actividades para hoy"
-                    android:textColor="#5E5E5E"
-                    android:textSize="18sp"
-                    tools:ignore="HardcodedText" />
+            <Button
+                android:id="@+id/btn_ver_logros_desde_menu"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="0.3"
+                android:text="Logros"
+                android:background="@drawable/fondo_icono_schedulock"
+                android:padding="10dp"
+                android:textColor="@color/color_blanco"
+                android:drawableTint="@color/color_blanco"
+                android:textSize="12sp"
+                android:textAllCaps="false"
+                android:drawableLeft="@drawable/icono_estrella_trofeo"/>
 
+        </LinearLayout>
 
-            </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Actividades para hoy"
+            android:textColor="@color/color_texto_gris_claro"
+            android:gravity="center_horizontal"
+            android:textSize="15sp"
+            android:layout_marginTop="10dp"
+            tools:ignore="HardcodedText" />
 
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="3dp"
-                android:background="@drawable/forma_rectangulo_bordes_redondeados"
-                android:layout_marginTop="10dp"/>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="3dp"
+            android:background="#959595"
+            android:layout_marginTop="10dp"/>
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:padding="2dp"
+            tools:ignore="UselessParent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
-                android:padding="10dp"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="360dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
                     android:orientation="vertical">
-                    <LinearLayout
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/lista_actividades_para_hoy_menu_principal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:padding="10dp"
-                                android:layout_weight="0.3">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="0.5"
-                                    android:text="Actividad 1"
-                                    android:layout_marginBottom="15dp"/>
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="0.5"
-                                    android:text="Categoria 1"/>
-
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:padding="10dp"
-                                android:layout_weight="0.3">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="0.5"
-                                    android:text="Inicio: 10:00"
-                                    android:layout_marginBottom="15dp"/>
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="0.5"
-                                    android:text="Fin: 12:00"/>
-
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:padding="15dp"
-                                android:layout_weight="0.3">
-
-                                <Button
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:text="Ver"
-                                    android:textAllCaps="false"
-                                    android:onClick="onClickVerActividad"
-                                    android:background="@drawable/forma_rectangulo_bordes_redondeados"
-                                    android:drawableRight="@drawable/icono_mayor_que"/>
-
-                            </LinearLayout>
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="fill_parent"
-                        android:layout_height="3dp"
-                        android:background="@drawable/forma_rectangulo_bordes_redondeados"
-                        android:layout_marginTop="10dp"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:padding="10dp"
-                                android:layout_weight="0.3">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="0.5"
-                                    android:text="Actividad 1"
-                                    android:layout_marginBottom="15dp"/>
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="0.5"
-                                    android:text="Categoria 1"/>
-
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:padding="10dp"
-                                android:layout_weight="0.3">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="0.5"
-                                    android:text="Inicio: 10:00"
-                                    android:layout_marginBottom="15dp"/>
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="0.5"
-                                    android:text="Fin: 12:00"/>
-
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:padding="15dp"
-                                android:layout_weight="0.3">
-
-                                <Button
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:text="Ver"
-                                    android:onClick="onClickVerActividad"
-                                    android:textAllCaps="false"
-                                    android:background="@drawable/forma_rectangulo_bordes_redondeados"
-                                    android:drawableRight="@drawable/icono_mayor_que"/>
-
-                            </LinearLayout>
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="fill_parent"
-                        android:layout_height="3dp"
-                        android:background="@drawable/forma_rectangulo_bordes_redondeados"
-                        android:layout_marginTop="10dp"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:padding="10dp"
-                                android:layout_weight="0.3">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="0.5"
-                                    android:text="Actividad 1"
-                                    android:layout_marginBottom="15dp"/>
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="0.5"
-                                    android:text="Categoria 1"/>
-
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:padding="10dp"
-                                android:layout_weight="0.3">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="0.5"
-                                    android:text="Inicio: 10:00"
-                                    android:layout_marginBottom="15dp"/>
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="0.5"
-                                    android:text="Fin: 12:00"/>
-
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:padding="15dp"
-                                android:layout_weight="0.3">
-
-                                <Button
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:text="Ver"
-                                    android:onClick="onClickVerActividad"
-                                    android:textAllCaps="false"
-                                    android:background="@drawable/forma_rectangulo_bordes_redondeados"
-                                    android:drawableRight="@drawable/icono_mayor_que"/>
-
-                            </LinearLayout>
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="fill_parent"
-                        android:layout_height="3dp"
-                        android:background="@drawable/forma_rectangulo_bordes_redondeados"
-                        android:layout_marginTop="10dp"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:padding="10dp"
-                                android:layout_weight="0.3">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="0.5"
-                                    android:text="Actividad 1"
-                                    android:layout_marginBottom="15dp"/>
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="0.5"
-                                    android:text="Categoria 1"/>
-
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:padding="10dp"
-                                android:layout_weight="0.3">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="0.5"
-                                    android:text="Inicio: 10:00"
-                                    android:layout_marginBottom="15dp"/>
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="0.5"
-                                    android:text="Fin: 12:00"/>
-
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:padding="15dp"
-                                android:layout_weight="0.3">
-
-                                <Button
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:text="Ver"
-                                    android:onClick="onClickVerActividad"
-                                    android:textAllCaps="false"
-                                    android:background="@drawable/forma_rectangulo_bordes_redondeados"
-                                    android:drawableRight="@drawable/icono_mayor_que"/>
-
-                            </LinearLayout>
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="fill_parent"
-                        android:layout_height="3dp"
-                        android:background="@drawable/forma_rectangulo_bordes_redondeados"
-                        android:layout_marginTop="10dp"/>
-
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="7dp"
+                        android:padding="2dp" />
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_gravity="bottom"
                     android:orientation="vertical">
 
                     <ProgressBar
@@ -460,8 +175,9 @@
 
             </LinearLayout>
 
-        </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 
-    </ScrollView>
+
 
 </LinearLayout>
