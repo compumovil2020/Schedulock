@@ -1,77 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo_login"
+    android:padding="10dp"
     tools:context=".Controladores_de_Eventos.FragmentoVerCalendarios">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:padding="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.9"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:padding="5dp"
-            app:layout_constraintBottom_toTopOf="@+id/list_calendarios"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.1"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:paddingLeft="15dp"
-                android:text="Calendarios"
-                android:textSize="24dp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.9" />
-
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.1"
-                android:src="@drawable/icono_ordenar_resultados" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:background="@drawable/forma_rectangulo_bordes_redondeados">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_calendarios"
+            android:layout_marginTop="10dp"
+            android:layout_weight="0.8"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.9"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_height="wrap_content"/>
 
-        <ImageView
-            android:id="@+id/btn_add_calendar"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/icono_mas_relleno"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginRight="10dp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Agregar Calendario"
+                android:textSize="15dp"
+                android:textColor="@color/color_texto_gris_claro"
+                android:gravity="center_vertical"/>
+
+            <ImageView
+                android:id="@+id/btn_add_calendar"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/fondo_boton_schedulock"
+                android:src="@drawable/icono_mas_relleno"
+                app:tint="@color/color_blanco"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
