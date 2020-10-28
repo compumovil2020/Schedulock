@@ -2,10 +2,11 @@ package com.lostvayneg.schedulock.Entidades;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Actividad {
+public class Actividad implements Serializable {
 
     private String nombre;
     private String categoria;

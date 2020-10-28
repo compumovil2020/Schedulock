@@ -21,10 +21,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.material.navigation.NavigationView;
 import com.lostvayneg.schedulock.Entidades.Actividad;
 import com.lostvayneg.schedulock.Entidades.Localizacion;
 import com.lostvayneg.schedulock.R;
@@ -131,9 +133,14 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
             actividad.setRecordatorio(recordatorio.getSelectedItem().toString());
             actividad.setPrioridad(importancia.getSelectedItem().toString());
             actividad.setFrencuenciaR(frecuencia.getSelectedItem().toString());
-            actividad.setLocalizacion(new Localizacion(latitud, longitud));
+            if(latitud != null && longitud != null){
+                actividad.setLocalizacion(new Localizacion(latitud, longitud));
+            }
             baseDatos.agregarNuevaActividad(actividad);
-            Navigation.findNavController(getView()).navigate(R.id.ir_de_agregar_actividad_a_ver_actividad);
+            Toast.makeText(pantalla.getContext(), "Se agrego la actividad", Toast.LENGTH_LONG).show();
+            Bundle enviarActividad = new Bundle();
+            enviarActividad.putSerializable("actividad", actividad);
+            Navigation.findNavController(getView()).navigate(R.id.ir_de_agregar_actividad_a_ver_actividad, enviarActividad);
         }
     }
 
@@ -183,9 +190,10 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
                 } else {
                     Toast.makeText(pantalla.getContext(), "Dirección no encontrada", Toast.LENGTH_SHORT).show();}
             } catch (IOException e) {
-                e.printStackTrace();
+                Toast.makeText(pantalla.getContext(), "Dirección no encontrada", Toast.LENGTH_SHORT).show();
             }
-        } else {Toast.makeText(pantalla.getContext(), "La dirección esta vacía", Toast.LENGTH_SHORT).show();}
+        } else {
+            Toast.makeText(pantalla.getContext(), "La dirección esta vacía", Toast.LENGTH_SHORT).show();}
     }
 
     public void seleccionarFecha(View v){

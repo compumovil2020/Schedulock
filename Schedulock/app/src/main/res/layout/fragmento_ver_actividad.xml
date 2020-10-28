@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/fondo_login"
+    android:padding="10dp"
     tools:context=".Controladores_de_Eventos.FragmentoVerActividad">
 
 
@@ -16,52 +18,58 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="25dp">
+            android:padding="25dp"
+            android:background="@drawable/forma_rectangulo_bordes_redondeados">
             <TextView
+                android:id="@+id/titulo_ver_actividad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Actividad 1"
+                android:textColor="@color/color_schedulock_iconos"
                 android:textSize="18sp"
                 android:layout_marginTop="10dp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Descripcion: "
+                android:textColor="@color/color_texto_gris_claro"
                 android:layout_marginTop="10dp"/>
 
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="3dp"
-                android:background="@drawable/forma_rectangulo_bordes_redondeados"
+                android:background="@drawable/fondo_boton_schedulock"
                 android:layout_marginTop="10dp"/>
 
             <TextView
+                android:id="@+id/descripcion_ver_actividad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="inherit"
                 android:layout_marginTop="20dp"
-                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop-"
-                />
+                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop-" />
 
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="3dp"
-                android:background="@drawable/forma_rectangulo_bordes_redondeados"
+                android:background="@drawable/fondo_boton_schedulock"
                 android:layout_marginTop="10dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="10dp">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="Nivel de importancia: "
+                    android:text="Prioridad: "
+                    android:textColor="@color/color_texto_gris_claro"
                     android:layout_marginTop="10dp"/>
                 <TextView
+                    android:id="@+id/prioridad_ver_actividad"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
@@ -72,21 +80,23 @@
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="3dp"
-                android:background="@drawable/forma_rectangulo_bordes_redondeados"
+                android:background="@drawable/fondo_boton_schedulock"
                 android:layout_marginTop="10dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="10dp">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:text="Fecha de inicio: "
+                    android:textColor="@color/color_texto_gris_claro"
                     android:layout_marginTop="10dp"/>
                 <TextView
+                    android:id="@+id/fecha_inicio_ver_actividad"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
@@ -97,21 +107,23 @@
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="3dp"
-                android:background="@drawable/forma_rectangulo_bordes_redondeados"
+                android:background="@drawable/fondo_boton_schedulock"
                 android:layout_marginTop="10dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="10dp">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:text="Fecha de finalizacion: "
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/color_texto_gris_claro"/>
                 <TextView
+                    android:id="@+id/fecha_fin_ver_actividad"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
@@ -122,7 +134,7 @@
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="3dp"
-                android:background="@drawable/forma_rectangulo_bordes_redondeados"
+                android:background="@drawable/fondo_boton_schedulock"
                 android:layout_marginTop="10dp"/>
 
             <TextView
@@ -130,6 +142,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:text="Invitados:"
+                android:visibility="invisible"
                 android:layout_marginTop="20dp"/>
 
             <LinearLayout
@@ -143,7 +156,9 @@
                     android:layout_weight="0.5"
                     android:text="Ubicacion"
                     android:layout_marginRight="5dp"
-                    android:padding="10dp"/>
+                    android:padding="10dp"
+                    android:textColor="@color/color_blanco"
+                    android:background="@drawable/fondo_boton_schedulock"/>
 
                 <Button
                     android:id="@+id/btn_ver_mensajes_actividad"
@@ -152,7 +167,9 @@
                     android:text="Mensajes"
                     android:layout_weight="0.5"
                     android:padding="10dp"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/color_blanco"
+                    android:background="@drawable/fondo_boton_schedulock"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

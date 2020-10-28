@@ -12,7 +12,7 @@
         android:orientation="horizontal"
         android:background="@drawable/fondo_barra_lateral_inferior"
         android:layout_height="wrap_content"
-        android:padding = "5dp">
+        android:padding = "2dp">
 
         <LinearLayout
             android:layout_width="match_parent"

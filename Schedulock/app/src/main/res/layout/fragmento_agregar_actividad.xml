@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo_login"
     tools:context=".Controladores_de_Eventos.FragmentoAgregarActividad"
     android:orientation="vertical">
 
@@ -14,87 +15,119 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="20dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Actividad Nueva"
-                android:layout_marginTop="10dp"
-                android:textSize="16sp"/>
+            android:padding="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
-                android:padding="15dp"
+                android:background="@drawable/forma_rectangulo_bordes_redondeados"
                 android:orientation="vertical"
-                android:background="@drawable/forma_rectangulo_bordes_redondeados">
+                android:padding="15dp">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Información Basica"
+                    android:layout_marginTop="10dp"
                     android:gravity="center"
-                    android:layout_marginTop="10dp"/>
+                    android:text="Información Basica"
+                    android:textColor="@color/color_schedulock_iconos"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="Titulo:"/>
+                    android:text="Titulo:"
+                    android:textColor="@color/color_texto_gris_claro" />
+
                 <EditText
                     android:id="@+id/editNombre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Escriba el titulo de la actividad"/>
+                    android:drawableLeft="@drawable/icono_notas"
+                    android:drawableTint="@color/color_schedulock_iconos"
+                    android:gravity="center"
+                    android:hint="Titulo de la actividad"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="Categoria:"/>
+                    android:text="Categoria:"
+                    android:textColor="@color/color_texto_gris_claro"/>
+
                 <EditText
                     android:id="@+id/editCategoria"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Escriba la categoria de la actividad"/>
+                    android:gravity="center"
+                    android:drawableLeft="@drawable/icono_etiqueta"
+                    android:drawableTint="@color/color_schedulock_iconos"
+                    android:hint="Categoria de la actividad" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="Descripcion:"/>
+                    android:textColor="@color/color_texto_gris_claro"
+                    android:text="Descripcion:" />
+
                 <EditText
                     android:id="@+id/editDescripcion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Agrega una breve descripcion de la actividad"/>
+                    android:gravity="center"
+                    android:drawableLeft="@drawable/icono_descripcion"
+                    android:drawableTint="@color/color_schedulock_iconos"
+                    android:hint="Descripcion de la actividad" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="Fecha de inicio:"/>
+                    android:textColor="@color/color_texto_gris_claro"
+                    android:text="Fecha de inicio:" />
+
                 <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="Selecciona una fecha"
-                    android:background="#AACCAB"
-                    android:id="@+id/btn_seleccionar_fecha_inicio"/>
+                    android:id="@+id/btn_seleccionar_fecha_inicio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:layout_gravity="center"
+                    android:drawableLeft="@drawable/icono_calendario"
+                    android:drawableTint="@color/color_blanco"
+                    android:textColor="@color/color_blanco"
+                    android:background="@drawable/fondo_boton_schedulock"
+                    android:text="  Selecciona una fecha" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="Fecha de fin:"/>
+                    android:text="Fecha de fin:"
+                    android:textColor="@color/color_texto_gris_claro"/>
+
                 <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="Selecciona una fecha"
-                    android:background="#C8918D"
-                    android:id="@+id/btn_seleccionar_fecha_fin"/>
+                    android:id="@+id/btn_seleccionar_fecha_fin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:layout_gravity="center"
+                    android:drawableLeft="@drawable/icono_calendario"
+                    android:drawableTint="@color/color_blanco"
+                    android:textColor="@color/color_blanco"
+                    android:background="@drawable/fondo_boton_schedulock"
+                    android:text="  Selecciona una fecha" />
             </LinearLayout>
 
             <LinearLayout
@@ -110,17 +143,24 @@
                     android:layout_height="wrap_content"
                     android:text="Información Adicional"
                     android:gravity="center"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/color_schedulock_iconos"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="Ubicación:"/>
+                    android:text="Ubicación:"
+                    android:textColor="@color/color_texto_gris_claro"/>
                 <EditText
                     android:id="@+id/editDireccion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:drawableLeft="@drawable/icono_ubicacion"
+                    android:drawableTint="@color/color_schedulock_iconos"
                     android:hint="Ingrese un lugar o direccion"/>
 
                 <TextView
@@ -128,13 +168,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="Categoria:"/>
+                    android:text="Prioridad:"
+                    android:textColor="@color/color_texto_gris_claro"
+                    />
                 <Spinner
                     android:id="@+id/sprSelecionarNivelImportancia"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
-                    android:background="#fff"
+                    android:background="@drawable/fondo_boton_schedulock"
                     android:entries="@array/arreglo_niveles_importancia"/>
 
                 <TextView
@@ -142,26 +184,28 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="Recordatorio de la actividad:"/>
+                    android:text="Recordatorio de la actividad:"
+                    android:textColor="@color/color_texto_gris_claro"/>
                 <Spinner
                     android:id="@+id/sprSelecionarRecordatorio"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
-                    android:background="#fff"
+                    android:background="@drawable/fondo_boton_schedulock"
                     android:entries="@array/arreglo_tiempo_recordatorio"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="Frecuencia de Recordatorios:"/>
+                    android:text="Frecuencia de Recordatorios:"
+                    android:textColor="@color/color_texto_gris_claro"/>
                 <Spinner
                     android:id="@+id/sprSelecionarFrecuenciaRecordatorio"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
-                    android:background="#fff"
+                    android:background="@drawable/fondo_boton_schedulock"
                     android:entries="@array/arreglo_frecuencia_recordatorio"/>
 
                 <TextView
@@ -186,12 +230,18 @@
 
             <Button
                 android:id="@+id/btn_guardar_actividad"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingRight="20dp"
+                android:paddingLeft="20dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:background="#2196F3"
+                android:background="@drawable/fondo_boton_schedulock"
+                android:backgroundTint="#fff"
+                android:textColor="@color/color_schedulock_iconos"
+                android:drawableTint="@color/color_schedulock_iconos"
                 android:drawableLeft="@drawable/icono_guardar"
-                android:text="Guardar Actividad"/>
+                android:text=" Guardar Actividad"/>
         </LinearLayout>
     </ScrollView>
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@drawable/fondo_login"
-    android:padding="10dp"
+    android:padding="5dp"
     android:layout_height="match_parent"
     tools:context=".Controladores_de_Eventos.FragmentoVerCalendario">
 
@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="10dp"
+        android:padding="5dp"
         android:background="@drawable/forma_rectangulo_bordes_redondeados">
 
         <LinearLayout
@@ -100,8 +100,7 @@
                         android:id="@+id/list_actividades"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="7dp"
-                        android:padding="5dp" />
+                        android:layout_marginTop="7dp"/>
                 </LinearLayout>
 
             </ScrollView>

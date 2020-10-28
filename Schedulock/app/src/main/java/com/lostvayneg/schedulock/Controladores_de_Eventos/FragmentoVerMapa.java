@@ -524,7 +524,7 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
 
             if(i==shortestRouteIndex)
             {
-                polyOptions.color(getResources().getColor(R.color.colorPrimary));
+                polyOptions.color(getResources().getColor(R.color.color_schedulock_iconos));
                 polyOptions.width(7);
                 polyOptions.addAll(route.get(shortestRouteIndex).getPoints());
                 Polyline polyline = mMap.addPolyline(polyOptions);
