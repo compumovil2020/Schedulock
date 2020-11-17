@@ -66,6 +66,13 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.lostvayneg.schedulock.Entidades.Actividad;
 import com.lostvayneg.schedulock.Entidades.Localizacion;
 import com.lostvayneg.schedulock.R;
@@ -77,7 +84,10 @@ import java.util.Date;
 import java.util.List;
 
 public class FragmentoVerMapa extends Fragment implements RoutingListener {
-    private Acceso_Base_Datos baseDatos;
+    public static final String PATH_ACTIVIDADES = "actividades/";
+    public DatabaseReference refDB;
+    private FirebaseDatabase database;
+    private FirebaseAuth mAuth;
     private GoogleMap mMap;
 
     public static final int FINE_LOCATION = 2;
@@ -148,9 +158,32 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        baseDatos = new Acceso_Base_Datos();
+        mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
 
-        listaActividades = baseDatos.obtenerActividadesUsuario();
+        refDB = database.getReference(PATH_ACTIVIDADES);
+        final FirebaseUser user = mAuth.getCurrentUser();
+
+        if (user != null) {
+            refDB.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    listaActividades.clear();
+                    for (DataSnapshot actividadBD: dataSnapshot.getChildren()) {
+                        Actividad act = actividadBD.getValue(Actividad.class);
+                        if (user.getUid().equals(act.getUidUser())) {
+                            listaActividades.add(act);
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+
 
         location = getView().findViewById(R.id.imageLocation);
 
