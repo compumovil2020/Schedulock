@@ -65,7 +65,6 @@
                         android:text="Subir foto de perfil"
                         android:gravity="center"
                         android:textSize="12sp"
-                        android:layout_marginTop="9dp"
                         android:textStyle="bold"
                         android:textColor="@color/color_texto_gris_claro"
                         />
