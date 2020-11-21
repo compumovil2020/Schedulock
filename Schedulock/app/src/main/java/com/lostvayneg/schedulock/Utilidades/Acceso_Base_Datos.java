@@ -1,5 +1,7 @@
 package com.lostvayneg.schedulock.Utilidades;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
@@ -112,20 +114,16 @@ public class Acceso_Base_Datos {
     }
 
     public File obtenerFotoPerfil() throws IOException {
-        File localFile = File.createTempFile("images", "jpg");
-        referenciaSBD = storageBD.getReference(RUTA_IMAGENES).child(usuario.getUid());
+        final File localFile = File.createTempFile("images", "jpg");
+        referenciaSBD = storageBD.getReference(RUTA_IMAGENES).child(autenticacionFB.getUsuario().getUid());
         referenciaSBD.getFile(localFile)
                 .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        // Successfully downloaded data to local file
-                        // ...
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                // Handle failed download
-                // ...
             }
         });
         return localFile;
