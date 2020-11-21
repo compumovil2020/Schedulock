@@ -124,6 +124,7 @@ public class Acceso_Base_Datos {
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
+
             }
         });
         return localFile;

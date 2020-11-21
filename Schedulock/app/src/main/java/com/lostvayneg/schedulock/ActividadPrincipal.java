@@ -68,6 +68,8 @@ public class ActividadPrincipal extends AppCompatActivity implements NavigationV
     public static final String RUTA_IMAGENES = "fotos_perfil/";
     private FirebaseStorage storageBD;
     private ProgressDialog cargaDatosUsuario;
+    private File file_img_usuario;
+    private Usuario usuario_conectado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +115,10 @@ public class ActividadPrincipal extends AppCompatActivity implements NavigationV
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.frg_ver_perfil:
-                controladorNavegacion.navigate(R.id.frg_ver_perfil);
+                Bundle datosIniciales = new Bundle();
+                datosIniciales.putSerializable("usuario", usuario_conectado);
+                datosIniciales.putSerializable("file_imagen_usuario", file_img_usuario);
+                controladorNavegacion.navigate(R.id.frg_ver_perfil, datosIniciales);
                 menuLateral.closeDrawer(GravityCompat.START);
                 return true;
             case R.id.frg_menu_principal:
@@ -162,6 +167,7 @@ public class ActividadPrincipal extends AppCompatActivity implements NavigationV
                     cargaDatosUsuario.show();
                     Usuario usuarioConsultado = dataSnapshot.getValue(Usuario.class);
                     txt_nombre_usuario.setText(usuarioConsultado.getNombre());
+                    usuario_conectado = usuarioConsultado;
                     txt_correo_usuario.setText(currentUser.getEmail());
                     final File localFile;
                     try {
@@ -171,6 +177,7 @@ public class ActividadPrincipal extends AppCompatActivity implements NavigationV
                                 .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                                     @Override
                                     public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                        file_img_usuario = localFile;
                                         final Bitmap selectedImage = BitmapFactory.decodeFile(localFile.getPath());
                                         img_perfil_usuario.setImageBitmap(selectedImage);
                                         cargaDatosUsuario.dismiss();

@@ -1,5 +1,7 @@
 package com.lostvayneg.schedulock.Controladores_de_Eventos;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.lostvayneg.schedulock.Entidades.Usuario;
+import com.lostvayneg.schedulock.Enumerados.Enum_Niveles;
 import com.lostvayneg.schedulock.R;
 import com.lostvayneg.schedulock.Utilidades.Acceso_Base_Datos;
 
@@ -41,7 +45,7 @@ public class FragmentoVerPerfil extends Fragment {
     private TextView genero_usuario;
     private Button guardar_cambios;
 
-    private Acceso_Base_Datos base_datos;
+    private Usuario usuario_actual;
 
     @Nullable
     @Override
@@ -66,22 +70,47 @@ public class FragmentoVerPerfil extends Fragment {
         genero_usuario = pantalla.findViewById(R.id.genero_usuario_ver_perfil);
         guardar_cambios = pantalla.findViewById(R.id.btn_guardar_cambios_ver_perfil);
 
-        base_datos = new Acceso_Base_Datos();
-        cargarDatos();
+        cargarDatosIniciales();
 
         return pantalla;
     }
 
-    private void cargarDatos(){
-        cargarImagen();
+    private void cargarDatosIniciales(){
+        Bundle datosIniciales = getArguments();
+        if(datosIniciales != null){
+            usuario_actual = (Usuario) datosIniciales.getSerializable("usuario");
+            if(usuario_actual != null){
+                nombre_usuario.setText(usuario_actual.getNombre());
+                correo_usuario.setText(usuario_actual.getEmail());
+                nivel_usuario.setText("Nivel " + usuario_actual.getNivel());
+                puntos_usuario.setText("" + usuario_actual.getExperiencia());
+                puntos_restantes_nivel.setText(calcularPuntosRestantes());
+                editar_nombre_usuario.setText(usuario_actual.getNombre());
+                editar_correo_usuario.setText(usuario_actual.getEmail());
+                editar_edad_usuario.setText(usuario_actual.getEdad());
+                genero_usuario.setText(usuario_actual.getGenero());
+            }
+
+            File img_usuario = (File) datosIniciales.getSerializable("file_imagen_usuario");
+            if(img_usuario != null){
+                Bitmap bmImagen = BitmapFactory.decodeFile(img_usuario.getPath());
+                imagen_usuario.setImageBitmap(bmImagen);
+            }
+        }
     }
 
-    private void cargarImagen(){
-        try {
+    private String calcularPuntosRestantes(){
+        Enum_Niveles enum_niveles = null;
 
-            File imagen = base_datos.obtenerFotoPerfil();
-        } catch (IOException e) {
-            e.printStackTrace();
+        String expRestante;
+        if(usuario_actual.getNivel() == 0){
+            enum_niveles = Enum_Niveles.NIVEL_1;
+            expRestante = usuario_actual.getExperiencia() + "/" + enum_niveles.getPuntosNecesarios() + " Puntos";
         }
+        else{
+            enum_niveles = enum_niveles.obtenerNivel(usuario_actual.getNivel());
+            expRestante = usuario_actual.getExperiencia() + "/" + enum_niveles.getPuntosNecesarios() + " Puntos";
+        }
+        return expRestante;
     }
 }
