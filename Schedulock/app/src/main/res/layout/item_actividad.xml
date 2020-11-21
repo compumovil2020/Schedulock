@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Actividad X"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 android:textColor="@color/color_texto_gris_claro" />
 
@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Categoria X"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:textColor="@color/color_texto_gris_claro" />
         </LinearLayout>
 
@@ -51,7 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Inicio:"
-                    android:textSize="16sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     android:textColor="@color/color_texto_gris_claro" />
 
@@ -60,7 +60,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="07/09/2020 10:00"
-                    android:textSize="17sp"
+                    android:textSize="12sp"
                     android:textColor="@color/color_texto_gris_claro" />
             </LinearLayout>
 
@@ -74,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:text="Fin:"
                     android:textColor="@color/color_texto_gris_claro"
-                    android:textSize="16sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     android:layout_marginRight="5dp"/>
 
@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:text="07/09/2020 12:00"
-                    android:textSize="17sp"
+                    android:textSize="12sp"
                     android:textColor="@color/color_texto_gris_claro" />
             </LinearLayout>
         </LinearLayout>

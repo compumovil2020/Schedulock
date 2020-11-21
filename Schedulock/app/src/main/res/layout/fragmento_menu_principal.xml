@@ -48,6 +48,7 @@
                         android:layout_height="wrap_content"
                         android:text="Mapa de actividades"
                         android:layout_gravity="center"
+                        android:textSize="22sp"
                         android:drawableTint="@color/color_blanco"
                         android:textColor="@color/color_blanco"
                         android:drawableTop="@drawable/icono_estrella_trofeo"/>
@@ -75,10 +76,12 @@
                 android:drawableTint="@color/color_blanco"
                 android:textColor="@color/color_blanco"
                 android:textSize="10sp"
-                android:padding="10dp"
+                android:padding="15dp"
                 android:textAllCaps="false"
                 android:background="@drawable/fondo_icono_schedulock"
                 android:drawableLeft="@drawable/icono_calendario"
+
+
                 />
             <Button
                 android:id="@+id/btn_ver_notas_desde_menu"
@@ -91,7 +94,7 @@
                 android:textColor="@color/color_blanco"
                 android:drawableTint="@color/color_blanco"
                 android:background="@drawable/fondo_icono_schedulock"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:textAllCaps="false"
                 android:padding="10dp"
                 android:drawableLeft="@drawable/icono_notas" />
@@ -106,7 +109,7 @@
                 android:padding="10dp"
                 android:textColor="@color/color_blanco"
                 android:drawableTint="@color/color_blanco"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:textAllCaps="false"
                 android:drawableLeft="@drawable/icono_estrella_trofeo"/>
 
@@ -119,7 +122,7 @@
             android:text="Actividades para hoy"
             android:textColor="@color/color_texto_gris_claro"
             android:gravity="center_horizontal"
-            android:textSize="15sp"
+            android:textSize="16sp"
             android:layout_marginTop="10dp"
             tools:ignore="HardcodedText" />
 
