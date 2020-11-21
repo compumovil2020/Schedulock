@@ -56,7 +56,7 @@
 
     </RelativeLayout>
 
-    <ScrollView
+    <HorizontalScrollView
         android:id="@+id/sv_inferior_ver_perfil"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -65,14 +65,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:gravity="center">
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_superior_ver_perfil"
-                android:layout_width="350dp"
+                android:layout_width="320dp"
                 android:layout_height="300dp"
                 android:layout_centerHorizontal="true"
                 app:cardCornerRadius="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
                 app:cardElevation="5dp">
 
                 <LinearLayout
@@ -140,6 +144,7 @@
                         android:layout_weight="0.3"
                         android:orientation="horizontal">
                         <LinearLayout
+                            android:id="@+id/ly_logros_ver_perfil"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="0.5"
@@ -161,6 +166,7 @@
                                 android:gravity="center"/>
                         </LinearLayout>
                         <LinearLayout
+                            android:id="@+id/ly_calendarios_ver_perfil"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="0.5"
@@ -189,6 +195,7 @@
                         android:layout_weight="0.3"
                         android:orientation="horizontal">
                         <LinearLayout
+                            android:id="@+id/ly_notas_ver_perfil"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="0.5"
@@ -210,6 +217,7 @@
                                 android:gravity="center"/>
                         </LinearLayout>
                         <LinearLayout
+                            android:id="@+id/ly_actividades_ver_perfil"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="0.5"
@@ -235,147 +243,142 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center">
-                <androidx.cardview.widget.CardView
-                    android:layout_width="350dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="20dp"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="5dp">
+            <androidx.cardview.widget.CardView
+                android:layout_width="320dp"
+                android:layout_height="300dp"
+                android:layout_marginLeft="20dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="Mis Datos Personales"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:gravity="center_vertical"
+                        android:drawableTint="@color/color_schedulock_iconos"
+                        android:drawableRight="@drawable/icono_usuario"/>
 
                     <LinearLayout
+                        android:layout_marginTop="10dp"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:paddingBottom="10dp">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingRight="20dp"
+                        android:paddingLeft="10dp">
                         <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
-                            android:text="Mis Datos Personales"
-                            android:textStyle="bold"
-                            android:textSize="14sp"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:text="Nombre: "
                             android:gravity="center_vertical"
-                            android:drawableTint="@color/color_schedulock_iconos"
-                            android:drawableRight="@drawable/icono_usuario"/>
-
-                        <LinearLayout
-                            android:layout_marginTop="10dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:paddingRight="20dp"
-                            android:paddingLeft="10dp">
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:text="Nombre: "
-                                android:gravity="center_vertical"
-                                android:layout_weight="0.3"/>
-                            <EditText
-                                android:id="@+id/entrada_nombre_usuario_ver_perfil"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="0.7"
-                                android:gravity="center_horizontal"
-                                android:hint="Nombre de usuario"/>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_marginTop="10dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:paddingRight="20dp"
-                            android:paddingLeft="10dp">
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:text="Correo: "
-                                android:gravity="center_vertical"
-                                android:layout_weight="0.3"/>
-                            <TextView
-                                android:id="@+id/correo2_usuario_ver_perfil"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="0.7"
-                                android:gravity="center_horizontal"
-                                android:hint="Correo de usuario"
-                                android:text=""/>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_marginTop="10dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:paddingRight="20dp"
-                            android:paddingLeft="10dp">
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:text="Edad: "
-                                android:gravity="center_vertical"
-                                android:layout_weight="0.3"/>
-                            <EditText
-                                android:id="@+id/entrada_edad_usuario_ver_perfil"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="0.7"
-                                android:gravity="center_horizontal"
-                                android:hint="Edad de usuario"/>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_marginTop="10dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:paddingRight="20dp"
-                            android:paddingLeft="10dp">
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:text="Genero: "
-                                android:gravity="center_vertical"
-                                android:layout_weight="0.3"/>
-                            <TextView
-                                android:id="@+id/genero_usuario_ver_perfil"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="0.7"
-                                android:gravity="center_horizontal"
-                                android:hint="Otro"/>
-                        </LinearLayout>
-
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="40dp"
-                            android:layout_marginRight="40dp"
-                            android:layout_marginTop="20dp"
-                            android:id="@+id/btn_guardar_cambios_ver_perfil"
-                            android:background="@drawable/fondo_boton_schedulock"
-                            android:text="Guardar Cambios"
-                            android:paddingLeft="20dp"
-                            android:paddingRight="20dp"
-                            android:textSize="12sp"
-                            android:textColor="@android:color/white" />
+                            android:layout_weight="0.3"/>
+                        <EditText
+                            android:id="@+id/entrada_nombre_usuario_ver_perfil"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.7"
+                            android:gravity="center_horizontal"
+                            android:hint="Nombre de usuario"/>
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
-            </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingRight="20dp"
+                        android:paddingLeft="10dp">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:text="Correo: "
+                            android:gravity="center_vertical"
+                            android:layout_weight="0.3"/>
+                        <TextView
+                            android:id="@+id/correo2_usuario_ver_perfil"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.7"
+                            android:gravity="center_horizontal"
+                            android:hint="Correo de usuario"
+                            android:text=""/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingRight="20dp"
+                        android:paddingLeft="10dp">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:text="Edad: "
+                            android:gravity="center_vertical"
+                            android:layout_weight="0.3"/>
+                        <EditText
+                            android:id="@+id/entrada_edad_usuario_ver_perfil"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.7"
+                            android:gravity="center_horizontal"
+                            android:hint="Edad de usuario"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingRight="20dp"
+                        android:paddingLeft="10dp">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:text="Genero: "
+                            android:gravity="center_vertical"
+                            android:layout_weight="0.3"/>
+                        <TextView
+                            android:id="@+id/genero_usuario_ver_perfil"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.7"
+                            android:gravity="center_horizontal"
+                            android:hint="Otro"/>
+                    </LinearLayout>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginTop="20dp"
+                        android:id="@+id/btn_guardar_cambios_ver_perfil"
+                        android:background="@drawable/fondo_boton_schedulock"
+                        android:text="Guardar Cambios"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:textSize="12sp"
+                        android:textColor="@android:color/white" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
-    </ScrollView>
+    </HorizontalScrollView>
 
 
 
