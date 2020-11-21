@@ -18,22 +18,10 @@ public class Actividad implements Serializable {
     private String frencuenciaR;
     private Localizacion localizacion;
     private List<String> colaboradores;
+    private String idNota;
 
     public Actividad() {
     }
-
-    /*public Actividad(String nombre, String categoria, Date inicio, Date fin,String descripcion,String prioridad, String recordatorio,String frencuenciaR,LatLng localizacion) {
-        this.nombre = nombre;
-        this.categoria = categoria;
-        this.inicio = inicio;
-        this.fin = fin;
-        this.descripcion=descripcion;
-        this.prioridad=prioridad;
-        this.recordatorio=recordatorio;
-        this.frencuenciaR=frencuenciaR;
-        this.localizacion = localizacion;
-    }*/
-
 
     public String getNombre() {
         return nombre;
@@ -136,5 +124,13 @@ public class Actividad implements Serializable {
     }
     public String toStringFechaFin(){
         return (fin.getYear() + "/" + fin.getMonth() +"/" +fin.getDate()+" "+fin.getHours()+":"+fin.getMinutes());
+    }
+
+    public String getIdNota() {
+        return idNota;
+    }
+
+    public void setIdNota(String idNota) {
+        this.idNota = idNota;
     }
 }

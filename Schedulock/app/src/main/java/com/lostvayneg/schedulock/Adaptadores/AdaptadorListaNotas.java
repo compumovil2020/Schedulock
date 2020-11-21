@@ -39,7 +39,7 @@ public class AdaptadorListaNotas extends RecyclerView.Adapter<AdaptadorListaNota
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String nombre = model.get(position).getNombre();
-        String actividad = model.get(position).getActividad() != null ? model.get(position).getActividad().getNombre() : "";
+        String actividad = model.get(position).getIdActividad() != null ? model.get(position).getIdActividad().getNombre() : "";
 
         holder.nombre.setText(nombre);
         holder.actividad.setText(actividad);
