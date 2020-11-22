@@ -13,6 +13,9 @@ public class Actividad implements Serializable {
     private Date inicio;
     private Date fin;
     private String descripcion;
+    private String idUser;
+    private String idActividad;
+
     private String prioridad;
     private String recordatorio;
     private String frencuenciaR;
@@ -137,4 +140,21 @@ public class Actividad implements Serializable {
     public String toStringFechaFin(){
         return (fin.getYear() + "/" + fin.getMonth() +"/" +fin.getDate()+" "+fin.getHours()+":"+fin.getMinutes());
     }
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
+    }
+
+    public String getIdActividad() {
+        return idActividad;
+    }
+
+    public void setIdActividad(String idActividad) {
+        this.idActividad = idActividad;
+    }
+
+
 }

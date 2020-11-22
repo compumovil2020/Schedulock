@@ -9,6 +9,7 @@ import android.provider.CalendarContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
@@ -34,6 +36,7 @@ import com.lostvayneg.schedulock.Utilidades.Acceso_Base_Datos;
 
 import java.io.IOException;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -52,7 +55,8 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
     private Date fechaI,fechaf, fechaSelecionada;
     private EditText nombre,categoria,descripcion,ubicacion;
     private Geocoder mGeocoder;
-
+    private Spinner spinner;
+    private String categotiab;
     private Acceso_Base_Datos baseDatos;
 
     @Override
@@ -67,6 +71,16 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
         btnSeleccionarFechaFin = pantalla.findViewById(R.id.btn_seleccionar_fecha_fin);
         btnGuardarActividad = pantalla.findViewById(R.id.btn_guardar_actividad);
         nombre=pantalla.findViewById(R.id.editNombre);
+        final ArrayList<String> arregloCategorias =new ArrayList<String>() ;
+        arregloCategorias.add("Personal");
+        arregloCategorias.add("Laboral");
+        arregloCategorias.add("Academico");
+        arregloCategorias.add("Ocio");
+        arregloCategorias.add("Otro");
+        ArrayAdapter adp=new ArrayAdapter(pantalla.getContext(), android.R.layout.simple_spinner_dropdown_item,arregloCategorias);
+        spinner=pantalla.findViewById(R.id.act_categoria);
+        spinner.setAdapter(adp);
+
         categoria=pantalla.findViewById(R.id.editCategoria);
         descripcion=pantalla.findViewById(R.id.editDescripcion);
         importancia=pantalla.findViewById(R.id.sprSelecionarNivelImportancia);
@@ -101,7 +115,23 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
                 agregarActividad();
             }
         });
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position==4){
+                    categoria.setVisibility(View.VISIBLE);
+                }else{
+                    categotiab=arregloCategorias.get(position);
+                    categoria.setVisibility(View.INVISIBLE);
+                    categoria.setVisibility(View.GONE);
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         String[] arregloInvitadosEjemplo = {
                 "invitado1@gmail.com",
                 "invitado2@gmail.com",
@@ -126,7 +156,7 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
             actividad=new Actividad();
 
             actividad.setNombre(nombre.getText().toString());
-            actividad.setCategoria(categoria.getText().toString());
+            actividad.setCategoria(categotiab);
             actividad.setInicio(fechaI);
             actividad.setFin(fechaf);
             actividad.setDescripcion(descripcion.getText().toString());
@@ -136,6 +166,7 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
             if(latitud != null && longitud != null){
                 actividad.setLocalizacion(new Localizacion(latitud, longitud));
             }
+
             baseDatos.agregarNuevaActividad(actividad);
             Toast.makeText(pantalla.getContext(), "Se agrego la actividad", Toast.LENGTH_LONG).show();
             Bundle enviarActividad = new Bundle();
@@ -147,7 +178,11 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
     private boolean verificarCampos(){
 
         if(!nombre.getText().toString().isEmpty()){
-            if(!categoria.getText().toString().isEmpty()){
+
+            if(spinner.getSelectedItemPosition()>=0){
+                if(spinner.getSelectedItem().toString().equals("otro")){
+                    categotiab=categoria.getText().toString();
+                }
                 if(!descripcion.getText().toString().isEmpty()){
                     if(fechaI != null){
                         if(fechaf != null){
@@ -169,7 +204,7 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
                 }
             }
             else{
-                Toast.makeText(pantalla.getContext(), "Escriba la categoria de la actividad", Toast.LENGTH_LONG).show();
+                Toast.makeText(pantalla.getContext(), "Seleccione la categoria de la actividad", Toast.LENGTH_LONG).show();
             }
         }
         else{

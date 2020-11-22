@@ -64,11 +64,16 @@ public class Acceso_Base_Datos {
 
     public boolean agregarNuevaActividad(Actividad nuevaActividad){
         try{
+            DatabaseReference aux;
             int cantidadActividadesUsuario = this.listaActividades.size();
             Log.i("Cant", cantidadActividadesUsuario +"");
             String idActividad = String.valueOf(cantidadActividadesUsuario + 1);
-            referenciaBD = baseDatos.getReference(RUTA_ACTIVIDADES + usuario.getUid()+ "/" + idActividad + "/");
-            referenciaBD.setValue(nuevaActividad);
+            nuevaActividad.setIdUser(usuario.getUid());
+            referenciaBD = baseDatos.getReference(RUTA_ACTIVIDADES);
+            String id=referenciaBD.push().getKey();
+            nuevaActividad.setIdActividad(id);
+            aux = baseDatos.getReference(RUTA_ACTIVIDADES+id);
+            aux.setValue(nuevaActividad);
         }
         catch (Exception e){
             return false;

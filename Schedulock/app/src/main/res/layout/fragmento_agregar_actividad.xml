@@ -60,15 +60,20 @@
                     android:layout_marginTop="10dp"
                     android:text="Categoria:"
                     android:textColor="@color/color_texto_gris_claro"/>
-
+                <Spinner
+                    android:id="@+id/act_categoria"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
                 <EditText
                     android:id="@+id/editCategoria"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:visibility="invisible"
                     android:drawableLeft="@drawable/icono_etiqueta"
                     android:drawableTint="@color/color_schedulock_iconos"
-                    android:hint="Categoria de la actividad" />
+                    android:hint="Nueva Categoria" />
 
                 <TextView
                     android:layout_width="wrap_content"
