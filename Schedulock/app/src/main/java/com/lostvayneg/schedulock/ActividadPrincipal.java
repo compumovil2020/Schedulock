@@ -31,6 +31,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.lostvayneg.schedulock.Controladores_de_Eventos.Login;
 import com.lostvayneg.schedulock.Entidades.Usuario;
+import com.lostvayneg.schedulock.Servicios.Servicio_Recordatorios;
 import com.lostvayneg.schedulock.Utilidades.Acceso_Base_Datos;
 
 import androidx.annotation.NonNull;
@@ -70,6 +71,7 @@ public class ActividadPrincipal extends AppCompatActivity implements NavigationV
     private ProgressDialog cargaDatosUsuario;
     private File file_img_usuario;
     private Usuario usuario_conectado;
+    private Intent servicio_recordatorios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -203,4 +205,5 @@ public class ActividadPrincipal extends AppCompatActivity implements NavigationV
         } else {
         }
     }
+    
 }
