@@ -21,6 +21,7 @@ public class Actividad implements Serializable {
     private String frencuenciaR;
     private Localizacion localizacion;
     private List<String> colaboradores;
+    private String uidUser;
 
     public Actividad() {
     }
