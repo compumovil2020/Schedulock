@@ -1,10 +1,12 @@
 package com.lostvayneg.schedulock.Entidades;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Nota
+public class Nota implements Serializable
 {
+    private String id;
     private String nombre;
     private String descripcion;
     private List<Object> adjuntos;
@@ -20,6 +22,14 @@ public class Nota
     }
 
     public Nota(String s) {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getIdUsuario() {

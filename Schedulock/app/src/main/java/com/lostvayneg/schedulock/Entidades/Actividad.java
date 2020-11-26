@@ -23,6 +23,7 @@ public class Actividad implements Serializable {
     public Actividad() {
     }
 
+
     public String getNombre() {
         return nombre;
     }

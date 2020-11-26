@@ -4,17 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo_login"
     tools:context=".Controladores_de_Eventos.FragmentoAgregarNota"
     >
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/forma_rectangulo_bordes_redondeados"
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:padding="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.9"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -25,7 +27,7 @@
             android:layout_height="0dp"
             android:padding="5dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.1"
+            app:layout_constraintHeight_percent="0.2"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -39,23 +41,15 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <EditText
-                    android:id="@+id/tv_ver_nombre_nota"
+                    android:id="@+id/et_nombre_nota"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="0.5"
                     android:paddingLeft="15dp"
                     android:textSize="24dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tv_ver_actividad_nota"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.5"
-                    android:textAlignment="center"
-                    android:textSize="24dp" />
+                    android:textStyle="bold"
+                    android:hint="Nombre Nota"/>
 
             </LinearLayout>
 
@@ -68,17 +62,33 @@
             android:layout_height="0dp"
             android:layout_marginTop="1dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.8"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHeight_percent="0.7"
+            app:layout_constraintHorizontal_bias="0.448"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayoutNA">
 
-            <EditText
-                android:id="@+id/textView2"
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text=""
-                android:textSize="18sp" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_adjunto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    />
+
+                <EditText
+                    android:id="@+id/et_desc_nota"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Descripción Nota"
+                    android:text=""
+                    android:textSize="18sp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
         </ScrollView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -91,13 +101,23 @@
             app:layout_constraintTop_toBottomOf="@+id/scrollView2">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/iv_subirFoto"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginRight="15dp"
                 android:src="@drawable/icono_subir_archivo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_tomar_foto"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/ic_baseline_camera"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/iv_subirFoto"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView

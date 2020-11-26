@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario {
+    private String id;
     private String nombre;
     private String email;
     private String edad;
@@ -13,11 +14,28 @@ public class Usuario {
     private List<Calendario> calendarios;
     private List<Logro> logros;
     private List<String> idsNotas;
+    private Localizacion localizacion;
 
     public Usuario() {
         this.idsNotas = new ArrayList<>();
         this.calendarios = new ArrayList<>();
         this.logros = new ArrayList<>();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Localizacion getLocalizacion() {
+        return localizacion;
+    }
+
+    public void setLocalizacion(Localizacion localizacion) {
+        this.localizacion = localizacion;
     }
 
     public String getNombre() {

@@ -5,7 +5,6 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
 import android.Manifest;
 import android.app.Activity;
@@ -29,18 +28,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.directions.route.AbstractRouting;
-import com.directions.route.Route;
-import com.directions.route.RouteException;
-import com.directions.route.Routing;
-import com.directions.route.RoutingListener;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.common.api.ResolvableApiException;
@@ -62,8 +54,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
-import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -74,7 +64,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
 import com.lostvayneg.schedulock.Entidades.Actividad;
 import com.lostvayneg.schedulock.Entidades.Localizacion;
 import com.lostvayneg.schedulock.Entidades.Usuario;
@@ -82,23 +71,20 @@ import com.lostvayneg.schedulock.R;
 import com.lostvayneg.schedulock.Utilidades.Acceso_Base_Datos;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-public class FragmentoVerMapa extends Fragment implements RoutingListener {
+public class FragmentVerMapaUnico extends Fragment {
 
     public FirebaseDatabase fireDB;
-    public ValueEventListener suscripcionAct;
-    public DatabaseReference refDBActv;
+    public HashMap <String, DatabaseReference> referencias;
+    public HashMap <String, ValueEventListener> suscripciones;
+    public HashMap <String, Marker> markers;
     public DatabaseReference refDBUser;
     private FirebaseAuth authF;
     private FirebaseUser fireUser;
-    public static final String RUTA_ACTIVIDADES ="actividades/";
-    public static final String RUTA_USUARIOS ="usuarios/";
-
     private GoogleMap mMap;
+    public static final String RUTA_USUARIOS ="usuarios/";
 
     public static final int FINE_LOCATION = 2;
     public static final int REQUEST_CHECK_SETTINGS = 3;
@@ -114,18 +100,16 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
 
     public Geocoder mGeocoder;
     public Marker actualMarker = null;
+    public Marker actividadMarker = null;
 
     public EditText searchMap;
 
     public int inicio = 0;
-    public ArrayList<Actividad> listaActividades = new ArrayList<>();
-    public HashMap<String, Actividad> idsMarkerActv = new HashMap<>();
-
-    public List<Polyline> polylines = null;
+    public boolean pausado = false;
 
     public ImageView location;
-    public CheckBox hoy;
-    public boolean esHoy = false;
+
+    private Actividad actividad;
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
@@ -144,31 +128,22 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
             mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                 @Override
                 public boolean onMarkerClick(Marker marker) {
-                    if (!marker.getId().equals(actualMarker.getId())) {
-                        encontrarRuta(actualMarker.getPosition(), marker.getPosition());
-                        Toast.makeText(getActivity(), "Distancia: " +
-                                        distance(actualMarker.getPosition().latitude, actualMarker.getPosition().longitude, marker.getPosition().latitude, marker.getPosition().longitude) + " Km",
-                                Toast.LENGTH_LONG).show();
-                    }
+
+                    Toast.makeText(getActivity(), "Distancia: " +
+                                    distance(actualMarker.getPosition().latitude, actualMarker.getPosition().longitude, marker.getPosition().latitude, marker.getPosition().longitude) +" Km",
+                            Toast.LENGTH_LONG).show();
                     marker.showInfoWindow();
                     return true;
                 }
             });
 
-            mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-                @Override
-                public void onInfoWindowClick(Marker marker) {
-                    if (!marker.getId().equals(actualMarker.getId())) {
-                        Actividad act = idsMarkerActv.get(marker.getId());
-                        Bundle b = new Bundle();
-                        b.putSerializable("actividad", act);
-                        Navigation.findNavController(getView()).navigate(R.id.ir_de_ver_mapa_a_ver_actividad, b);
-                    }
-                }
-            });
-
             mMap.getUiSettings().setZoomGesturesEnabled(true);
             mMap.getUiSettings().setZoomControlsEnabled(true);
+
+            actividadMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(actividad.getLocalizacion().getLatitud(), actividad.getLocalizacion().getLongitud())
+                        ).title(actividad.getNombre()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+
+            seguirInvitados();
         }
     };
 
@@ -177,21 +152,26 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
-        return inflater.inflate(R.layout.fragmento_ver_mapa, container, false);
+        return inflater.inflate(R.layout.fragment_ver_mapa_unico, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+        actividad = (Actividad) getArguments().getSerializable("actividad");
+
         super.onViewCreated(view, savedInstanceState);
 
         fireDB = FirebaseDatabase.getInstance();
         authF = FirebaseAuth.getInstance();
         fireUser = authF.getCurrentUser();
-        refDBActv = fireDB.getReference(RUTA_ACTIVIDADES + fireUser.getUid() + "/");
         refDBUser = fireDB.getReference(RUTA_USUARIOS + fireUser.getUid());
 
         location = getView().findViewById(R.id.imageLocation);
+
+        suscripciones = new HashMap<>();
+        referencias = new HashMap<>();
+        markers = new HashMap<>();
 
         location.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -200,15 +180,6 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
             }
         });
 
-        hoy = getView().findViewById(R.id.checkBoxHoy);
-
-        hoy.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                esHoy = b;
-                crearMarkerActividades();
-            }
-        });
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
@@ -229,6 +200,7 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
             public void onLocationResult(LocationResult locationResult) {
                 Location location = locationResult.getLastLocation();
                 if (location != null) {
+
                     if(actualMarker != null) {
                         actualMarker.remove();
                     }
@@ -236,12 +208,11 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
                     LatLng actualLoc = new LatLng(location.getLatitude(), location.getLongitude());
                     updateLocationUsuario(actualLoc);
                     actualMarker = mMap.addMarker(new MarkerOptions().position(actualLoc).title("Posición Actual").icon(BitmapDescriptorFactory
-                      .fromBitmap(resizeMapIcons("person_blue", 70, 120))));
+                            .fromBitmap(resizeMapIcons("person_blue", 70, 120))));
 
                     if (inicio == 0) {
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(actualLoc, 12));
                         inicio = 1;
-                        crearMarkerActividades();
                     }
                 }
 
@@ -311,20 +282,24 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
 
         solicitarPermiso(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION, "Se necesita acceso a la localización", FINE_LOCATION);
         usePermission();
+
     }
 
-    public void obtenerActividadesUsuario() {
-        listaActividades = new ArrayList<>();
-        suscripcionAct = refDBActv.addValueEventListener(new ValueEventListener() {
+    public void obtenerLocalizacionSeguir(final String uid){
+        DatabaseReference refUsr = fireDB.getReference(RUTA_USUARIOS + uid);
+        ValueEventListener vEL = refUsr.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot actividadBD: dataSnapshot.getChildren()) {
-                    Actividad act = actividadBD.getValue(Actividad.class);
-                    listaActividades.add(act);
+            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                Usuario usr = datasnapshot.getValue(Usuario.class);
+                if(markers.get(uid) != null) {
+                    markers.get(uid).remove();
                 }
-                if(inicio == 1) {
-                    crearMarkerActividades();
-                }
+
+                LatLng actualLoc = new LatLng(usr.getLocalizacion().getLatitud(), usr.getLocalizacion().getLongitud());
+                double distancia = distance(usr.getLocalizacion().getLatitud(), usr.getLocalizacion().getLongitud(), actualMarker.getPosition().latitude, actualMarker.getPosition().longitude);
+                Marker aux = mMap.addMarker(new MarkerOptions().position(actualLoc).title(usr.getNombre()+" a: " + distancia + " Km"));
+                //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(aux.getPosition(), 12));
+                markers.put(uid, aux);
             }
 
             @Override
@@ -332,6 +307,8 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
 
             }
         });
+        referencias.put(uid, refUsr);
+        suscripciones.put(uid, vEL);
     }
 
     public void updateLocationUsuario(final LatLng localizacion) {
@@ -350,40 +327,15 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
         });
     }
 
-    private void crearMarkerActividades() {
-        ArrayList<Actividad> listaActividadesFiltradas = new ArrayList<>();
-        Date fechaHoy = new Date();
-        mMap.clear();
-        actualMarker = mMap.addMarker(new MarkerOptions().position(actualMarker.getPosition()).title(actualMarker.getTitle()).icon(BitmapDescriptorFactory
-                .fromBitmap(resizeMapIcons("person_blue", 10, 10))));
+    private void seguirInvitados() {
 
-        if (esHoy) {
-            for (int i = 0; i < listaActividades.size(); i++) {
-                if (listaActividades.get(i).getInicio().before(fechaHoy) && listaActividades.get(i).getFin().after(fechaHoy)) {
-                    listaActividadesFiltradas.add(listaActividades.get(i));
-                }
-            }
-        } else {
-            listaActividadesFiltradas = listaActividades;
+        for (String id: actividad.getColaboradores()) {
+            if (!fireUser.getUid().equals(id))
+                obtenerLocalizacionSeguir(id);
         }
 
-        for (int i = 0; i < listaActividadesFiltradas.size(); i++) {
-            Marker aux = mMap.addMarker(new MarkerOptions().position(new LatLng(listaActividadesFiltradas.get(i).getLocalizacion().getLatitud(), listaActividadesFiltradas.get(i).getLocalizacion().getLongitud())).title(listaActividadesFiltradas.get(i).getNombre()));
-            idsMarkerActv.put(aux.getId(), listaActividadesFiltradas.get(i));
-        }
+        // TODO: CREADOR PARA LOS INVITADOS
 
-        Actividad act1 = new Actividad();
-        act1.setNombre("Nombre vacio");
-        act1.setFrencuenciaR("Una vez");
-        act1.setPrioridad("Alta");
-        act1.setDescripcion("Ejemplo");
-        act1.setRecordatorio("30 Minutos Antes");
-        act1.setCategoria("1");
-        act1.setInicio(new Date());
-        act1.setFin(new Date());
-        act1.setLocalizacion(new Localizacion(2.1867, -75.6233));
-
-        mMap.addMarker(new MarkerOptions().position(new LatLng(act1.getLocalizacion().getLatitud(), act1.getLocalizacion().getLongitud())).title(act1.getNombre()));
     }
 
     @Override
@@ -397,8 +349,12 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
         sensorManager.registerListener(lightSensorListener, lightSensor,
                 SensorManager.SENSOR_DELAY_NORMAL);
 
-        // Suscribirse a las actividades del usuario
-        obtenerActividadesUsuario();
+        if(pausado) {
+            for (String id: referencias.keySet()) {
+                referencias.get(id).addValueEventListener(suscripciones.get(id));
+            }
+        }
+
     }
 
     @Override
@@ -411,38 +367,12 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
         //Desuscribirse a actualizaciones de Sensores
         sensorManager.unregisterListener(lightSensorListener);
 
-        // Desuscribirse a las actividades del usuario
-        refDBActv.removeEventListener(suscripcionAct);
-    }
-
-    public void encontrarRuta(LatLng point1, LatLng point2) {
-
-        Routing routing = new Routing.Builder()
-                .travelMode(AbstractRouting.TravelMode.DRIVING)
-                .withListener(this)
-                .alternativeRoutes(true)
-                .waypoints(point1, point2)
-                .key("AIzaSyAPlEsrLXdHOOZN-X-T9pAhk8WTY3jmgmM")  //also define your api key here.
-                .build();
-        routing.execute();
-
-    }
-
-    // Función para obtener la dirección de unas coordenadas
-    private String geoSearchLatLng(LatLng latLng) {
-        String address = "";
-
-        try {
-            List<Address> lista = mGeocoder.getFromLocation(latLng.latitude, latLng.longitude, 2);
-            if (lista != null && lista.size() > 0)
-            {
-                address = lista.get(0).getAddressLine(0);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        //Desuscribirse a los usuarios seguidos
+        for (String id: referencias.keySet()) {
+            referencias.get(id).removeEventListener(suscripciones.get(id));
         }
 
-        return address;
+        pausado = true;
     }
 
     // Función para especificar la petición secuencial de la localización
@@ -572,65 +502,11 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(actualMarker.getPosition(), 15));
     }
 
-    // Función en caso de que falle el cálculo de la ruta
-    @Override
-    public void onRoutingFailure(RouteException e) {
-        Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
-    }
-
-    // Función que se ejecuta cuando se lanza la petición a la API y se espera respuesta
-    @Override
-    public void onRoutingStart() {
-        //Toast.makeText(MainActivity.this,"Finding Route...",Toast.LENGTH_LONG).show();
-    }
-
-    // Función que se ejecuta cuando la API retornó la ruta
-    @Override
-    public void onRoutingSuccess(ArrayList<Route> route, int shortestRouteIndex) {
-
-        if(polylines!=null) {
-            polylines.get(0).remove();
-            polylines.clear();
-        }
-
-        PolylineOptions polyOptions = new PolylineOptions();
-        LatLng polylineStartLatLng=null;
-        LatLng polylineEndLatLng=null;
-
-        polylines = new ArrayList<>();
-
-        //Añadir la ruta al mapa con Polyline
-        for (int i = 0; i <route.size(); i++) {
-
-            if(i==shortestRouteIndex)
-            {
-                polyOptions.color(getResources().getColor(R.color.color_schedulock_iconos));
-                polyOptions.width(7);
-                polyOptions.addAll(route.get(shortestRouteIndex).getPoints());
-                Polyline polyline = mMap.addPolyline(polyOptions);
-                polylineStartLatLng=polyline.getPoints().get(0);
-                int k=polyline.getPoints().size();
-                polylineEndLatLng=polyline.getPoints().get(k-1);
-                polylines.add(polyline);
-
-            }
-            else {
-
-            }
-
-        }
-    }
-
-    // Función en caso de que se cancele por algun motivo el proceso
-    @Override
-    public void onRoutingCancelled() {
-
-    }
-
     // Función para cambiar el tamaño a una imagen
     public Bitmap resizeMapIcons(String iconName, int width, int height) {
         Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), getResources().getIdentifier(iconName, "drawable", getActivity().getPackageName()));
         Bitmap resizedBitmap = Bitmap.createScaledBitmap(imageBitmap, width, height, false);
         return resizedBitmap;
     }
+
 }

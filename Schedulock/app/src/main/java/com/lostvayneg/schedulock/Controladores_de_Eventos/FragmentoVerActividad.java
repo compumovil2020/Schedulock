@@ -33,27 +33,29 @@ public class FragmentoVerActividad extends Fragment {
         pantalla = inflater.inflate(R.layout.fragmento_ver_actividad, container, false);
         verUbicacion = pantalla.findViewById(R.id.btn_ver_ubicacion_actividad);
         verMensajes = pantalla.findViewById(R.id.btn_ver_mensajes_actividad);
-        try {
-            Actividad actividadRecibida = (Actividad) getArguments().getSerializable("actividad");
-            tituloActividad = pantalla.findViewById(R.id.titulo_ver_actividad);
-            descripcionActividad = pantalla.findViewById(R.id.descripcion_ver_actividad);
-            prioridadActividad = pantalla.findViewById(R.id.prioridad_ver_actividad);
-            fechaInicioActividad = pantalla.findViewById(R.id.fecha_inicio_ver_actividad);
-            fechaFinActividad = pantalla.findViewById(R.id.fecha_fin_ver_actividad);
+
+        final Actividad actividadRecibida = (Actividad) getArguments().getSerializable("actividad");
+        tituloActividad = pantalla.findViewById(R.id.titulo_ver_actividad);
+        descripcionActividad = pantalla.findViewById(R.id.descripcion_ver_actividad);
+        prioridadActividad = pantalla.findViewById(R.id.prioridad_ver_actividad);
+        fechaInicioActividad = pantalla.findViewById(R.id.fecha_inicio_ver_actividad);
+        fechaFinActividad = pantalla.findViewById(R.id.fecha_fin_ver_actividad);
+
+        if (actividadRecibida != null) {
             tituloActividad.setText(actividadRecibida.getNombre());
             descripcionActividad.setText(actividadRecibida.getDescripcion());
             prioridadActividad.setText(actividadRecibida.getPrioridad());
             fechaInicioActividad.setText(actividadRecibida.toStringFechaInicio());
             fechaFinActividad.setText(actividadRecibida.toStringFechaFin());
         }
-        catch (Exception e){
 
-        }
 
         verUbicacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.ir_de_ver_actividad_a_ver_mapa);
+                Bundle b = new Bundle();
+                b.putSerializable("actividad", actividadRecibida);
+                Navigation.findNavController(v).navigate(R.id.ir_de_ver_actividad_a_ver_mapa_unico, b);
             }
         });
 

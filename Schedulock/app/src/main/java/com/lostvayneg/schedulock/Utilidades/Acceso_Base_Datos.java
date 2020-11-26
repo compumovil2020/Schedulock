@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,6 +22,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.lostvayneg.schedulock.Controladores_de_Eventos.Login;
 import com.lostvayneg.schedulock.Entidades.Actividad;
+import com.lostvayneg.schedulock.Entidades.Localizacion;
 import com.lostvayneg.schedulock.Entidades.Usuario;
 
 import java.io.File;
@@ -130,4 +132,6 @@ public class Acceso_Base_Datos {
         });
         return localFile;
     }
+
+
 }

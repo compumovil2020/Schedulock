@@ -32,7 +32,11 @@
         android:id="@+id/frg_ver_mapa"
         android:name="com.lostvayneg.schedulock.Controladores_de_Eventos.FragmentoVerMapa"
         android:label="Mapa de Actividades"
-        tools:layout="@layout/fragmento_ver_mapa"/>
+        tools:layout="@layout/fragmento_ver_mapa">
+        <action
+            android:id="@+id/ir_de_ver_mapa_a_ver_actividad"
+            app:destination="@id/frg_ver_actividad" />
+    </fragment>
     <fragment
         android:id="@+id/frg_ver_calendarios"
         android:name="com.lostvayneg.schedulock.Controladores_de_Eventos.FragmentoVerCalendarios"
@@ -91,11 +95,11 @@
         android:label="Actividad"
         tools:layout="@layout/fragmento_ver_actividad">
         <action
-            android:id="@+id/ir_de_ver_actividad_a_ver_mapa"
-            app:destination="@id/frg_ver_mapa" />
-        <action
             android:id="@+id/ir_de_ver_actividad_a_chat_actividad"
             app:destination="@id/frg_chat_actividad" />
+        <action
+            android:id="@+id/ir_de_ver_actividad_a_ver_mapa_unico"
+            app:destination="@id/fragmentVerMapaUnico" />
     </fragment>
     <fragment
         android:id="@+id/frg_chat_actividad"
@@ -121,7 +125,14 @@
         tools:layout="@layout/fragmento_agregar_nota">
         <action
             android:id="@+id/ir_de_agregar_nota_a_ver_nota"
-            app:destination="@id/frg_ver_nota" />
+            app:destination="@id/frg_ver_nota"
+            app:popUpTo="@id/frg_agregar_nota"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/ir_de_agregar_nota_a_ver_notas"
+            app:destination="@id/frg_ver_notas"
+            app:popUpTo="@id/frg_agregar_nota"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/frg_ver_nota"
@@ -131,6 +142,9 @@
         <action
             android:id="@+id/ir_de_ver_nota_a_editar_nota"
             app:destination="@id/frg_editar_nota" />
+        <action
+            android:id="@+id/ir_de_ver_nota_a_ver_notas"
+            app:destination="@id/frg_ver_notas" />
     </fragment>
     <fragment
         android:id="@+id/frg_editar_nota"
@@ -139,7 +153,9 @@
         tools:layout="@layout/fragmento_editar_nota">
         <action
             android:id="@+id/ir_de_editar_nota_a_ver_nota"
-            app:destination="@id/frg_ver_nota" />
+            app:destination="@id/frg_ver_nota"
+            app:popUpTo="@id/frg_ver_nota"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/frg_agregar_calendario"
@@ -162,4 +178,8 @@
         android:label="Perfil"
         tools:layout="@layout/fragmento_ver_perfil">
     </fragment>
+    <fragment
+        android:id="@+id/fragmentVerMapaUnico"
+        android:name="com.lostvayneg.schedulock.Controladores_de_Eventos.FragmentVerMapaUnico"
+        android:label="FragmentVerMapaUnico" />
 </navigation>
