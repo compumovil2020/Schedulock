@@ -231,7 +231,27 @@ public class FragmentoAgregarNota extends Fragment {
         StorageReference adjuntoRef = mStorageRef.child("adjuntos_notas/" + n.getId());
 
         if (file == null){
-            adjuntoRef.putStream(bitmapFire);
+            if(bitmapFire != null) {
+                adjuntoRef.putStream(bitmapFire)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                Bundle b = new Bundle();
+                                b.putSerializable("nota", n);
+                                Navigation.findNavController(getView()).navigate(R.id.ir_de_agregar_nota_a_ver_nota, b);
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                Log.e("ERROR", exception.getMessage());
+                            }
+                        });
+            } else {
+                Bundle b = new Bundle();
+                b.putSerializable("nota", n);
+                Navigation.findNavController(getView()).navigate(R.id.ir_de_agregar_nota_a_ver_nota, b);
+            }
         } else {
 
             adjuntoRef.putFile(file)

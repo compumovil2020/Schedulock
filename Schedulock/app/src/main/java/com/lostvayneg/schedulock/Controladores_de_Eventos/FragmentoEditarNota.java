@@ -248,9 +248,22 @@ public class FragmentoEditarNota extends Fragment {
     private void subirAdjunto(final Nota n) {
         Uri file = this.imagenFire;
         StorageReference adjuntoRef = mStorageRef.child("adjuntos_notas/" + n.getId());
-
         if (file == null){
-            adjuntoRef.putStream(bitmapFire);
+            adjuntoRef.putStream(bitmapFire)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Bundle b = new Bundle();
+                        b.putSerializable("nota", n);
+                        Navigation.findNavController(getView()).navigate(R.id.ir_de_editar_nota_a_ver_nota, b);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        Log.e("ERROR", exception.getMessage());
+                    }
+                });
         } else {
 
             adjuntoRef.putFile(file)
@@ -280,7 +293,7 @@ public class FragmentoEditarNota extends Fragment {
 
         refNota.setValue(nota);
 
-        if (imagenFire != null && bitmapFire != null) {
+        if (imagenFire != null || bitmapFire != null) {
             subirAdjunto(nota);
         } else {
             Bundle b = new Bundle();
