@@ -329,12 +329,13 @@ public class FragmentVerMapaUnico extends Fragment {
 
     private void seguirInvitados() {
 
-        for (String id: actividad.getColaboradores()) {
-            if (!fireUser.getUid().equals(id))
-                obtenerLocalizacionSeguir(id);
+        if(actividad.getColaboradores() != null) {
+            for (String id: actividad.getColaboradores()) {
+                if (!fireUser.getUid().equals(id))
+                    obtenerLocalizacionSeguir(id);
+            }
         }
 
-        // TODO: CREADOR PARA LOS INVITADOS
         if(!fireUser.getUid().equals(actividad.getIdUser())){
             obtenerLocalizacionSeguir(actividad.getIdUser());
         }
