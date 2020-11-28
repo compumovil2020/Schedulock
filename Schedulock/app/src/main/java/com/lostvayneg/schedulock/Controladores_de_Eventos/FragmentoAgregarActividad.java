@@ -163,6 +163,7 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
             actividad.setRecordatorio(recordatorio.getSelectedItem().toString());
             actividad.setPrioridad(importancia.getSelectedItem().toString());
             actividad.setFrencuenciaR(frecuencia.getSelectedItem().toString());
+            actividad.setInvitado(false);
             if(latitud != null && longitud != null){
                 actividad.setLocalizacion(new Localizacion(latitud, longitud));
             }

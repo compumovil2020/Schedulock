@@ -21,7 +21,7 @@ public class Actividad implements Serializable {
     private String frencuenciaR;
     private Localizacion localizacion;
     private List<String> colaboradores;
-    private String uidUser;
+    private boolean invitado;
 
     public Actividad() {
     }
@@ -157,5 +157,11 @@ public class Actividad implements Serializable {
         this.idActividad = idActividad;
     }
 
+    public boolean isInvitado() {
+        return invitado;
+    }
 
+    public void setInvitado(boolean invitado) {
+        this.invitado = invitado;
+    }
 }

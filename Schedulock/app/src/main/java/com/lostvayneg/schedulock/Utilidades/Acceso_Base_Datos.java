@@ -67,7 +67,6 @@ public class Acceso_Base_Datos {
             DatabaseReference aux;
             int cantidadActividadesUsuario = this.listaActividades.size();
             Log.i("Cant", cantidadActividadesUsuario +"");
-            String idActividad = String.valueOf(cantidadActividadesUsuario + 1);
             nuevaActividad.setIdUser(usuario.getUid());
             referenciaBD = baseDatos.getReference(RUTA_ACTIVIDADES);
             String id=referenciaBD.push().getKey();

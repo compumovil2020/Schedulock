@@ -171,7 +171,7 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
                     listaActividades.clear();
                     for (DataSnapshot actividadBD: dataSnapshot.getChildren()) {
                         Actividad act = actividadBD.getValue(Actividad.class);
-                        if (user.getUid().equals(act.getUidUser())) {
+                        if (user.getUid().equals(act.getIdUser())) {
                             listaActividades.add(act);
                         }
                     }
@@ -237,6 +237,7 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
                       .fromBitmap(resizeMapIcons("person_blue", 70, 120))));
 
                     if (inicio == 0) {
+                        crearMarkerActividades(false);
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(actualLoc, 12));
                         inicio = 1;
                     }
