@@ -74,7 +74,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
 import com.lostvayneg.schedulock.Entidades.Actividad;
 import com.lostvayneg.schedulock.Entidades.Localizacion;
 import com.lostvayneg.schedulock.Entidades.Usuario;
@@ -88,16 +87,10 @@ import java.util.HashMap;
 import java.util.List;
 
 public class FragmentoVerMapa extends Fragment implements RoutingListener {
-
-    public FirebaseDatabase fireDB;
-    public ValueEventListener suscripcionAct;
-    public DatabaseReference refDBActv;
-    public DatabaseReference refDBUser;
-    private FirebaseAuth authF;
-    private FirebaseUser fireUser;
-    public static final String RUTA_ACTIVIDADES ="actividades/";
-    public static final String RUTA_USUARIOS ="usuarios/";
-
+    public static final String PATH_ACTIVIDADES = "actividades/";
+    public DatabaseReference refDB;
+    private FirebaseDatabase database;
+    private FirebaseAuth mAuth;
     private GoogleMap mMap;
 
     public static final int FINE_LOCATION = 2;
@@ -185,11 +178,32 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        fireDB = FirebaseDatabase.getInstance();
-        authF = FirebaseAuth.getInstance();
-        fireUser = authF.getCurrentUser();
-        refDBActv = fireDB.getReference(RUTA_ACTIVIDADES + fireUser.getUid() + "/");
-        refDBUser = fireDB.getReference(RUTA_USUARIOS + fireUser.getUid());
+        mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+
+        refDB = database.getReference(PATH_ACTIVIDADES);
+        final FirebaseUser user = mAuth.getCurrentUser();
+
+        if (user != null) {
+            refDB.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    listaActividades.clear();
+                    for (DataSnapshot actividadBD: dataSnapshot.getChildren()) {
+                        Actividad act = actividadBD.getValue(Actividad.class);
+                        if (user.getUid().equals(act.getIdUser())) {
+                            listaActividades.add(act);
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+
 
         location = getView().findViewById(R.id.imageLocation);
 
@@ -239,6 +253,7 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
                       .fromBitmap(resizeMapIcons("person_blue", 70, 120))));
 
                     if (inicio == 0) {
+                        crearMarkerActividades(false);
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(actualLoc, 12));
                         inicio = 1;
                         crearMarkerActividades();

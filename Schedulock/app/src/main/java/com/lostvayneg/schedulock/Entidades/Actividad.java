@@ -13,12 +13,16 @@ public class Actividad implements Serializable {
     private Date inicio;
     private Date fin;
     private String descripcion;
+    private String idUser;
+    private String idActividad;
+
     private String prioridad;
     private String recordatorio;
     private String frencuenciaR;
     private Localizacion localizacion;
     private List<String> colaboradores;
     private String idNota;
+    private boolean invitado;
 
     public Actividad() {
     }
@@ -125,6 +129,29 @@ public class Actividad implements Serializable {
     }
     public String toStringFechaFin(){
         return (fin.getYear() + "/" + fin.getMonth() +"/" +fin.getDate()+" "+fin.getHours()+":"+fin.getMinutes());
+    }
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
+    }
+
+    public String getIdActividad() {
+        return idActividad;
+    }
+
+    public void setIdActividad(String idActividad) {
+        this.idActividad = idActividad;
+    }
+
+    public boolean isInvitado() {
+        return invitado;
+    }
+
+    public void setInvitado(boolean invitado) {
+        this.invitado = invitado;
     }
 
     public String getIdNota() {
