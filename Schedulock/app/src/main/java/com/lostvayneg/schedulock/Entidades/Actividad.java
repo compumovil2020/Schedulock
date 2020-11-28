@@ -15,6 +15,8 @@ public class Actividad implements Serializable {
     private String descripcion;
     private String idUser;
     private String idActividad;
+    private String idCalendario;
+
 
     private String prioridad;
     private String recordatorio;
@@ -155,6 +157,14 @@ public class Actividad implements Serializable {
     public void setIdActividad(String idActividad) {
         this.idActividad = idActividad;
     }
+    public String getIdCalendario() {
+        return idCalendario;
+    }
+
+    public void setIdCalendario(String idCalendario) {
+        this.idCalendario = idCalendario;
+    }
+
 
 
 }

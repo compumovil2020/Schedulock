@@ -14,6 +14,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
@@ -21,6 +22,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.lostvayneg.schedulock.Controladores_de_Eventos.Login;
 import com.lostvayneg.schedulock.Entidades.Actividad;
+import com.lostvayneg.schedulock.Entidades.Calendario;
 import com.lostvayneg.schedulock.Entidades.Usuario;
 
 import java.io.File;
@@ -37,7 +39,9 @@ public class Acceso_Base_Datos {
     public static final String RUTA_USUARIOS ="usuarios/";
     public static final String RUTA_ACTIVIDADES ="actividades/";
     public static final String RUTA_IMAGENES = "fotos_perfil/";
+    public static final String RUTA_CALENDARIOS="calendarios/";
     private ArrayList<Actividad> listaActividades;
+    private ArrayList<Calendario> listaCalendario;
     private FirebaseUser usuario;
     public StorageReference referenciaSBD;
 
@@ -46,6 +50,7 @@ public class Acceso_Base_Datos {
         storageBD = FirebaseStorage.getInstance();
         autenticacionFB = new Autenticacion_Firebase();
         this.listaActividades = new ArrayList<>();
+        this.listaCalendario = new ArrayList<>();
         usuario = autenticacionFB.getUsuario();
     }
 
@@ -82,15 +87,55 @@ public class Acceso_Base_Datos {
     }
 
     public ArrayList<Actividad> obtenerActividadesUsuario(){
-        referenciaBD = baseDatos.getReference(RUTA_ACTIVIDADES + usuario.getUid() + "/");
-        referenciaBD.addValueEventListener(new ValueEventListener() {
+        referenciaBD=baseDatos.getReference(RUTA_ACTIVIDADES);
+        referenciaBD.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot actividadBD: dataSnapshot.getChildren()
-                     ) {
+                for (DataSnapshot actividadBD: dataSnapshot.getChildren()) {
                     Actividad act = actividadBD.getValue(Actividad.class);
-                    listaActividades.add(act);
+                    if(act.getIdUser().equals(usuario.getUid())){
+                        listaActividades.add(act);
+                    }
+
                 }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return  listaActividades;
+    }
+    public boolean agregarNuevoCalendario(Calendario calendario){
+        try{
+            DatabaseReference aux;
+            calendario.setUserId(usuario.getUid());
+            referenciaBD = baseDatos.getReference(RUTA_CALENDARIOS);
+            String id=referenciaBD.push().getKey();
+            aux = baseDatos.getReference(RUTA_CALENDARIOS+id);
+            calendario.setIdCalendario(id);
+            aux.setValue(calendario);
+        }
+        catch (Exception e){
+            return false;
+        }
+        return true;
+    }
+    public ArrayList<Calendario> obtenerCalendariosUsuario(){
+        referenciaBD=baseDatos.getReference(RUTA_CALENDARIOS);
+        referenciaBD.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot actividadBD: dataSnapshot.getChildren()) {
+                    Calendario cal = actividadBD.getValue(Calendario.class);
+                    if(cal.getUserId().equals(usuario.getUid())){
+                        listaCalendario.add(cal);
+                    }
+                }
+
+
             }
 
             @Override
@@ -99,9 +144,8 @@ public class Acceso_Base_Datos {
             }
         });
 
-        return  listaActividades;
+        return  listaCalendario;
     }
-
     public boolean guardarFotoPerfil(Uri uriFotoPerfil, String userID) {
 
         final boolean[] estadoTarea = {false};

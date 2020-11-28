@@ -225,10 +225,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="100dp"/>
                 <EditText
+                    android:id="@+id/newUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:hint="Escriba el correo de otro invitado"/>
+                    android:hint="Escriba el correo de  "/>
+                <Button
+                    android:id="@+id/agragarUsuario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/fondo_boton_schedulock"
+                    android:backgroundTint="#fff"
+                    android:textColor="@color/color_schedulock_iconos"
+                    android:drawableTint="@color/color_schedulock_iconos"
+
+                    android:text="agregar Usuario"/>
 
 
             </LinearLayout>
