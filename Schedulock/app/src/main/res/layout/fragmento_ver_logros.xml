@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo_login"
     tools:context=".Controladores_de_Eventos.FragmentoVerLogros">
 
     <ScrollView
@@ -14,17 +15,17 @@
         tools:ignore="MissingConstraints">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="20dp"
-            android:layout_weight="0.3">
+            android:background="@drawable/forma_rectangulo_bordes_redondeados">
             <TextView
                 android:id="@+id/Logros"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="¡LOGROS!"
                 android:textAlignment="center"
-                android:textColor="#070707"
+                android:textColor="@color/color_schedulock_base_azul"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:gravity="center_horizontal" />
@@ -41,6 +42,7 @@
                     android:rotation="90"
                     android:progress="78"
                     android:layout_marginTop="20dp"
+                    android:progressTint="@color/color_schedulock_base_azul"
                     style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                     android:progressDrawable="@drawable/forma_progreso_nivel_circular"/>
                 <TextView
@@ -49,11 +51,13 @@
                     android:text="Progreso"
                     android:textAlignment="center"
                     android:layout_marginTop="50dp"
+                    android:textStyle="bold"
                     android:gravity="center_horizontal" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="84%"
+                    android:textStyle="bold"
                     android:textAlignment="center"
                     android:layout_marginTop="85dp"
                     android:gravity="center_horizontal" />
@@ -67,15 +71,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:background="#BFF5E5">
+                    android:background="@drawable/fondo_icono_schedulock">
 
                     <TextView
                         android:id="@+id/puntos"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:text="Lista de logros"
-                        android:textColor="#070707"
-                        android:textSize="14sp"
+                        android:paddingLeft="20dp"
+                        android:textColor="@color/color_blanco"
+                        android:textSize="18sp"
                         android:layout_weight="0.5"
                          />
                     <TextView
@@ -85,8 +90,9 @@
                         android:text="Puntaje "
                         android:textAlignment="textEnd"
                         android:layout_weight="0.5"
-                        android:textColor="#070707"
-                        android:textSize="14sp"
+                        android:paddingRight="20dp"
+                        android:textColor="@color/color_blanco"
+                        android:textSize="18sp"
                         android:gravity="end" />
 
                 </LinearLayout>
@@ -95,19 +101,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:background="#74F894">
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/fondo_barra_lateral_superior">
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
                     <TextView
 
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:drawableLeft="@drawable/icono_trofeo_relleno"
+                        android:layout_height="60dp"
                         android:text="Título del Logro"
+                        android:layout_marginTop="10dp"
+                        android:drawableLeft="@drawable/ic_trofeo_logro"
                         android:textAlignment="center"
                         android:layout_weight="0.5"
-                        android:textColor="#070707"
+                        android:textColor="@color/color_blanco"
                         android:textSize="14sp"
                         android:gravity="center_horizontal" />
 
@@ -115,10 +125,11 @@
 
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
+                            android:paddingRight="17dp"
                             android:text="+ 990 pts"
                             android:textAlignment="textEnd"
                             android:layout_weight="0.5"
-                            android:textColor="#070707"
+                            android:textColor="@color/color_blanco"
                             android:textSize="14sp"
                             android:gravity="end" />
                     </LinearLayout>
@@ -129,7 +140,7 @@
                         android:text="Descripción cómo completar logro"
                         android:textAlignment="center"
                         android:layout_weight="0.5"
-                        android:textColor="#070707"
+                        android:textColor="@color/color_blanco"
                         android:textSize="14sp"
                         android:gravity="center_horizontal" />
 
@@ -145,30 +156,32 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:background="#74F894">
+                    android:background="@drawable/fondo_barra_lateral_superior">
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        >
                         <TextView
 
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:drawableLeft="@drawable/icono_trofeo_relleno"
+                            android:layout_height="60dp"
                             android:text="Título del Logro"
+                            android:layout_marginTop="10dp"
+                            android:drawableLeft="@drawable/ic_trofeo_logro"
                             android:textAlignment="center"
                             android:layout_weight="0.5"
-                            android:textColor="#070707"
+                            android:textColor="@color/color_blanco"
                             android:textSize="14sp"
                             android:gravity="center_horizontal" />
-
                         <TextView
 
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:text="+ 1300 pts"
+                            android:paddingRight="17dp"
                             android:textAlignment="textEnd"
                             android:layout_weight="0.5"
-                            android:textColor="#070707"
+                            android:textColor="@color/color_blanco"
                             android:textSize="14sp"
                             android:gravity="end" />
                     </LinearLayout>
@@ -179,7 +192,7 @@
                         android:text="Descripción cómo completar logro"
                         android:textAlignment="center"
                         android:layout_weight="0.5"
-                        android:textColor="#070707"
+                        android:textColor="@color/color_blanco"
                         android:textSize="14sp"
                         android:gravity="center_horizontal" />
 
@@ -195,19 +208,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:background="#74F894">
+                    android:background="@drawable/fondo_barra_lateral_superior">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <TextView
 
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:drawableLeft="@drawable/icono_trofeo_relleno"
+                            android:layout_height="60dp"
+                            android:layout_marginTop="10dp"
+                            android:drawableLeft="@drawable/ic_trofeo_logro"
                             android:text="Título del Logro"
                             android:textAlignment="center"
                             android:layout_weight="0.5"
-                            android:textColor="#070707"
+                            android:textColor="@color/color_blanco"
                             android:textSize="14sp"
                             android:gravity="center_horizontal" />
 
@@ -216,9 +230,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:text="+ 289 pts"
+                            android:paddingRight="17dp"
                             android:textAlignment="textEnd"
                             android:layout_weight="0.5"
-                            android:textColor="#070707"
+                            android:textColor="@color/color_blanco"
                             android:textSize="14sp"
                             android:gravity="end" />
                     </LinearLayout>
@@ -229,7 +244,7 @@
                         android:text="Descripción cómo completar logro"
                         android:textAlignment="center"
                         android:layout_weight="0.5"
-                        android:textColor="#070707"
+                        android:textColor="@color/color_blanco"
                         android:textSize="14sp"
                         android:gravity="center_horizontal" />
 

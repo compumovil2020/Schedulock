@@ -92,6 +92,7 @@ public class ActividadPrincipal extends AppCompatActivity implements NavigationV
                 R.id.frg_ver_perfil,
                 R.id.frg_menu_principal,
                 R.id.frg_ver_calendarios,
+                R.id.frg_ver_habitos,
                 R.id.frg_ver_notas,
                 R.id.frg_ver_logros)
                 .setDrawerLayout(menuLateral)
@@ -122,6 +123,10 @@ public class ActividadPrincipal extends AppCompatActivity implements NavigationV
                 return true;
             case R.id.frg_ver_calendarios:
                 controladorNavegacion.navigate(R.id.frg_ver_calendarios);
+                menuLateral.closeDrawer(GravityCompat.START);
+                return true;
+            case R.id.frg_ver_habitos:
+                controladorNavegacion.navigate(R.id.frg_ver_habitos);
                 menuLateral.closeDrawer(GravityCompat.START);
                 return true;
             case R.id.frg_ver_notas:
