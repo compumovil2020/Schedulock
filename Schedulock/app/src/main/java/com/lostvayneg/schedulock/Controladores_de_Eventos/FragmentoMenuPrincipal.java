@@ -52,7 +52,7 @@ public class FragmentoMenuPrincipal extends Fragment {
         btnVerMapa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.frg_chat_actividad);
+                Navigation.findNavController(v).navigate(R.id.ir_de_menu_principal_a_ver_mapa);
             }
         });
 

@@ -88,6 +88,7 @@ import java.util.List;
 
 public class FragmentoVerMapa extends Fragment implements RoutingListener {
     public static final String PATH_ACTIVIDADES = "actividades/";
+    public static final String PATH_USUARIOS = "usuarios/";
     public DatabaseReference refDB;
     private FirebaseDatabase database;
     private FirebaseAuth mAuth;
@@ -119,6 +120,10 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
     public ImageView location;
     public CheckBox hoy;
     public boolean esHoy = false;
+
+    public  DatabaseReference refDBUser;
+    public DatabaseReference refDBActv;
+    public ValueEventListener suscripcionAct;
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
@@ -177,34 +182,10 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-
-        refDB = database.getReference(PATH_ACTIVIDADES);
-        final FirebaseUser user = mAuth.getCurrentUser();
-
-        if (user != null) {
-            refDB.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    listaActividades.clear();
-                    for (DataSnapshot actividadBD: dataSnapshot.getChildren()) {
-                        Actividad act = actividadBD.getValue(Actividad.class);
-                        if (user.getUid().equals(act.getIdUser())) {
-                            listaActividades.add(act);
-                        }
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        }
-
-
+        refDBActv = database.getReference(PATH_ACTIVIDADES);
+        obtenerActividadesUsuario();
         location = getView().findViewById(R.id.imageLocation);
 
         location.setOnClickListener(new View.OnClickListener() {
@@ -253,7 +234,6 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
                       .fromBitmap(resizeMapIcons("person_blue", 70, 120))));
 
                     if (inicio == 0) {
-                        crearMarkerActividades(false);
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(actualLoc, 12));
                         inicio = 1;
                         crearMarkerActividades();
@@ -329,24 +309,38 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
     }
 
     public void obtenerActividadesUsuario() {
-        listaActividades = new ArrayList<>();
-        suscripcionAct = refDBActv.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot actividadBD: dataSnapshot.getChildren()) {
-                    Actividad act = actividadBD.getValue(Actividad.class);
-                    listaActividades.add(act);
-                }
-                if(inicio == 1) {
-                    crearMarkerActividades();
-                }
-            }
+        final FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            refDBUser = database.getReference(PATH_USUARIOS+user.getUid());
+            suscripcionAct = refDBActv.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    listaActividades.clear();
+                    for (DataSnapshot actividadBD: dataSnapshot.getChildren()) {
+                        Actividad act = actividadBD.getValue(Actividad.class);
+                        if (user.getUid().equals(act.getIdUser())) {
+                            listaActividades.add(act);
+                        }
+                        else if(act.getColaboradores() != null){
+                            for (int i = 0; i < act.getColaboradores().size(); i++) {
+                                if(act.getColaboradores().get(i).equals(user.getUid())){
+                                    listaActividades.add(act);
+                                }
+                            }
+                        }
+                    }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                    if(inicio == 1) {
+                        crearMarkerActividades();
+                    }
+                }
 
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
     }
 
     public void updateLocationUsuario(final LatLng localizacion) {
@@ -387,7 +381,7 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
             idsMarkerActv.put(aux.getId(), listaActividadesFiltradas.get(i));
         }
 
-        Actividad act1 = new Actividad();
+        /*Actividad act1 = new Actividad();
         act1.setNombre("Nombre vacio");
         act1.setFrencuenciaR("Una vez");
         act1.setPrioridad("Alta");
@@ -396,9 +390,9 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
         act1.setCategoria("1");
         act1.setInicio(new Date());
         act1.setFin(new Date());
-        act1.setLocalizacion(new Localizacion(2.1867, -75.6233));
+        act1.setLocalizacion(new Localizacion(2.1867, -75.6233));*/
 
-        mMap.addMarker(new MarkerOptions().position(new LatLng(act1.getLocalizacion().getLatitud(), act1.getLocalizacion().getLongitud())).title(act1.getNombre()));
+        //mMap.addMarker(new MarkerOptions().position(new LatLng(act1.getLocalizacion().getLatitud(), act1.getLocalizacion().getLongitud())).title(act1.getNombre()));
     }
 
     @Override

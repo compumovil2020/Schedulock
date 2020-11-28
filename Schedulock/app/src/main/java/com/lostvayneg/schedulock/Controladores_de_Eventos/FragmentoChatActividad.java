@@ -36,7 +36,7 @@ public class FragmentoChatActividad extends Fragment {
     private static final String PATH_MENSAJES = "mensajes/";
     private FirebaseDatabase database;
     private FirebaseAuth mAuth;
-    private static  final String idActividad = "-MNEfVb6_XvKTwyA7t_R";
+    private String idActividad;
     private ArrayList<Mensaje> mensajes;
     private int pos = 0;
     public MensajeAdapter mensajeAdapter;
@@ -51,6 +51,7 @@ public class FragmentoChatActividad extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Se infla el elemento por el cual se van a obtener los elementos de la pantalla
         pantalla = inflater.inflate(R.layout.fragmento_chat_actividad, container, false);
+        idActividad = getArguments().getString("idActv");
         miLista = pantalla.findViewById(R.id.listaMensajes);
         mensajeEnviar = pantalla.findViewById(R.id.mensajeEnviar);
         enviar = pantalla.findViewById(R.id.imageEnviar);
@@ -102,7 +103,7 @@ public class FragmentoChatActividad extends Fragment {
         final FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
             refMensaje = database.getReference(PATH_MENSAJES);
-            refMensaje.addValueEventListener(new ValueEventListener() {
+            listener = refMensaje.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     mensajes.clear();
@@ -135,6 +136,8 @@ public class FragmentoChatActividad extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        refMensaje.removeEventListener(listener);
+        if(listener != null) {
+            refMensaje.removeEventListener(listener);
+        }
     }
 }

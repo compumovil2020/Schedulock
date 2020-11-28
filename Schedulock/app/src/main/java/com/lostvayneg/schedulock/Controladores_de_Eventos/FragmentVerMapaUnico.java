@@ -335,6 +335,9 @@ public class FragmentVerMapaUnico extends Fragment {
         }
 
         // TODO: CREADOR PARA LOS INVITADOS
+        if(!fireUser.getUid().equals(actividad.getIdUser())){
+            obtenerLocalizacionSeguir(actividad.getIdUser());
+        }
 
     }
 

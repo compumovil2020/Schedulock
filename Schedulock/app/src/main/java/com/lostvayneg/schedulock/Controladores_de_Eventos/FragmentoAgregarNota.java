@@ -86,7 +86,7 @@ public class FragmentoAgregarNota extends Fragment {
 
         pantalla = inflater.inflate(R.layout.fragmento_agregar_nota, container, false);
 
-        if (getArguments().getString("actividad") != null) {
+        if (getArguments() != null) {
             idAct = getArguments().getString("actividad");
         }
 

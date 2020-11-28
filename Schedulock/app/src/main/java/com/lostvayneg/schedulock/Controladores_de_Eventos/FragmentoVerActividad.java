@@ -62,7 +62,9 @@ public class FragmentoVerActividad extends Fragment {
         verMensajes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.ir_de_ver_actividad_a_chat_actividad);
+                Bundle b = new Bundle();
+                b.putString("idActv", actividadRecibida.getIdActividad());
+                Navigation.findNavController(v).navigate(R.id.ir_de_ver_actividad_a_chat_actividad, b);
             }
         });
         return pantalla;
