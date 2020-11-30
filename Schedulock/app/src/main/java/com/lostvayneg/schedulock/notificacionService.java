@@ -79,8 +79,8 @@ public class notificacionService extends JobIntentService{
                            // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
                                    // Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             //intent.putExtra("id",id);
-                            PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(), 0, null, 0);
-                            mBuilder.setContentIntent(pendingIntent);
+                            //PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(), 0, null, 0);
+                            //mBuilder.setContentIntent(pendingIntent);
                             mBuilder.setAutoCancel(true);
                             int notificationId = 001;
                             NotificationManagerCompat notificationManager =

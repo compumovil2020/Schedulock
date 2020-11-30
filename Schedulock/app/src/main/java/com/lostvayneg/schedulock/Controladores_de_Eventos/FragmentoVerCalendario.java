@@ -124,7 +124,10 @@ public class FragmentoVerCalendario extends Fragment {
         adapterActividad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.ir_de_ver_calendario_a_ver_actividad);
+                int position = recyclerViewActividades.getChildLayoutPosition(view);
+                Bundle b = new Bundle();
+                b.putSerializable("actividad", listaActividades.get(position));
+                Navigation.findNavController(view).navigate(R.id.ir_de_ver_calendario_a_ver_actividad, b);
             }
         });
     }

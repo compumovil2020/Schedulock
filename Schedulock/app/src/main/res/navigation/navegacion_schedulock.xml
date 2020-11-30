@@ -100,6 +100,12 @@
         <action
             android:id="@+id/ir_de_ver_actividad_a_ver_mapa_unico"
             app:destination="@id/fragmentVerMapaUnico" />
+        <action
+            android:id="@+id/ir_de_ver_actividad_a_agregar_nota"
+            app:destination="@id/frg_agregar_nota" />
+        <action
+            android:id="@+id/ir_de_ver_actividad_a_ver_nota"
+            app:destination="@id/frg_ver_nota" />
     </fragment>
     <fragment
         android:id="@+id/frg_chat_actividad"

@@ -129,9 +129,9 @@ public class FragmentVerMapaUnico extends Fragment {
                 @Override
                 public boolean onMarkerClick(Marker marker) {
 
-                    Toast.makeText(getActivity(), "Distancia: " +
-                                    distance(actualMarker.getPosition().latitude, actualMarker.getPosition().longitude, marker.getPosition().latitude, marker.getPosition().longitude) +" Km",
-                            Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getActivity(), "Distancia: " +
+                    //                distance(actualMarker.getPosition().latitude, actualMarker.getPosition().longitude, marker.getPosition().latitude, marker.getPosition().longitude) +" Km",
+                    //        Toast.LENGTH_LONG).show();
                     marker.showInfoWindow();
                     return true;
                 }
@@ -141,9 +141,8 @@ public class FragmentVerMapaUnico extends Fragment {
             mMap.getUiSettings().setZoomControlsEnabled(true);
 
             actividadMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(actividad.getLocalizacion().getLatitud(), actividad.getLocalizacion().getLongitud())
-                        ).title(actividad.getNombre()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                        ).title(actividad.getNombre()));
 
-            seguirInvitados();
         }
     };
 
@@ -209,6 +208,8 @@ public class FragmentVerMapaUnico extends Fragment {
                     updateLocationUsuario(actualLoc);
                     actualMarker = mMap.addMarker(new MarkerOptions().position(actualLoc).title("Posición Actual").icon(BitmapDescriptorFactory
                             .fromBitmap(resizeMapIcons("person_blue", 70, 120))));
+
+                    seguirInvitados();
 
                     if (inicio == 0) {
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(actualLoc, 12));
@@ -297,7 +298,7 @@ public class FragmentVerMapaUnico extends Fragment {
 
                 LatLng actualLoc = new LatLng(usr.getLocalizacion().getLatitud(), usr.getLocalizacion().getLongitud());
                 double distancia = distance(usr.getLocalizacion().getLatitud(), usr.getLocalizacion().getLongitud(), actualMarker.getPosition().latitude, actualMarker.getPosition().longitude);
-                Marker aux = mMap.addMarker(new MarkerOptions().position(actualLoc).title(usr.getNombre()+" a: " + distancia + " Km"));
+                Marker aux = mMap.addMarker(new MarkerOptions().position(actualLoc).title(usr.getNombre()+" a: " + distancia + " Km").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
                 //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(aux.getPosition(), 12));
                 markers.put(uid, aux);
             }
@@ -331,8 +332,10 @@ public class FragmentVerMapaUnico extends Fragment {
 
         if(actividad.getColaboradores() != null) {
             for (String id: actividad.getColaboradores()) {
-                if (!fireUser.getUid().equals(id))
+                if (!fireUser.getUid().equals(id)) {
+                    //Log.i("EROOOOO", id);
                     obtenerLocalizacionSeguir(id);
+                }
             }
         }
 

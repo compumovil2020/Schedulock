@@ -176,6 +176,7 @@ public class FragmentoAgregarNota extends Fragment {
                     try {
                         final Uri imageUri = data.getData();
                         this.imagenFire = imageUri;
+                        this.bitmapFire = null;
                         final InputStream imageStream = getActivity().getContentResolver().openInputStream(imageUri);
                         final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                         adjunto.setImageBitmap(selectedImage);
@@ -191,7 +192,7 @@ public class FragmentoAgregarNota extends Fragment {
                     Bundle extras = data.getExtras();
                     Bitmap imageBitmap = (Bitmap) extras.get("data");
                     adjunto.setImageBitmap(imageBitmap);
-
+                    this.imagenFire = null;
                     ByteArrayOutputStream bos = new ByteArrayOutputStream();
                     imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
 
@@ -291,7 +292,7 @@ public class FragmentoAgregarNota extends Fragment {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                     Actividad act = datasnapshot.getValue(Actividad.class);
-                    act.setIdNota(idAct);
+                    act.setIdNota(nota.getId());
                     refAct.setValue(act);
                 }
 

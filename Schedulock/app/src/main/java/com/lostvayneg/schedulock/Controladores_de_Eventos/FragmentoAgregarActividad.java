@@ -9,6 +9,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,9 +28,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.lostvayneg.schedulock.Entidades.Actividad;
 import com.lostvayneg.schedulock.Entidades.Calendario;
 import com.lostvayneg.schedulock.Entidades.Localizacion;
+import com.lostvayneg.schedulock.Entidades.Usuario;
 import com.lostvayneg.schedulock.R;
 import com.lostvayneg.schedulock.Utilidades.Acceso_Base_Datos;
 import com.lostvayneg.schedulock.notificacionService;
@@ -182,7 +189,47 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
                 actividad.setLocalizacion(new Localizacion(latitud, longitud));
             }
 
-            baseDatos.agregarNuevaActividad(actividad);
+            // Agregar Colaboradores
+            FirebaseDatabase db = FirebaseDatabase.getInstance();
+            DatabaseReference refAux = db.getReference("usuarios/");
+            refAux.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ArrayList<String> ids = new ArrayList<>();
+                    for (DataSnapshot data: dataSnapshot.getChildren()) {
+                        Usuario u = data.getValue(Usuario.class);
+                        for (String correo: arregloInvitadosEjemplo) {
+                            //Log.i("EROOOOO", correo);
+                            if(u.getEmail().equals(correo)) {
+                                ids.add(data.getKey());
+                                //Log.i("EROOOOO", "ID: " + data.getKey());
+                                break;
+                            }
+                        }
+                    }
+
+                    actividad.setColaboradores(ids);
+
+                    baseDatos.agregarNuevaActividad(actividad);
+                    Toast.makeText(pantalla.getContext(), "Se agrego la actividad", Toast.LENGTH_LONG).show();
+                    Bundle enviarActividad = new Bundle();
+                    enviarActividad.putSerializable("actividad", actividad);
+                    Bundle bundle=new Bundle();
+                    bundle.putSerializable("calendar",(Serializable)calendarioUsuario);
+                    Intent intent = new Intent(getContext(), notificacionService.class);
+                    intent.putExtra("lista",arregloInvitadosEjemplo);
+                    notificacionService.enqueueWork(getContext(), intent);
+                    Navigation.findNavController(getView()).navigate(R.id.ir_de_agregar_actividad_a_ver_actividad, enviarActividad);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+
+            /*baseDatos.agregarNuevaActividad(actividad);
             Toast.makeText(pantalla.getContext(), "Se agrego la actividad", Toast.LENGTH_LONG).show();
             Bundle enviarActividad = new Bundle();
             enviarActividad.putSerializable("actividad", actividad);
@@ -191,7 +238,7 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
             Intent intent = new Intent(getContext(), notificacionService.class);
             intent.putExtra("lista",arregloInvitadosEjemplo);
             notificacionService.enqueueWork(getContext(), intent);
-            Navigation.findNavController(getView()).navigate(R.id.ir_de_agregar_actividad_a_ver_actividad, enviarActividad);
+            Navigation.findNavController(getView()).navigate(R.id.ir_de_agregar_actividad_a_ver_actividad, enviarActividad);*/
         }
     }
 
