@@ -1,11 +1,14 @@
 package com.lostvayneg.schedulock.Controladores_de_Eventos;
 
 import android.app.DatePickerDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.Build;
 import android.os.Bundle;
-import android.provider.CalendarContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,20 +25,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.material.navigation.NavigationView;
 import com.lostvayneg.schedulock.Entidades.Actividad;
+import com.lostvayneg.schedulock.Entidades.Calendario;
 import com.lostvayneg.schedulock.Entidades.Localizacion;
 import com.lostvayneg.schedulock.R;
 import com.lostvayneg.schedulock.Utilidades.Acceso_Base_Datos;
+import com.lostvayneg.schedulock.notificacionService;
 
 import java.io.IOException;
-import java.sql.Time;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -46,6 +46,7 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
     private Button btnSeleccionarFechaInicio;
     private Button btnSeleccionarFechaFin;
     private Button btnGuardarActividad;
+    private Button btnagregarUsuario;
     private View pantalla;
     private Spinner importancia,recordatorio,frecuencia;
     private Actividad actividad;
@@ -53,11 +54,14 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
     private Double longitud=null;
     private int contfecha;
     private Date fechaI,fechaf, fechaSelecionada;
-    private EditText nombre,categoria,descripcion,ubicacion;
+    private EditText nombre,categoria,descripcion,ubicacion,newU;
     private Geocoder mGeocoder;
     private Spinner spinner;
     private String categotiab;
     private Acceso_Base_Datos baseDatos;
+    private Calendario calendarioUsuario;
+    public static String CHANNEL_ID = "MyApp";
+    ArrayList<String> arregloInvitadosEjemplo=new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,10 +81,11 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
         arregloCategorias.add("Academico");
         arregloCategorias.add("Ocio");
         arregloCategorias.add("Otro");
+        createNotificationChannel();
         ArrayAdapter adp=new ArrayAdapter(pantalla.getContext(), android.R.layout.simple_spinner_dropdown_item,arregloCategorias);
         spinner=pantalla.findViewById(R.id.act_categoria);
         spinner.setAdapter(adp);
-
+        calendarioUsuario=(Calendario) getArguments().getSerializable("calendar");
         categoria=pantalla.findViewById(R.id.editCategoria);
         descripcion=pantalla.findViewById(R.id.editDescripcion);
         importancia=pantalla.findViewById(R.id.sprSelecionarNivelImportancia);
@@ -132,16 +137,24 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
 
             }
         });
-        String[] arregloInvitadosEjemplo = {
-                "invitado1@gmail.com",
-                "invitado2@gmail.com",
-                "invitado3@gmail.com",
-                "invitado4@gmail.com",
-                "invitado5@gmail.com",
-                "invitado6@gmail.com"};
+
         ArrayAdapter<String> adaptadorInvitados = new ArrayAdapter<String>(getContext(),  android.R.layout.simple_list_item_1,arregloInvitadosEjemplo);
-        ListView listaUsuarios = pantalla.findViewById(R.id.listaUsuarios);
-        listaUsuarios.setAdapter(adaptadorInvitados);
+        final ListView listaUsuarios = pantalla.findViewById(R.id.listaUsuarios);
+        listaUsuarios.setVisibility(View.INVISIBLE);
+        listaUsuarios.setVisibility(View.GONE);
+        newU=pantalla.findViewById(R.id.newUser);
+        btnagregarUsuario=pantalla.findViewById(R.id.agragarUsuario);
+        btnagregarUsuario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                arregloInvitadosEjemplo.add(newU.getText().toString());
+                ArrayAdapter<String> adaptadorInvitados = new ArrayAdapter<String>(getContext(),  android.R.layout.simple_list_item_1,arregloInvitadosEjemplo);
+                newU.setText("");
+                listaUsuarios.setAdapter(adaptadorInvitados);
+                listaUsuarios.setVisibility(View.VISIBLE);
+            }
+        });
         return pantalla;
     }
 
@@ -164,6 +177,7 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
             actividad.setPrioridad(importancia.getSelectedItem().toString());
             actividad.setFrencuenciaR(frecuencia.getSelectedItem().toString());
             actividad.setInvitado(false);
+            actividad.setIdCalendario(calendarioUsuario.getIdCalendario());
             if(latitud != null && longitud != null){
                 actividad.setLocalizacion(new Localizacion(latitud, longitud));
             }
@@ -172,6 +186,11 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
             Toast.makeText(pantalla.getContext(), "Se agrego la actividad", Toast.LENGTH_LONG).show();
             Bundle enviarActividad = new Bundle();
             enviarActividad.putSerializable("actividad", actividad);
+            Bundle bundle=new Bundle();
+            bundle.putSerializable("calendar",(Serializable)calendarioUsuario);
+            Intent intent = new Intent(getContext(), notificacionService.class);
+            intent.putExtra("lista",arregloInvitadosEjemplo);
+            notificacionService.enqueueWork(getContext(), intent);
             Navigation.findNavController(getView()).navigate(R.id.ir_de_agregar_actividad_a_ver_actividad, enviarActividad);
         }
     }
@@ -279,5 +298,21 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         fechaSelecionada.setHours(hourOfDay);
         fechaSelecionada.setMinutes(minute);
+    }
+    private void createNotificationChannel() {
+// Create the NotificationChannel, but only on API 26+ because
+// the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "channel";
+            String description = "channel description";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+//IMPORTANCE_MAX MUESTRA LA NOTIFICACIÓN ANIMADA
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+// Register the channel with the system; you can't change the importance
+// or other notification behaviors after this
+            NotificationManager notificationManager = getContext().getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 }
