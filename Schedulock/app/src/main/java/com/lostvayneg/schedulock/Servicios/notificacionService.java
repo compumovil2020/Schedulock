@@ -1,7 +1,6 @@
-package com.lostvayneg.schedulock;
+package com.lostvayneg.schedulock.Servicios;
 
 import android.app.IntentService;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.Context;
 
@@ -18,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.lostvayneg.schedulock.Controladores_de_Eventos.FragmentoAgregarActividad;
 import com.lostvayneg.schedulock.Entidades.Usuario;
+import com.lostvayneg.schedulock.R;
 
 import java.util.ArrayList;
 

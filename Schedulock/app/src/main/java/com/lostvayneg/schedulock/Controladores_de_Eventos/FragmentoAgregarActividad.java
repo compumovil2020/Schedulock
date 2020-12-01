@@ -1,9 +1,12 @@
 package com.lostvayneg.schedulock.Controladores_de_Eventos;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
@@ -38,8 +41,9 @@ import com.lostvayneg.schedulock.Entidades.Calendario;
 import com.lostvayneg.schedulock.Entidades.Localizacion;
 import com.lostvayneg.schedulock.Entidades.Usuario;
 import com.lostvayneg.schedulock.R;
+import com.lostvayneg.schedulock.Servicios.Recibir_Alarma;
 import com.lostvayneg.schedulock.Utilidades.Acceso_Base_Datos;
-import com.lostvayneg.schedulock.notificacionService;
+import com.lostvayneg.schedulock.Servicios.notificacionService;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -69,6 +73,7 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
     private Calendario calendarioUsuario;
     public static String CHANNEL_ID = "MyApp";
     ArrayList<String> arregloInvitadosEjemplo=new ArrayList<>();
+    private AlarmManager manejadorAlarmas;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -214,6 +219,7 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
                     Toast.makeText(pantalla.getContext(), "Se agrego la actividad", Toast.LENGTH_LONG).show();
                     Bundle enviarActividad = new Bundle();
                     enviarActividad.putSerializable("actividad", actividad);
+                    crearRecordatorio(getContext(), actividad);
                     Bundle bundle=new Bundle();
                     bundle.putSerializable("calendar",(Serializable)calendarioUsuario);
                     Intent intent = new Intent(getContext(), notificacionService.class);
@@ -229,19 +235,109 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
             });
 
 
-            /*baseDatos.agregarNuevaActividad(actividad);
-            Toast.makeText(pantalla.getContext(), "Se agrego la actividad", Toast.LENGTH_LONG).show();
-            Bundle enviarActividad = new Bundle();
-            enviarActividad.putSerializable("actividad", actividad);
-            Bundle bundle=new Bundle();
-            bundle.putSerializable("calendar",(Serializable)calendarioUsuario);
-            Intent intent = new Intent(getContext(), notificacionService.class);
-            intent.putExtra("lista",arregloInvitadosEjemplo);
-            notificacionService.enqueueWork(getContext(), intent);
-            Navigation.findNavController(getView()).navigate(R.id.ir_de_agregar_actividad_a_ver_actividad, enviarActividad);*/
         }
     }
 
+    private void crearRecordatorio(Context context, Actividad actividad) {
+        Log.i("Alarma", "create an alarm");
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, fechaI.getYear());
+        calendar.set(Calendar.MONTH, fechaI.getMonth()-1);
+        calendar.set(Calendar.DAY_OF_MONTH, fechaI.getDate());
+        int minutos = fechaI.getMinutes();
+        switch (recordatorio.getSelectedItem().toString()) {
+            case "Sin Recordatorio":
+                return;
+            case "1 Minuto Antes":
+                minutos-=1;
+                if(minutos < 0){
+                    minutos = 59 + minutos;
+                    calendar.set(Calendar.HOUR_OF_DAY, fechaI.getHours()-1);
+                }
+                else{
+                    calendar.set(Calendar.HOUR_OF_DAY, fechaI.getHours());
+                }
+                break;
+            case "5 Minutos Antes":
+                minutos-=5;
+                if(minutos < 0){
+                    minutos = 59 + minutos;
+                    calendar.set(Calendar.HOUR_OF_DAY, fechaI.getHours()-1);
+                }
+                else{
+                    calendar.set(Calendar.HOUR_OF_DAY, fechaI.getHours());
+                }
+                break;
+            case "10 Minutos Antes":
+                minutos-=10;
+                if(minutos < 0){
+                    minutos = 59 + minutos;
+                    calendar.set(Calendar.HOUR_OF_DAY, fechaI.getHours()-1);
+                }
+                else{
+                    calendar.set(Calendar.HOUR_OF_DAY, fechaI.getHours());
+                }
+                break;
+            case "30 Minutos Antes":
+                minutos-=30;
+                if(minutos < 0){
+                    minutos = 59 + minutos;
+                    calendar.set(Calendar.HOUR_OF_DAY, fechaI.getHours()-1);
+                }
+                else{
+                    calendar.set(Calendar.HOUR_OF_DAY, fechaI.getHours());
+                }
+                break;
+            case "1 Hora Antes":
+                calendar.set(Calendar.HOUR_OF_DAY, fechaI.getHours()-1);
+                break;
+            case "2 Horas Antes":
+                calendar.set(Calendar.HOUR_OF_DAY, fechaI.getHours()-2);
+                break;
+        }
+
+        calendar.set(Calendar.MINUTE, minutos);
+        manejadorAlarmas = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        Intent recibirAlarma = new Intent(context, Recibir_Alarma.class);
+        Bundle datosActividad = new Bundle();
+        final int id_intent = (int) System.currentTimeMillis();
+        datosActividad.putString("nombre_actividad", actividad.getNombre());
+        datosActividad.putSerializable("inicio_actividad", actividad.getInicio());
+        datosActividad.putInt("id_pending_intent", id_intent);
+        recibirAlarma.putExtras(datosActividad);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id_intent, recibirAlarma,
+                0);
+
+        long frecuenciaRecordatorio = 0;
+
+        Log.i("AlarmaActual", ""+ System.currentTimeMillis());
+        Log.i("AlarmaCalendario",""+ calendar.getTimeInMillis());
+        Log.i("AlarmaDiferencia", "" + (calendar.getTimeInMillis()-System.currentTimeMillis()));
+        Log.i("AlarmaMinutos",""+minutos);
+        switch (frecuencia.getSelectedItem().toString()){
+            case "Una Sola Vez":
+                manejadorAlarmas.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+                return;
+            case "Cada Minuto":
+                frecuenciaRecordatorio = 1*60*1000;
+                break;
+            case "Cada 5 Minutos":
+                frecuenciaRecordatorio = 5*60*1000;
+                break;
+            case "Cada 10 Minutos":
+                frecuenciaRecordatorio = 10*60*1000;
+                break;
+            case "Cada 20 Minutos":
+                frecuenciaRecordatorio = 20*60*1000;
+                break;
+            case "Cada 30 Minutos":
+                frecuenciaRecordatorio = AlarmManager.INTERVAL_HALF_HOUR;
+                break;
+            default:
+                frecuenciaRecordatorio = 0;
+        }
+        manejadorAlarmas.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),frecuenciaRecordatorio, pendingIntent);
+    }
     private boolean verificarCampos(){
 
         if(!nombre.getText().toString().isEmpty()){

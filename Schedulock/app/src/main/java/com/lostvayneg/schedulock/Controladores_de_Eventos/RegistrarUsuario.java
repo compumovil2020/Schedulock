@@ -2,14 +2,20 @@ package com.lostvayneg.schedulock.Controladores_de_Eventos;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.ContactsContract;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -37,6 +43,7 @@ import com.lostvayneg.schedulock.R;
 import com.lostvayneg.schedulock.Utilidades.Acceso_Base_Datos;
 import com.lostvayneg.schedulock.Utilidades.Permisos;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
@@ -52,9 +59,13 @@ public class RegistrarUsuario extends AppCompatActivity {
     private Acceso_Base_Datos baseDatos;
     private ImageView imagen_perfil;
     private static final int IMAGE_PICKER_REQUEST = 2;
+    private static final int CAMERA_PICKER_REQUEST = 1;
     private Permisos permisos;
     private Uri uriFotoPerfil;
     private ProgressDialog progresoRegistro;
+    private String ruta_imagen_camara;
+    private File foto_camara;
+    private static String RUTA_FOTOS = "Fotos Schedulock";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,20 +96,64 @@ public class RegistrarUsuario extends AppCompatActivity {
         imagen_perfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(permisos.solicitarPermisoSeleccionarImagen((Activity) v.getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE,"Se necesita aceeso a la galería",IMAGE_PICKER_REQUEST)){
-                    seleccionarImagen();
-                }
-                else{
-                }
+                mostrarOpcionesSelecionarImagen();
             }
         });
 
     }
 
+    private void mostrarOpcionesSelecionarImagen(){
+        final CharSequence[] opciones = {"Tomar Foto","Seleccionar de Galeria","Cancelar"};
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Seleccione una opcion");
+        builder.setItems(opciones, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(opciones[which].equals("Tomar Foto")){
+                    lanzarCamara();
+                }else if (opciones[which].equals("Seleccionar de Galeria")){
+                    seleccionarImagen();
+                }
+                else{
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
+
+    private void lanzarCamara(){
+        if(permisos.solicitarPermisoSeleccionarImagen(this, Manifest.permission.CAMERA,"Se necesita aceeso a la galería",CAMERA_PICKER_REQUEST) &&
+                permisos.solicitarPermisoSeleccionarImagen(this, Manifest.permission.READ_EXTERNAL_STORAGE,"Se necesita aceeso a la galería",CAMERA_PICKER_REQUEST)){
+            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+            StrictMode.setVmPolicy(builder.build());
+            File miFile = new File(Environment.getExternalStorageDirectory(), RUTA_FOTOS);
+            boolean isCreada = miFile.exists();
+            if(!isCreada){
+                isCreada = miFile.mkdirs();
+            }
+            if(isCreada){
+                Long consecutivo = System.currentTimeMillis()/1000;
+                String nombreFoto = consecutivo.toString() + ".jpg";
+                ruta_imagen_camara = Environment.getExternalStorageDirectory() + File.separator + RUTA_FOTOS + File.separator + nombreFoto;
+                foto_camara = new File(ruta_imagen_camara);
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(foto_camara));
+                startActivityForResult(takePictureIntent, CAMERA_PICKER_REQUEST);
+            }
+        }
+        else{
+        }
+    }
+
     private void seleccionarImagen(){
-        Intent pickImage = new Intent(Intent.ACTION_PICK);
-        pickImage.setType("image/*");
-        startActivityForResult(pickImage, IMAGE_PICKER_REQUEST);
+        if(permisos.solicitarPermisoSeleccionarImagen(this, Manifest.permission.WRITE_EXTERNAL_STORAGE,"Se necesita aceeso a la galería",IMAGE_PICKER_REQUEST)){
+            Intent pickImage = new Intent(Intent.ACTION_PICK);
+            pickImage.setType("image/*");
+            startActivityForResult(pickImage, IMAGE_PICKER_REQUEST);
+        }
+        else{
+        }
 
     }
 
@@ -245,8 +300,15 @@ public class RegistrarUsuario extends AppCompatActivity {
                     seleccionarImagen();
                 } else {
                 }
-                return;
             }
+            break;
+            case CAMERA_PICKER_REQUEST: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    lanzarCamara();
+                } else {
+                }
+            }
+            break;
         }
     }
 
@@ -266,6 +328,20 @@ public class RegistrarUsuario extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }break;
+            case CAMERA_PICKER_REQUEST:
+                if(resultCode == RESULT_OK){
+                    MediaScannerConnection.scanFile(getBaseContext(), new String[]{ruta_imagen_camara}, null,
+                            new MediaScannerConnection.OnScanCompletedListener() {
+                                @Override
+                                public void onScanCompleted(String path, Uri uri) {
+                                    Log.i("Path: ", path);
+                                    uriFotoPerfil = uri;
+                                }
+                            });
+                    Bitmap imageBitmap = BitmapFactory.decodeFile(ruta_imagen_camara);
+                    imagen_perfil.setImageBitmap(imageBitmap);
+                }
+                break;
         }
     }
     public void onClickIniciarSesion(View v){

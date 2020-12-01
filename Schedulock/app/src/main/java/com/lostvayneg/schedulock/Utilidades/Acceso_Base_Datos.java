@@ -43,6 +43,7 @@ public class Acceso_Base_Datos {
     public static final String RUTA_IMAGENES = "fotos_perfil/";
     public static final String RUTA_CALENDARIOS="calendarios/";
     public static final String RUTA_NOTAS = "notas/";
+    public static final String RUTA_LOGROS ="logros/";
     public static final String RUTA_MENSAJES = "mensajes/";
     private ArrayList<Actividad> listaActividades;
     private ArrayList<Calendario> listaCalendario;

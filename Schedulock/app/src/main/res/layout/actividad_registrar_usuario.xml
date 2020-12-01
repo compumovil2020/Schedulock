@@ -65,7 +65,6 @@
                         android:text="Subir foto de perfil"
                         android:gravity="center"
                         android:textSize="12sp"
-                        android:layout_marginTop="9dp"
                         android:textStyle="bold"
                         android:textColor="@color/color_texto_gris_claro"
                         />
@@ -117,46 +116,46 @@
                         android:drawableTint="@color/color_schedulock_iconos"
                         android:inputType="number"/>
 
-                        <RadioGroup
-                            android:id="@+id/genero_registrarse"
+                    <RadioGroup
+                        android:id="@+id/genero_registrarse"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Género"
+                            android:textSize="16dp"
+                            android:layout_marginLeft="22dp" />
+
+                        <RadioButton
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical" >
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Género"
-                                android:textSize="16dp"
-                                android:layout_marginLeft="22dp" />
-
-                            <RadioButton
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Femenino"
-                                android:id="@+id/cbx_femenino"
-                                android:textColor="@color/color_texto_gris_claro"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginLeft="20dp" />
-                            <RadioButton
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Masculino"
-                                android:textColor="@color/color_texto_gris_claro"
-                                android:id="@+id/cbx_masculino"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginLeft="20dp" />
-                            <RadioButton
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Otro"
-                                android:textColor="@color/color_texto_gris_claro"
-                                android:id="@+id/cbx_otro"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginLeft="20dp" />
+                            android:layout_height="wrap_content"
+                            android:text="Femenino"
+                            android:id="@+id/cbx_femenino"
+                            android:textColor="@color/color_texto_gris_claro"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="20dp" />
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Masculino"
+                            android:textColor="@color/color_texto_gris_claro"
+                            android:id="@+id/cbx_masculino"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="20dp" />
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Otro"
+                            android:textColor="@color/color_texto_gris_claro"
+                            android:id="@+id/cbx_otro"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="20dp" />
 
 
-                        </RadioGroup>
+                    </RadioGroup>
 
 
                     <EditText

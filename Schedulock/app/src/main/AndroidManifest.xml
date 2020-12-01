@@ -22,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <service
-            android:name=".notificacionService"
+            android:name=".Servicios.notificacionService"
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE"></service>
         <!--
