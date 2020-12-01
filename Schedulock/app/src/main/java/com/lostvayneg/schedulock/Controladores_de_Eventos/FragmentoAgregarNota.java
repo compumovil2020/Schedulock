@@ -42,6 +42,7 @@ import com.lostvayneg.schedulock.Entidades.Localizacion;
 import com.lostvayneg.schedulock.Entidades.Nota;
 import com.lostvayneg.schedulock.Entidades.Usuario;
 import com.lostvayneg.schedulock.R;
+import com.lostvayneg.schedulock.Utilidades.Acceso_Base_Datos;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -56,10 +57,6 @@ public class FragmentoAgregarNota extends Fragment {
     private FirebaseAuth authF;
     private FirebaseUser user;
     private StorageReference mStorageRef;
-
-    private static final String RUTA_NOTAS = "notas/";
-    public static final String RUTA_USUARIOS ="usuarios/";
-    public static final String RUTA_ACTIVIDADES ="actividades/";
 
     private View pantalla;
     private ImageView btnCancelar;
@@ -276,7 +273,7 @@ public class FragmentoAgregarNota extends Fragment {
     private void crearNota() {
         final Nota nota = new Nota();
 
-        DatabaseReference refNota = fireDB.getReference(RUTA_NOTAS);
+        DatabaseReference refNota = fireDB.getReference(Acceso_Base_Datos.RUTA_NOTAS);
         final String id = refNota.push().getKey();
 
         nota.setId(id);
@@ -287,7 +284,7 @@ public class FragmentoAgregarNota extends Fragment {
         if (idAct != null) {
             nota.setIdActividad(idAct);
 
-            final DatabaseReference refAct = fireDB.getReference(RUTA_ACTIVIDADES + idAct);
+            final DatabaseReference refAct = fireDB.getReference(Acceso_Base_Datos.RUTA_ACTIVIDADES + idAct);
             refAct.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot datasnapshot) {
@@ -304,10 +301,10 @@ public class FragmentoAgregarNota extends Fragment {
 
         }
 
-        refNota = fireDB.getReference(RUTA_NOTAS + id);
+        refNota = fireDB.getReference(Acceso_Base_Datos.RUTA_NOTAS + id);
         refNota.setValue(nota);
 
-        final DatabaseReference refUser = fireDB.getReference(RUTA_USUARIOS + user.getUid());
+        final DatabaseReference refUser = fireDB.getReference(Acceso_Base_Datos.RUTA_USUARIOS + user.getUid());
         refUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot datasnapshot) {

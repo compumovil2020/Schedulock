@@ -87,8 +87,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class FragmentoVerMapa extends Fragment implements RoutingListener {
-    public static final String PATH_ACTIVIDADES = "actividades/";
-    public static final String PATH_USUARIOS = "usuarios/";
     public DatabaseReference refDB;
     private FirebaseDatabase database;
     private FirebaseAuth mAuth;
@@ -184,7 +182,7 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
         super.onViewCreated(view, savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        refDBActv = database.getReference(PATH_ACTIVIDADES);
+        refDBActv = database.getReference(Acceso_Base_Datos.RUTA_ACTIVIDADES);
         obtenerActividadesUsuario();
         location = getView().findViewById(R.id.imageLocation);
 
@@ -311,7 +309,7 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
     public void obtenerActividadesUsuario() {
         final FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
-            refDBUser = database.getReference(PATH_USUARIOS+user.getUid());
+            refDBUser = database.getReference(Acceso_Base_Datos.RUTA_USUARIOS+user.getUid());
             suscripcionAct = refDBActv.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

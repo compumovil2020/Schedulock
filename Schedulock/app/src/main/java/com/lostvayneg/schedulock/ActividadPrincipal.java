@@ -58,14 +58,12 @@ public class ActividadPrincipal extends AppCompatActivity implements NavigationV
     private FirebaseAuth autenticacionFB;
     private FirebaseDatabase baseDatos;
     private DatabaseReference referenciaBD;
-    public static final String rutaUsuarios="usuarios/";
     private TextView txt_nombre_usuario;
     private TextView txt_correo_usuario;
     private ImageView img_perfil_usuario;
     private View headerMenuLateral;
     private Acceso_Base_Datos base_datos;
     private StorageReference referenciaSBD;
-    public static final String RUTA_IMAGENES = "fotos_perfil/";
     private FirebaseStorage storageBD;
     private ProgressDialog cargaDatosUsuario;
 
@@ -151,7 +149,7 @@ public class ActividadPrincipal extends AppCompatActivity implements NavigationV
 
     private void updateUI(final FirebaseUser currentUser){
         if(currentUser!=null){
-            referenciaBD = baseDatos.getReference(rutaUsuarios+currentUser.getUid());
+            referenciaBD = baseDatos.getReference(Acceso_Base_Datos.RUTA_USUARIOS+currentUser.getUid());
 
             referenciaBD.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -166,7 +164,7 @@ public class ActividadPrincipal extends AppCompatActivity implements NavigationV
                     final File localFile;
                     try {
                         localFile = File.createTempFile("images", "jpg");
-                        referenciaSBD = storageBD.getReference(RUTA_IMAGENES).child(currentUser.getUid());
+                        referenciaSBD = storageBD.getReference(Acceso_Base_Datos.RUTA_IMAGENES).child(currentUser.getUid());
                         referenciaSBD.getFile(localFile)
                                 .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                                     @Override

@@ -112,8 +112,8 @@ public class Login extends AppCompatActivity {
     public void onClickiniciarSesion(View v){
         String emailin;
         String passwordin;
-        emailin=email.getText().toString();
-        passwordin=password.getText().toString();
+        emailin=email.getText().toString().trim();
+        passwordin=password.getText().toString().trim();
         if(!emailin.isEmpty() && isEmailValid(emailin)){
             if(!passwordin.isEmpty()){
                 autenticacionFB.signInWithEmailAndPassword(emailin, passwordin)

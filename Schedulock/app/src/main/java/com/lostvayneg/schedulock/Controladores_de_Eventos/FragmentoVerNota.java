@@ -28,6 +28,7 @@ import com.lostvayneg.schedulock.Entidades.Actividad;
 import com.lostvayneg.schedulock.Entidades.Nota;
 import com.lostvayneg.schedulock.Entidades.Usuario;
 import com.lostvayneg.schedulock.R;
+import com.lostvayneg.schedulock.Utilidades.Acceso_Base_Datos;
 import com.squareup.picasso.Picasso;
 
 
@@ -43,14 +44,10 @@ public class FragmentoVerNota extends Fragment {
 
     private Nota nota;
 
-    public static final String RUTA_ACTIVIDADES ="actividades/";
-    public static final String RUTA_NOTAS ="notas/";
     private FirebaseDatabase fireDB;
     private StorageReference mStorageRef;
     private FirebaseAuth authF;
     private FirebaseUser user;
-
-    public static final String RUTA_USUARIOS ="usuarios/";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -106,11 +103,11 @@ public class FragmentoVerNota extends Fragment {
         btnEliminarNota.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference ref = fireDB.getReference(RUTA_NOTAS + nota.getId());
+                DatabaseReference ref = fireDB.getReference(Acceso_Base_Datos.RUTA_NOTAS + nota.getId());
                 ref.removeValue();
                 StorageReference adjuntoRef = mStorageRef.child("adjuntos_notas/" + nota.getId());
                 adjuntoRef.delete();
-                final DatabaseReference refUser = fireDB.getReference(RUTA_USUARIOS + user.getUid());
+                final DatabaseReference refUser = fireDB.getReference(Acceso_Base_Datos.RUTA_USUARIOS + user.getUid());
                 refUser.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot datasnapshot) {
@@ -119,7 +116,7 @@ public class FragmentoVerNota extends Fragment {
                         refUser.setValue(usr);
 
                         if (nota.getIdActividad() != null) {
-                            final DatabaseReference refAct = fireDB.getReference(RUTA_ACTIVIDADES + nota.getIdActividad());
+                            final DatabaseReference refAct = fireDB.getReference(Acceso_Base_Datos.RUTA_ACTIVIDADES + nota.getIdActividad());
                             refAct.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot datasnapshot) {
@@ -151,7 +148,7 @@ public class FragmentoVerNota extends Fragment {
     }
 
     public void consultarActividad (String id) {
-        DatabaseReference ref = fireDB.getReference(RUTA_ACTIVIDADES + id);
+        DatabaseReference ref = fireDB.getReference(Acceso_Base_Datos.RUTA_ACTIVIDADES + id);
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

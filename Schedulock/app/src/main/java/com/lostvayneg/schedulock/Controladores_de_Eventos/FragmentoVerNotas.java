@@ -28,6 +28,7 @@ import com.lostvayneg.schedulock.Entidades.Actividad;
 import com.lostvayneg.schedulock.Entidades.Nota;
 import com.lostvayneg.schedulock.Entidades.Usuario;
 import com.lostvayneg.schedulock.R;
+import com.lostvayneg.schedulock.Utilidades.Acceso_Base_Datos;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -43,8 +44,6 @@ public class FragmentoVerNotas extends Fragment {
     private FirebaseDatabase fireDB;
     private FirebaseAuth authF;
     private FirebaseUser user;
-
-    private static final String RUTA_NOTAS = "notas/";
 
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
@@ -74,7 +73,7 @@ public class FragmentoVerNotas extends Fragment {
 
     public void cargarLista(){
         listaNotas = new ArrayList<>();
-        DatabaseReference ref = fireDB.getReference(RUTA_NOTAS);
+        DatabaseReference ref = fireDB.getReference(Acceso_Base_Datos.RUTA_NOTAS);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

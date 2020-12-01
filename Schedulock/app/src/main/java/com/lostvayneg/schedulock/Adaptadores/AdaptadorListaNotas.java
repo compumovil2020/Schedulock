@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.lostvayneg.schedulock.Entidades.Actividad;
 import com.lostvayneg.schedulock.Entidades.Nota;
 import com.lostvayneg.schedulock.R;
+import com.lostvayneg.schedulock.Utilidades.Acceso_Base_Datos;
 
 import java.util.ArrayList;
 
@@ -27,8 +28,6 @@ public class AdaptadorListaNotas extends RecyclerView.Adapter<AdaptadorListaNota
 
     private LayoutInflater inflater;
     private ArrayList<Nota> model;
-
-    public static final String RUTA_ACTIVIDADES ="actividades/";
     private FirebaseDatabase fireDB;
 
     //listener
@@ -61,7 +60,7 @@ public class AdaptadorListaNotas extends RecyclerView.Adapter<AdaptadorListaNota
     }
 
     public Actividad consultarActividad (String id) {
-        DatabaseReference ref = fireDB.getReference(RUTA_ACTIVIDADES + id);
+        DatabaseReference ref = fireDB.getReference(Acceso_Base_Datos.RUTA_ACTIVIDADES + id);
         final Actividad[] result = {null};
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

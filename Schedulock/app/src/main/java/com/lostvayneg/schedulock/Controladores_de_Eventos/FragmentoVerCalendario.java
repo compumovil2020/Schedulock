@@ -27,6 +27,7 @@ import com.lostvayneg.schedulock.Entidades.Actividad;
 import com.lostvayneg.schedulock.Entidades.Calendario;
 import com.lostvayneg.schedulock.Entidades.Localizacion;
 import com.lostvayneg.schedulock.R;
+import com.lostvayneg.schedulock.Utilidades.Acceso_Base_Datos;
 import com.lostvayneg.schedulock.Utilidades.Autenticacion_Firebase;
 
 import java.io.Serializable;
@@ -34,8 +35,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class FragmentoVerCalendario extends Fragment {
-
-    public static final String RUTA_ACTIVIDADES ="actividades/";
 
     private AdaptadorListaActividades adapterActividad;
     private RecyclerView recyclerViewActividades;
@@ -94,7 +93,7 @@ public class FragmentoVerCalendario extends Fragment {
 
 
     public void obtenerActividadesUsuario(){
-        referenciaBD=baseDatos.getReference(RUTA_ACTIVIDADES);
+        referenciaBD=baseDatos.getReference(Acceso_Base_Datos.RUTA_ACTIVIDADES);
         referenciaBD.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

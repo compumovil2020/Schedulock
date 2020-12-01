@@ -84,7 +84,6 @@ public class FragmentVerMapaUnico extends Fragment {
     private FirebaseAuth authF;
     private FirebaseUser fireUser;
     private GoogleMap mMap;
-    public static final String RUTA_USUARIOS ="usuarios/";
 
     public static final int FINE_LOCATION = 2;
     public static final int REQUEST_CHECK_SETTINGS = 3;
@@ -164,7 +163,7 @@ public class FragmentVerMapaUnico extends Fragment {
         fireDB = FirebaseDatabase.getInstance();
         authF = FirebaseAuth.getInstance();
         fireUser = authF.getCurrentUser();
-        refDBUser = fireDB.getReference(RUTA_USUARIOS + fireUser.getUid());
+        refDBUser = fireDB.getReference(Acceso_Base_Datos.RUTA_USUARIOS + fireUser.getUid());
 
         location = getView().findViewById(R.id.imageLocation);
 
@@ -287,7 +286,7 @@ public class FragmentVerMapaUnico extends Fragment {
     }
 
     public void obtenerLocalizacionSeguir(final String uid){
-        DatabaseReference refUsr = fireDB.getReference(RUTA_USUARIOS + uid);
+        DatabaseReference refUsr = fireDB.getReference(Acceso_Base_Datos.RUTA_USUARIOS + uid);
         ValueEventListener vEL = refUsr.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot datasnapshot) {

@@ -41,7 +41,6 @@ public class FragmentoVerCalendarios extends Fragment {
     public FirebaseStorage storageBD;
     public DatabaseReference referenciaBD;
     private Autenticacion_Firebase autenticacionFB;
-    public static final String RUTA_CALENDARIOS="calendarios/";
     private FirebaseUser usuario;
 
     @Override
@@ -78,7 +77,7 @@ public class FragmentoVerCalendarios extends Fragment {
 
 
     public void obtenerCalendariosUsuario(){
-        referenciaBD=baseDatos.getReference(RUTA_CALENDARIOS);
+        referenciaBD=baseDatos.getReference(Acceso_Base_Datos.RUTA_CALENDARIOS);
         referenciaBD.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

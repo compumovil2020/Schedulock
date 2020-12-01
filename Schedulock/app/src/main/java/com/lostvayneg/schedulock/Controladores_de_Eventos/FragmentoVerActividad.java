@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.lostvayneg.schedulock.Entidades.Actividad;
 import com.lostvayneg.schedulock.Entidades.Nota;
 import com.lostvayneg.schedulock.R;
+import com.lostvayneg.schedulock.Utilidades.Acceso_Base_Datos;
 
 public class FragmentoVerActividad extends Fragment {
 
@@ -33,8 +34,6 @@ public class FragmentoVerActividad extends Fragment {
     private TextView fechaInicioActividad;
     private TextView fechaFinActividad;
 
-
-    public static final String RUTA_NOTAS ="notas/";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -85,7 +84,7 @@ public class FragmentoVerActividad extends Fragment {
             public void onClick(View view) {
                 if (actividadRecibida.getIdNota() != null) {
                     if(actividadRecibida.getIdNota() != "") {
-                        DatabaseReference refaux = FirebaseDatabase.getInstance().getReference(RUTA_NOTAS + actividadRecibida.getIdNota());
+                        DatabaseReference refaux = FirebaseDatabase.getInstance().getReference(Acceso_Base_Datos.RUTA_NOTAS + actividadRecibida.getIdNota());
                         refaux.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

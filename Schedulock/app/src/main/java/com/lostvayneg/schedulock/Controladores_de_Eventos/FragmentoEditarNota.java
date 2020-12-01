@@ -40,6 +40,7 @@ import com.lostvayneg.schedulock.Entidades.Actividad;
 import com.lostvayneg.schedulock.Entidades.Nota;
 import com.lostvayneg.schedulock.Entidades.Usuario;
 import com.lostvayneg.schedulock.R;
+import com.lostvayneg.schedulock.Utilidades.Acceso_Base_Datos;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayInputStream;
@@ -64,9 +65,6 @@ public class FragmentoEditarNota extends Fragment {
     private FirebaseAuth authF;
     private FirebaseUser user;
     private StorageReference mStorageRef;
-
-    private static final String RUTA_NOTAS = "notas/";
-    public static final String RUTA_ACTIVIDADES ="actividades/";
 
     private EditText tituloNota;
     private TextView tituloActv;
@@ -287,7 +285,7 @@ public class FragmentoEditarNota extends Fragment {
 
     private void actualizarNota() {
 
-        DatabaseReference refNota = fireDB.getReference(RUTA_NOTAS + nota.getId());
+        DatabaseReference refNota = fireDB.getReference(Acceso_Base_Datos.RUTA_NOTAS + nota.getId());
 
         nota.setNombre(tituloNota.getText().toString());
         nota.setDescripcion(desc.getText().toString());
@@ -304,7 +302,7 @@ public class FragmentoEditarNota extends Fragment {
     }
 
     public void consultarActividad (String id) {
-        DatabaseReference ref = fireDB.getReference(RUTA_ACTIVIDADES + id);
+        DatabaseReference ref = fireDB.getReference(Acceso_Base_Datos.RUTA_ACTIVIDADES + id);
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

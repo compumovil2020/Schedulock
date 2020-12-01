@@ -27,13 +27,12 @@ import com.lostvayneg.schedulock.Adaptadores.MensajeAdapter;
 import com.lostvayneg.schedulock.Entidades.Mensaje;
 import com.lostvayneg.schedulock.Entidades.Usuario;
 import com.lostvayneg.schedulock.R;
+import com.lostvayneg.schedulock.Utilidades.Acceso_Base_Datos;
 
 import java.util.ArrayList;
 
 
 public class FragmentoChatActividad extends Fragment {
-
-    private static final String PATH_MENSAJES = "mensajes/";
     private FirebaseDatabase database;
     private FirebaseAuth mAuth;
     private String idActividad;
@@ -70,16 +69,16 @@ public class FragmentoChatActividad extends Fragment {
     }
 
     private void enviarMensaje() {
-        DatabaseReference refDB, aux;
-        refDB = database.getReference(PATH_MENSAJES);
+        final DatabaseReference refDB, aux;
+        refDB = database.getReference(Acceso_Base_Datos.RUTA_MENSAJES);
         String id= refDB.push().getKey();
-        aux = database.getReference(PATH_MENSAJES+id);
-        Mensaje mensaje = new Mensaje();
+        aux = database.getReference(Acceso_Base_Datos.RUTA_MENSAJES+id);
+        final Mensaje mensaje = new Mensaje();
         mensaje.setIdMensaje(id);
         mensaje.setIdUser(mAuth.getUid());
         mensaje.setIdActividad(idActividad);
         mensaje.setMensaje(mensajeEnviar.getText().toString());
-        DatabaseReference refDBUsers = database.getReference("usuarios/"+mAuth.getUid());
+        DatabaseReference refDBUsers = database.getReference(Acceso_Base_Datos.RUTA_USUARIOS+mAuth.getUid());
 
         refDBUsers.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -102,7 +101,7 @@ public class FragmentoChatActividad extends Fragment {
         mensajes = new ArrayList<>();
         final FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
-            refMensaje = database.getReference(PATH_MENSAJES);
+            refMensaje = database.getReference(Acceso_Base_Datos.RUTA_MENSAJES);
             listener = refMensaje.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
