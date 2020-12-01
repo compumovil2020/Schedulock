@@ -6,35 +6,50 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
-import com.lostvayneg.schedulock.Controladores_de_Eventos.Login;
+import com.lostvayneg.schedulock.Controladores_de_Eventos.ActividadRecordatorios;
 import com.lostvayneg.schedulock.R;
 
-public class Recibir_Alarma extends BroadcastReceiver {
+import java.util.Date;
 
+public class Recibir_Alarma extends BroadcastReceiver {
     @Override
-    public void onReceive(android.content.Context context, android.content.Intent intent) {
-        creaNotificacion(System.currentTimeMillis(), "Titulo de la notificacion", "Contenido de la notificacion", context);
+    public void onReceive(Context context, Intent intent) {
+        Bundle datosActividad = intent.getExtras();
+        String nombre_actividad = datosActividad.getString("nombre_actividad");
+        Date inicio_actividad = (Date) datosActividad.getSerializable("inicio_actividad");
+        String hora_inicio = inicio_actividad.getHours() + ":" + inicio_actividad.getMinutes();
+        int id_intent = datosActividad.getInt("id_pending_intent");
+        creaNotificacion(id_intent, nombre_actividad, hora_inicio, context);
     }
 
-    public static void creaNotificacion(long when, String title, String content, Context context) {
+    public static void creaNotificacion(int intentAlarma, String title, String content, Context context) {
         try {
 
-            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, "notificacionSchedulock")
+            Intent notificationIntent = new Intent(context, ActividadRecordatorios.class);
+            Bundle datosNotificacion = new Bundle();
+            datosNotificacion.putInt("id_pending_intent", intentAlarma);
+            datosNotificacion.putString("nombre_actividad", title);
+            datosNotificacion.putString("hora_inicio_actividad",content);
+            notificationIntent.putExtras(datosNotificacion);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+            NotificationManager notificationManager = (NotificationManager) context
+                    .getSystemService(Context.NOTIFICATION_SERVICE);
+
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context)
+                    .setContentTitle("Recordatorio: " + title)
+                    .setContentText("La actividad inicia a las " + content)
                     .setSmallIcon(R.drawable.icono_estrella_trofeo)
-                    .setContentTitle("Recordatorio de Actividad")
-                    .setContentText("Algo por decir")
-                    .setPriority(NotificationCompat.PRIORITY_HIGH);
+                    .setAutoCancel(true)
+                    .setContentIntent(pendingIntent)
+                    .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE | Notification.DEFAULT_SOUND);
 
-            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-
-            notificationManager.notify((int) when, notificationBuilder.build());
+            notificationManager.notify((int) System.currentTimeMillis(), notificationBuilder.build());
 
 
         } catch (Exception e) {

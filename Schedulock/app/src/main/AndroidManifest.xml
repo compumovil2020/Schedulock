@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lostvayneg.schedulock">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -24,13 +23,14 @@
         android:roundIcon="@mipmap/icono_schedulock_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Controladores_de_Eventos.ActividadRecordatorios"></activity>
+
         <service
             android:name=".Servicios.Servicio_Recordatorios"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
-        <receiver android:name=".Servicios.Recibir_Alarma"></receiver>
-
+        <receiver android:name=".Servicios.Recibir_Alarma" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

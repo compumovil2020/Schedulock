@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo_login"
+    android:padding="10dp"
+    tools:context="com.lostvayneg.schedulock.Controladores_de_Eventos.ActividadRecordatorios">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="40dp"
+        android:background="@drawable/forma_rectangulo_bordes_redondeados">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recordatorio Actividad"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/color_schedulock_iconos"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="40dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:text="Nombre:"/>
+
+            <TextView
+                android:id="@+id/nombre_actividad_recordatorio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text=""
+                android:textColor="@color/color_texto_gris_claro"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="80dp"
+            android:text="Hora de Inicio de la actividad:"/>
+
+        <TextView
+            android:id="@+id/hora_inicio_actividad_recordatorio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="20:20 PM"
+            android:textSize="50sp"
+            android:gravity="center_horizontal"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="bottom">
+            <Button
+                android:id="@+id/btn_parar_recordatorios_recordatorio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Parar Recordatorios"
+                android:layout_weight="0.5"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/color_blanco"
+                android:background="@drawable/fondo_boton_schedulock"/>
+            <Button
+                android:id="@+id/btn_posponer_recordatorios_recordatorio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Posponer Recordatorios"
+                android:textColor="@color/color_blanco"
+                android:layout_weight="0.5"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/fondo_boton_schedulock"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

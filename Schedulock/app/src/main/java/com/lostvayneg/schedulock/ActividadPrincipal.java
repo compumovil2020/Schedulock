@@ -1,20 +1,16 @@
 package com.lostvayneg.schedulock;
 
-import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,11 +27,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.lostvayneg.schedulock.Controladores_de_Eventos.Login;
 import com.lostvayneg.schedulock.Entidades.Usuario;
-import com.lostvayneg.schedulock.Servicios.Servicio_Recordatorios;
 import com.lostvayneg.schedulock.Utilidades.Acceso_Base_Datos;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -47,10 +41,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
 
-public class ActividadPrincipal extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class ActividadPrincipal extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private AppBarConfiguration listaFragmentos;
     private NavigationView vistaNavegacion;
@@ -71,7 +63,7 @@ public class ActividadPrincipal extends AppCompatActivity implements NavigationV
     private ProgressDialog cargaDatosUsuario;
     private File file_img_usuario;
     private Usuario usuario_conectado;
-    private Intent servicio_recordatorios;
+    public static final String PARAR_RECORDATORIOS = "parar_recordatorios";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -205,5 +197,6 @@ public class ActividadPrincipal extends AppCompatActivity implements NavigationV
         } else {
         }
     }
-    
+
+
 }
