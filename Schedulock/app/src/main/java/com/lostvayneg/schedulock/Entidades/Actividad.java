@@ -13,26 +13,21 @@ public class Actividad implements Serializable {
     private Date inicio;
     private Date fin;
     private String descripcion;
+    private String idUser;
+    private String idActividad;
+    private String idCalendario;
+
+
     private String prioridad;
     private String recordatorio;
     private String frencuenciaR;
     private Localizacion localizacion;
     private List<String> colaboradores;
+    private String idNota;
+    private boolean invitado;
 
     public Actividad() {
     }
-
-    /*public Actividad(String nombre, String categoria, Date inicio, Date fin,String descripcion,String prioridad, String recordatorio,String frencuenciaR,LatLng localizacion) {
-        this.nombre = nombre;
-        this.categoria = categoria;
-        this.inicio = inicio;
-        this.fin = fin;
-        this.descripcion=descripcion;
-        this.prioridad=prioridad;
-        this.recordatorio=recordatorio;
-        this.frencuenciaR=frencuenciaR;
-        this.localizacion = localizacion;
-    }*/
 
 
     public String getNombre() {
@@ -136,5 +131,44 @@ public class Actividad implements Serializable {
     }
     public String toStringFechaFin(){
         return (fin.getYear() + "/" + fin.getMonth() +"/" +fin.getDate()+" "+fin.getHours()+":"+fin.getMinutes());
+    }
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
+    }
+
+    public String getIdActividad() {
+        return idActividad;
+    }
+
+    public void setIdActividad(String idActividad) {
+        this.idActividad = idActividad;
+    }
+    public String getIdCalendario() {
+        return idCalendario;
+    }
+
+    public void setIdCalendario(String idCalendario) {
+        this.idCalendario = idCalendario;
+    }
+
+
+    public boolean isInvitado() {
+        return invitado;
+    }
+
+    public void setInvitado(boolean invitado) {
+        this.invitado = invitado;
+    }
+
+    public String getIdNota() {
+        return idNota;
+    }
+
+    public void setIdNota(String idNota) {
+        this.idNota = idNota;
     }
 }

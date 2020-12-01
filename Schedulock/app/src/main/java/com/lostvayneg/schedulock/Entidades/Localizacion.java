@@ -1,6 +1,8 @@
 package com.lostvayneg.schedulock.Entidades;
 
-public class Localizacion {
+import java.io.Serializable;
+
+public class Localizacion implements Serializable {
     private double latitud;
     private double longitud;
 

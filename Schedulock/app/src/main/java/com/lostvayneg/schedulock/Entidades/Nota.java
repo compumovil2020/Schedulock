@@ -1,23 +1,43 @@
 package com.lostvayneg.schedulock.Entidades;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Nota
+public class Nota implements Serializable
 {
+    private String id;
     private String nombre;
+    private String descripcion;
     private List<Object> adjuntos;
-    private Actividad actividad;
+    private String idUsuario;
+    private String idActividad;
 
     public Nota() {
-        this.actividad = null;
+        this.idActividad = null;
         this.adjuntos = new ArrayList<>();
     }
 
-    public Nota(String s, Actividad actividad) {
+    public Nota(String s, String actividad) {
     }
 
     public Nota(String s) {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNombre() {
@@ -36,11 +56,19 @@ public class Nota
         this.adjuntos = adjuntos;
     }
 
-    public Actividad getActividad() {
-        return actividad;
+    public String getIdActividad() {
+        return idActividad;
     }
 
-    public void setActividad(Actividad actividad) {
-        this.actividad = actividad;
+    public void setIdActividad(String idActividad) {
+        this.idActividad = idActividad;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 }
