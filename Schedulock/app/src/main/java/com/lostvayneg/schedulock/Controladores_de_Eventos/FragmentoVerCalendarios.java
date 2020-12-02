@@ -99,11 +99,9 @@ public class FragmentoVerCalendarios extends Fragment {
     }
 
     public void mostrarData(){
-        if(adapterCalendario != null){
-            recyclerViewCalendarios.setLayoutManager(new LinearLayoutManager(getContext()));
-            adapterCalendario = new AdaptadorListaCalendarios(getContext(), listaCalendarios);
-            recyclerViewCalendarios.setAdapter(adapterCalendario);
-        }
+        recyclerViewCalendarios.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapterCalendario = new AdaptadorListaCalendarios(getContext(), listaCalendarios);
+        recyclerViewCalendarios.setAdapter(adapterCalendario);
 
     }
 

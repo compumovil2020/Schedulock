@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -64,9 +65,15 @@ public class FragmentoVerActividad extends Fragment {
         verUbicacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle b = new Bundle();
-                b.putSerializable("actividad", actividadRecibida);
-                Navigation.findNavController(v).navigate(R.id.ir_de_ver_actividad_a_ver_mapa_unico, b);
+                if(actividadRecibida.getLocalizacion() != null){
+                    Bundle b = new Bundle();
+                    b.putSerializable("actividad", actividadRecibida);
+                    Navigation.findNavController(v).navigate(R.id.ir_de_ver_actividad_a_ver_mapa_unico, b);
+                }
+                else{
+                    Toast.makeText(pantalla.getContext(), "Esta actividad no tiene ubicacion", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 

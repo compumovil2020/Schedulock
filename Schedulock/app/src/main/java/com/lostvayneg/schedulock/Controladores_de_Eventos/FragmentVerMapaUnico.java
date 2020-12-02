@@ -139,8 +139,12 @@ public class FragmentVerMapaUnico extends Fragment {
             mMap.getUiSettings().setZoomGesturesEnabled(true);
             mMap.getUiSettings().setZoomControlsEnabled(true);
 
-            actividadMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(actividad.getLocalizacion().getLatitud(), actividad.getLocalizacion().getLongitud())
-                        ).title(actividad.getNombre()));
+            if(actividad.getLocalizacion() != null) {
+
+                actividadMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(actividad.getLocalizacion().getLatitud(), actividad.getLocalizacion().getLongitud())
+                ).title(actividad.getNombre()));
+
+            }
 
         }
     };

@@ -194,6 +194,9 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
             if(latitud != null && longitud != null){
                 actividad.setLocalizacion(new Localizacion(latitud, longitud));
             }
+            else{
+                actividad.setLocalizacion(null);
+            }
 
             // Agregar Colaboradores
             FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -225,7 +228,6 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
                     bundle.putSerializable("calendar",(Serializable)calendarioUsuario);
                     Intent intent = new Intent(getContext(), notificacionService.class);
                     intent.putExtra("lista",arregloInvitadosEjemplo);
-                    notificacionService.enqueueWork(getContext(), intent);
                     Navigation.findNavController(getView()).navigate(R.id.ir_de_agregar_actividad_a_ver_actividad, enviarActividad);
                 }
 
@@ -351,10 +353,15 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
                 if(!descripcion.getText().toString().isEmpty()){
                     if(fechaI != null){
                         if(fechaf != null){
-                            if(!ubicacion.getText().toString().isEmpty()){
-                                encontrarUbicacion(ubicacion.getText().toString());
+                            if(fechaI.compareTo(fechaf) < 0){
+                                if(!ubicacion.getText().toString().isEmpty()){
+                                    encontrarUbicacion(ubicacion.getText().toString());
+                                }
+                                return true;
                             }
-                            return true;
+                            else{
+                                Toast.makeText(pantalla.getContext(), "La fecha de fin debe ser despues de la inicio", Toast.LENGTH_LONG).show();
+                            }
                         }
                         else{
                             Toast.makeText(pantalla.getContext(), "Seleccione la fecha y hora de fin", Toast.LENGTH_LONG).show();

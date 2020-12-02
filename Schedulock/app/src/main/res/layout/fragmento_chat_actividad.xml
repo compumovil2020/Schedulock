@@ -4,59 +4,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo_login"
+    android:padding="10dp"
     tools:context=".Controladores_de_Eventos.FragmentoChatActividad">
 
-    <TextView
-        android:id="@+id/tvx"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:gravity="center_horizontal"
-        android:text="Chat"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:background="@drawable/forma_rectangulo_bordes_redondeados">
+        <TextView
+            android:id="@+id/tvx"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center_horizontal"
+            android:text="Chat"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listaMensajes"
-        android:layout_width="411dp"
-        android:layout_height="802dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvx"
-        app:layout_constraintVertical_bias="0.0" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listaMensajes"
+            android:layout_width="411dp"
+            android:layout_height="802dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvx"
+            app:layout_constraintVertical_bias="0.0" />
 
-    <EditText
-        android:id="@+id/mensajeEnviar"
-        android:layout_width="406dp"
-        android:layout_height="69dp"
-        android:ems="10"
-        android:hint="Mensaje nuevo..."
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvx"
-        app:layout_constraintVertical_bias="0.927" />
+        <EditText
+            android:id="@+id/mensajeEnviar"
+            android:layout_width="406dp"
+            android:layout_height="69dp"
+            android:ems="10"
+            android:hint="Mensaje nuevo..."
+            android:inputType="text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvx"
+            app:layout_constraintVertical_bias="0.927" />
 
-    <ImageView
-        android:id="@+id/imageEnviar"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_gravity="bottom"
-        android:background="@drawable/fondo_boton_schedulock"
-        android:padding="5dp"
-        android:src="@drawable/icono_enviar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.964"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvx"
-        app:layout_constraintVertical_bias="0.909" />
+        <ImageView
+            android:id="@+id/imageEnviar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/fondo_boton_schedulock"
+            android:padding="5dp"
+            android:src="@drawable/icono_enviar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.964"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvx"
+            app:layout_constraintVertical_bias="0.909" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
