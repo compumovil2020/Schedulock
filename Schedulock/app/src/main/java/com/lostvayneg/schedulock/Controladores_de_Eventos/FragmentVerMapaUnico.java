@@ -528,7 +528,7 @@ public class FragmentVerMapaUnico extends Fragment {
         return resizedBitmap;
     }
     public void cargarClima(){
-        String ruta="https://api.openweathermap.org/data/2.5/weather?lat="+actividad.getLocalizacion().getLatitud()+"&lon="+actividad.getLocalizacion().getLongitud()+"&appid=ec2421a82f3848971ac6474e4efac31c";
+        String ruta="https://api.openweathermap.org/data/2.5/weather?id=524901"+ "&lat="+actividad.getLocalizacion().getLatitud()+"&lon="+actividad.getLocalizacion().getLongitud()+"&appid=ec2421a82f3848971ac6474e4efac31c"+"&lang=sp";
         StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
@@ -552,8 +552,9 @@ public class FragmentVerMapaUnico extends Fragment {
             JSONObject main=jsonObject.getJSONObject("main");
             JSONArray we=jsonObject.getJSONArray("weather");
             JSONObject wefinal=we.getJSONObject(0);
-
-            String info="    Clima:  "+wefinal.optString("main")+"            Temp:  "+main.optString("temp");
+            double res= main.optDouble("temp");
+            res= res-273.15;
+            String info="  Clima:  "+wefinal.optString("description")+"  Temperatura:  "+(res) + " °C";
             txt.setText(info);
 
         } catch (MalformedURLException e) {
