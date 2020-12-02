@@ -22,6 +22,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -64,13 +65,23 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.network.connection.HttpURLConnectionFactoryImpl;
 import com.lostvayneg.schedulock.Entidades.Actividad;
 import com.lostvayneg.schedulock.Entidades.Localizacion;
 import com.lostvayneg.schedulock.Entidades.Usuario;
 import com.lostvayneg.schedulock.R;
 import com.lostvayneg.schedulock.Utilidades.Acceso_Base_Datos;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 
@@ -110,6 +121,7 @@ public class FragmentVerMapaUnico extends Fragment {
     public ImageView location;
 
     private Actividad actividad;
+    private TextView txt;
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
@@ -171,7 +183,7 @@ public class FragmentVerMapaUnico extends Fragment {
         suscripciones = new HashMap<>();
         referencias = new HashMap<>();
         markers = new HashMap<>();
-
+        txt=getView().findViewById(R.id.clima);
         location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -280,7 +292,7 @@ public class FragmentVerMapaUnico extends Fragment {
         //-------------------------------------------------------------------------------
 
         // Permisos
-
+        cargarClima();
         solicitarPermiso(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION, "Se necesita acceso a la localización", FINE_LOCATION);
         usePermission();
 
@@ -514,6 +526,45 @@ public class FragmentVerMapaUnico extends Fragment {
         Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), getResources().getIdentifier(iconName, "drawable", getActivity().getPackageName()));
         Bitmap resizedBitmap = Bitmap.createScaledBitmap(imageBitmap, width, height, false);
         return resizedBitmap;
+    }
+    public void cargarClima(){
+        String ruta="https://api.openweathermap.org/data/2.5/weather?lat="+actividad.getLocalizacion().getLatitud()+"&lon="+actividad.getLocalizacion().getLongitud()+"&appid=ec2421a82f3848971ac6474e4efac31c";
+        StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        URL url= null;
+        HttpURLConnection con;
+        try {
+            url=new URL(ruta);
+            System.out.println(ruta);            con=(HttpURLConnection) url.openConnection();
+            con.setRequestMethod("GET");
+            con.connect();
+            BufferedReader in=new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuffer response=new StringBuffer();
+            String json="";
+            while((inputLine =in.readLine())!=null){
+                response.append(inputLine);
+            }
+            json=response.toString();
+            JSONObject jsonObject=new JSONObject(json);
+
+            JSONObject main=jsonObject.getJSONObject("main");
+            JSONArray we=jsonObject.getJSONArray("weather");
+            JSONObject wefinal=we.getJSONObject(0);
+
+            String info="    Clima:  "+wefinal.optString("main")+"            Temp:  "+main.optString("temp");
+            txt.setText(info);
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 }

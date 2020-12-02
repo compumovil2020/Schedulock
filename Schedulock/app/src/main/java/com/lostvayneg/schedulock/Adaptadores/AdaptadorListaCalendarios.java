@@ -21,7 +21,7 @@ import com.lostvayneg.schedulock.R;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class AdaptadorListaCalendarios extends RecyclerView.Adapter<AdaptadorListaCalendarios.ViewHolder> implements View.OnClickListener,Serializable{
+public class AdaptadorListaCalendarios extends RecyclerView.Adapter<AdaptadorListaCalendarios.ViewHolder> implements View.OnClickListener{
 
     private LayoutInflater inflater;
     private ArrayList<Calendario> model;

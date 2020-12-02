@@ -1,17 +1,20 @@
 package com.lostvayneg.schedulock.Adaptadores;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lostvayneg.schedulock.Entidades.Actividad;
 import com.lostvayneg.schedulock.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class AdaptadorListaActividades extends RecyclerView.Adapter<AdaptadorListaActividades.ViewHolder> implements View.OnClickListener{
@@ -46,6 +49,15 @@ public class AdaptadorListaActividades extends RecyclerView.Adapter<AdaptadorLis
         holder.categoria.setText(categoria);
         holder.inicio.setText(fechaInicio);
         holder.fin.setText(fechaFin);
+        final int aux=position;
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("actividad", (Serializable) model.get(aux));
+                Navigation.findNavController(v).navigate(R.id.ir_de_ver_calendario_a_ver_actividad,bundle);
+            }
+        });
     }
 
     @Override
