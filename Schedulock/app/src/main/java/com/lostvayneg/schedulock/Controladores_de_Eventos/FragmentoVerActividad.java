@@ -10,6 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -20,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.lostvayneg.schedulock.Entidades.Actividad;
 import com.lostvayneg.schedulock.Entidades.Nota;
+import com.lostvayneg.schedulock.Entidades.Usuario;
 import com.lostvayneg.schedulock.R;
 import com.lostvayneg.schedulock.Utilidades.Acceso_Base_Datos;
 
@@ -34,7 +37,8 @@ public class FragmentoVerActividad extends Fragment {
     private TextView prioridadActividad;
     private TextView fechaInicioActividad;
     private TextView fechaFinActividad;
-
+    private DatabaseReference myRef;
+    private FirebaseDatabase database;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -121,4 +125,5 @@ public class FragmentoVerActividad extends Fragment {
 
         return pantalla;
     }
+
 }

@@ -42,7 +42,7 @@
         android:layout_gravity="bottom"
         android:backgroundTint="@color/color_blanco"
         android:background="@drawable/fondo_boton_schedulock"
-        android:text="Hoy"
+        android:text="Mostrar/Ocultar"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:textColor="@color/color_schedulock_iconos"

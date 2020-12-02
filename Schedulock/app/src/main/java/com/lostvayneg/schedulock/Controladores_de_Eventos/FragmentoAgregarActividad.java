@@ -211,7 +211,6 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
                             //Log.i("EROOOOO", correo);
                             if(u.getEmail().equals(correo)) {
                                 ids.add(data.getKey());
-                                //Log.i("EROOOOO", "ID: " + data.getKey());
                                 break;
                             }
                         }
@@ -228,6 +227,7 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
                     bundle.putSerializable("calendar",(Serializable)calendarioUsuario);
                     Intent intent = new Intent(getContext(), notificacionService.class);
                     intent.putExtra("lista",arregloInvitadosEjemplo);
+                    intent.putExtra("actividad", actividad);
                     Navigation.findNavController(getView()).navigate(R.id.ir_de_agregar_actividad_a_ver_actividad, enviarActividad);
                 }
 

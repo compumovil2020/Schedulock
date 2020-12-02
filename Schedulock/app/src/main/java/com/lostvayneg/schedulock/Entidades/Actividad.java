@@ -130,7 +130,7 @@ public class Actividad implements Serializable {
         return (inicio.getYear() + "/" + (inicio.getMonth()+1) +"/" +inicio.getDate()+" "+inicio.getHours()+":"+inicio.getMinutes());
     }
     public String toStringFechaFin(){
-        return (fin.getYear() + "/" + fin.getMonth() +"/" +fin.getDate()+" "+fin.getHours()+":"+fin.getMinutes());
+        return (fin.getYear() + "/" + (fin.getMonth()+1) +"/" +fin.getDate()+" "+fin.getHours()+":"+fin.getMinutes());
     }
     public String getIdUser() {
         return idUser;

@@ -16,8 +16,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.lostvayneg.schedulock.Controladores_de_Eventos.FragmentoAgregarActividad;
+import com.lostvayneg.schedulock.Entidades.Actividad;
 import com.lostvayneg.schedulock.Entidades.Usuario;
 import com.lostvayneg.schedulock.R;
+import com.lostvayneg.schedulock.Utilidades.Acceso_Base_Datos;
 
 import java.util.ArrayList;
 
@@ -35,6 +37,7 @@ public class notificacionService extends JobIntentService{
     // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
     DatabaseReference myRef;
     FirebaseDatabase database;
+    DatabaseReference referenciaNuevos;
     public static final String RUTA_USUARIOS ="usuarios/";
     private FirebaseAuth mAuth;
     // TODO: Rename parameters
@@ -58,10 +61,11 @@ public class notificacionService extends JobIntentService{
     @Override
     protected void onHandleWork(@NonNull Intent intent) {
         ArrayList<String> arregloInvitados = (ArrayList<String>) intent.getStringArrayListExtra("lista");
-        mandarInvitacion(arregloInvitados);
+        Actividad actividad = (Actividad) intent.getSerializableExtra("actividad");
+        mandarInvitacion(arregloInvitados, actividad);
     }
 
-    private void mandarInvitacion(final ArrayList<String> arregloInvitados) {
+    private void mandarInvitacion(final ArrayList<String> arregloInvitados, Actividad act) {
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -70,6 +74,11 @@ public class notificacionService extends JobIntentService{
 
                     for(int i=0;i<arregloInvitados.size();i++){
                         if(arregloInvitados.get(i).equals(usuarioAux.getEmail())){
+
+                            act.setIdUser(usuarioAux.getId());
+                            act.setInvitado(true);
+                            referenciaNuevos = database.getReference(Acceso_Base_Datos.RUTA_ACTIVIDADES);
+                            referenciaNuevos.setValue(act);
                             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getBaseContext(), FragmentoAgregarActividad.CHANNEL_ID);
                             mBuilder.setSmallIcon(R.drawable.common_full_open_on_phone);
                             mBuilder.setContentTitle("Invitacion a actividad");

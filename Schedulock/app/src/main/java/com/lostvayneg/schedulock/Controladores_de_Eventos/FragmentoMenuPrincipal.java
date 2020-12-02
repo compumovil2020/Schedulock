@@ -16,12 +16,19 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.lostvayneg.schedulock.Adaptadores.AdaptadorListaActividades;
 import com.lostvayneg.schedulock.Entidades.Actividad;
 import com.lostvayneg.schedulock.R;
 import com.lostvayneg.schedulock.Utilidades.Acceso_Base_Datos;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class FragmentoMenuPrincipal extends Fragment {
 
@@ -31,9 +38,10 @@ public class FragmentoMenuPrincipal extends Fragment {
     private Button btnVerCalendarios;
     private Button btnVerNotas;
     private Button btnVerLogros;
-    private Acceso_Base_Datos baseDatos;
     private ArrayList<Actividad> actividadesParaHoy;
     private RecyclerView vistaActividadesParaHoy;
+    public DatabaseReference referenciaBD;
+    public FirebaseDatabase baseDatos;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,6 +55,7 @@ public class FragmentoMenuPrincipal extends Fragment {
         btnVerCalendarios = pantalla.findViewById(R.id.btn_ver_calendarios_desde_menu);
         btnVerNotas = pantalla.findViewById(R.id.btn_ver_notas_desde_menu);
         btnVerLogros = pantalla.findViewById(R.id.btn_ver_logros_desde_menu);
+        baseDatos = FirebaseDatabase.getInstance();
         vistaActividadesParaHoy = pantalla.findViewById(R.id.lista_actividades_para_hoy_menu_principal);
         //Pasar a ver el mapa de actividades
         btnVerMapa.setOnClickListener(new View.OnClickListener() {
@@ -78,27 +87,31 @@ public class FragmentoMenuPrincipal extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.ir_de_menu_principal_a_ver_logros);
             }
         });
-
-        baseDatos = new Acceso_Base_Datos();
+        actividadesParaHoy = new ArrayList<>();
+        cargarActividades();
         return pantalla;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        baseDatos.obtenerActividadesUsuario();
-        cargarActividades();
-        mostrarListaActividadesParaHoy();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-    }
-
     private void cargarActividades(){
-        actividadesParaHoy = baseDatos.obtenerActividadesUsuario();
+        actividadesParaHoy = new ArrayList<>();
+        referenciaBD = baseDatos.getReference(Acceso_Base_Datos.RUTA_ACTIVIDADES);
+        referenciaBD.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot dataSnap: dataSnapshot.getChildren()) {
+                    Actividad dato = dataSnap.getValue(Actividad.class);
+                    if(dato.getIdUser().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                        actividadesParaHoy.add(dato);
+                    }
+                }
+                mostrarListaActividadesParaHoy();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void mostrarListaActividadesParaHoy(){
@@ -109,7 +122,10 @@ public class FragmentoMenuPrincipal extends Fragment {
         adaptadorActividad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.frg_ver_actividad);
+                int position = vistaActividadesParaHoy.getChildLayoutPosition(view);
+                Bundle b = new Bundle();
+                b.putSerializable("actividad", actividadesParaHoy.get(position));
+                Navigation.findNavController(view).navigate(R.id.frg_ver_actividad, b);
             }
         });
     }
