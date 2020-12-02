@@ -3,6 +3,7 @@ package com.lostvayneg.schedulock.Controladores_de_Eventos;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,12 +27,18 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.lostvayneg.schedulock.Entidades.Actividad;
+import com.lostvayneg.schedulock.Entidades.Calendario;
+import com.lostvayneg.schedulock.Entidades.Nota;
 import com.lostvayneg.schedulock.Entidades.Usuario;
 import com.lostvayneg.schedulock.Enumerados.Enum_Niveles;
 import com.lostvayneg.schedulock.R;
 import com.lostvayneg.schedulock.Utilidades.Acceso_Base_Datos;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 
 public class FragmentoVerPerfil extends Fragment {
@@ -148,6 +155,7 @@ public class FragmentoVerPerfil extends Fragment {
 
             File img_usuario = (File) datosIniciales.getSerializable("file_imagen_usuario");
             if(img_usuario != null){
+                Log.i("Perfil", "Imagen");
                 Bitmap bmImagen = BitmapFactory.decodeFile(img_usuario.getPath());
                 imagen_usuario.setImageBitmap(bmImagen);
             }
@@ -175,11 +183,18 @@ public class FragmentoVerPerfil extends Fragment {
     }
 
     private void cargarCantidadNotas(){
-        referenciaBD = baseDatos.getReference(Acceso_Base_Datos.RUTA_NOTAS + FirebaseAuth.getInstance().getCurrentUser().getUid() + "/");
+        referenciaBD = baseDatos.getReference(Acceso_Base_Datos.RUTA_NOTAS);
         referenciaBD.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                cantidad_notas.setText(""+dataSnapshot.getChildrenCount());
+                int cantidad = 0;
+                for (DataSnapshot dataSnap: dataSnapshot.getChildren()) {
+                    Nota dato = dataSnap.getValue(Nota.class);
+                    if(dato.getIdUsuario().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                        cantidad++;
+                    }
+                }
+                cantidad_notas.setText(""+cantidad);
             }
 
             @Override
@@ -205,11 +220,19 @@ public class FragmentoVerPerfil extends Fragment {
     }
 
     private void cargarCantidadCalendarios(){
-        referenciaBD = baseDatos.getReference(Acceso_Base_Datos.RUTA_CALENDARIOS + FirebaseAuth.getInstance().getCurrentUser().getUid() + "/");
+        List<Calendario> calendarios = new ArrayList<>();
+        referenciaBD = baseDatos.getReference(Acceso_Base_Datos.RUTA_CALENDARIOS);
         referenciaBD.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                cantidad_calendarios.setText(""+dataSnapshot.getChildrenCount());
+                int cantidad = 0;
+                for (DataSnapshot dataSnap: dataSnapshot.getChildren()) {
+                    Calendario dato = dataSnap.getValue(Calendario.class);
+                    if(dato.getUserId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                        cantidad++;
+                    }
+                }
+                cantidad_calendarios.setText(""+calendarios.size());
             }
 
             @Override
@@ -220,11 +243,18 @@ public class FragmentoVerPerfil extends Fragment {
     }
 
     private void cargarCantidadActividades(){
-        referenciaBD = baseDatos.getReference(Acceso_Base_Datos.RUTA_ACTIVIDADES + FirebaseAuth.getInstance().getCurrentUser().getUid() + "/");
+        referenciaBD = baseDatos.getReference(Acceso_Base_Datos.RUTA_ACTIVIDADES);
         referenciaBD.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                cantidad_actividades.setText(""+dataSnapshot.getChildrenCount());
+                int cantidad = 0;
+                for (DataSnapshot dataSnap: dataSnapshot.getChildren()) {
+                    Actividad dato = dataSnap.getValue(Actividad.class);
+                    if(dato.getIdUser().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                        cantidad++;
+                    }
+                }
+                cantidad_actividades.setText(""+cantidad);
             }
 
             @Override

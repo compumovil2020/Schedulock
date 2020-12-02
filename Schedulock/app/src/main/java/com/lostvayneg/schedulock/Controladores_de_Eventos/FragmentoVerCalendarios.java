@@ -58,7 +58,6 @@ public class FragmentoVerCalendarios extends Fragment {
         usuario = autenticacionFB.getUsuario();
         listaCalendarios = new ArrayList<>();
         obtenerCalendariosUsuario();
-        System.out.println("TAMAÑo"+listaCalendarios.size());
         //cargar lista
         //Mostrar datos
 
@@ -100,9 +99,11 @@ public class FragmentoVerCalendarios extends Fragment {
     }
 
     public void mostrarData(){
-        recyclerViewCalendarios.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapterCalendario = new AdaptadorListaCalendarios(getContext(), listaCalendarios);
-        recyclerViewCalendarios.setAdapter(adapterCalendario);
+        if(adapterCalendario != null){
+            recyclerViewCalendarios.setLayoutManager(new LinearLayoutManager(getContext()));
+            adapterCalendario = new AdaptadorListaCalendarios(getContext(), listaCalendarios);
+            recyclerViewCalendarios.setAdapter(adapterCalendario);
+        }
 
     }
 

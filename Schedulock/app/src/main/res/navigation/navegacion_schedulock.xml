@@ -115,7 +115,7 @@
     <fragment
         android:id="@+id/frg_ver_notas"
         android:name="com.lostvayneg.schedulock.Controladores_de_Eventos.FragmentoVerNotas"
-        android:label="Chat de la Actividad"
+        android:label="Notas"
         tools:layout="@layout/fragmento_ver_notas">
         <action
             android:id="@+id/ir_de_ver_notas_a_agregar_nota"

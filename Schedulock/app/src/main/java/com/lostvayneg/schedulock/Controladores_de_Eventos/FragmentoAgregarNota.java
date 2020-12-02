@@ -248,7 +248,7 @@ public class FragmentoAgregarNota extends Fragment {
             } else {
                 Bundle b = new Bundle();
                 b.putSerializable("nota", n);
-                Navigation.findNavController(getView()).navigate(R.id.ir_de_agregar_nota_a_ver_nota, b);
+                Navigation.findNavController(getView()).navigate(R.id.frg_ver_nota, b);
             }
         } else {
 

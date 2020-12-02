@@ -93,7 +93,6 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
         arregloCategorias.add("Academico");
         arregloCategorias.add("Ocio");
         arregloCategorias.add("Otro");
-        createNotificationChannel();
         ArrayAdapter adp=new ArrayAdapter(pantalla.getContext(), android.R.layout.simple_spinner_dropdown_item,arregloCategorias);
         spinner=pantalla.findViewById(R.id.act_categoria);
         spinner.setAdapter(adp);
@@ -160,11 +159,13 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
             @Override
             public void onClick(View v) {
 
-                arregloInvitadosEjemplo.add(newU.getText().toString());
-                ArrayAdapter<String> adaptadorInvitados = new ArrayAdapter<String>(getContext(),  android.R.layout.simple_list_item_1,arregloInvitadosEjemplo);
-                newU.setText("");
-                listaUsuarios.setAdapter(adaptadorInvitados);
-                listaUsuarios.setVisibility(View.VISIBLE);
+                if(!newU.getText().toString().equals("")){
+                    arregloInvitadosEjemplo.add(newU.getText().toString());
+                    ArrayAdapter<String> adaptadorInvitados = new ArrayAdapter<String>(getContext(),  android.R.layout.simple_list_item_1,arregloInvitadosEjemplo);
+                    newU.setText("");
+                    listaUsuarios.setAdapter(adaptadorInvitados);
+                    listaUsuarios.setVisibility(View.VISIBLE);
+                }
             }
         });
         return pantalla;
@@ -196,7 +197,7 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
 
             // Agregar Colaboradores
             FirebaseDatabase db = FirebaseDatabase.getInstance();
-            DatabaseReference refAux = db.getReference("usuarios/");
+            DatabaseReference refAux = db.getReference(Acceso_Base_Datos.RUTA_USUARIOS);
             refAux.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -217,9 +218,9 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
 
                     baseDatos.agregarNuevaActividad(actividad);
                     Toast.makeText(pantalla.getContext(), "Se agrego la actividad", Toast.LENGTH_LONG).show();
+                    crearRecordatorio(getContext(), actividad);
                     Bundle enviarActividad = new Bundle();
                     enviarActividad.putSerializable("actividad", actividad);
-                    crearRecordatorio(getContext(), actividad);
                     Bundle bundle=new Bundle();
                     bundle.putSerializable("calendar",(Serializable)calendarioUsuario);
                     Intent intent = new Intent(getContext(), notificacionService.class);
@@ -239,10 +240,11 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
     }
 
     private void crearRecordatorio(Context context, Actividad actividad) {
-        Log.i("Alarma", "create an alarm");
+        Log.i("Alarma", "Se crea una alarma");
         Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.YEAR, fechaI.getYear());
-        calendar.set(Calendar.MONTH, fechaI.getMonth()-1);
+        calendar.set(Calendar.MONTH, fechaI.getMonth());
         calendar.set(Calendar.DAY_OF_MONTH, fechaI.getDate());
         int minutos = fechaI.getMinutes();
         switch (recordatorio.getSelectedItem().toString()) {
@@ -395,6 +397,7 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
     }
 
     public void seleccionarFecha(View v){
+        fechaSelecionada = new Date();
         DatePickerDialog dpFecha = new DatePickerDialog(
                 getContext(),
                 this,
@@ -442,20 +445,5 @@ public class FragmentoAgregarActividad extends Fragment implements DatePickerDia
         fechaSelecionada.setHours(hourOfDay);
         fechaSelecionada.setMinutes(minute);
     }
-    private void createNotificationChannel() {
-// Create the NotificationChannel, but only on API 26+ because
-// the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "channel";
-            String description = "channel description";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-//IMPORTANCE_MAX MUESTRA LA NOTIFICACIÓN ANIMADA
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
-            channel.setDescription(description);
-// Register the channel with the system; you can't change the importance
-// or other notification behaviors after this
-            NotificationManager notificationManager = getContext().getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
-    }
+
 }

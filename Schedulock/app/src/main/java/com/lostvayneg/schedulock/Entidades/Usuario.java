@@ -1,9 +1,10 @@
 package com.lostvayneg.schedulock.Entidades;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Usuario {
+public class Usuario implements Serializable {
     private String id;
     private String nombre;
     private String email;
