@@ -21,12 +21,15 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.lostvayneg.schedulock.Controladores_de_Eventos.Login;
 import com.lostvayneg.schedulock.Entidades.Actividad;
+import com.lostvayneg.schedulock.Entidades.Logro;
 import com.lostvayneg.schedulock.Entidades.Usuario;
 
 import java.io.File;
 import java.io.IOException;
 import java.security.AccessController;
 import java.util.ArrayList;
+
+import static com.lostvayneg.schedulock.Adaptadores.AdaptadorListaLogros.RUTA_LOGROS;
 
 public class Acceso_Base_Datos {
 
@@ -37,7 +40,9 @@ public class Acceso_Base_Datos {
     public static final String RUTA_USUARIOS ="usuarios/";
     public static final String RUTA_ACTIVIDADES ="actividades/";
     public static final String RUTA_IMAGENES = "fotos_perfil/";
+    public static final String RUTA_LOGROS = "logros/";
     private ArrayList<Actividad> listaActividades;
+    private ArrayList<Logro> listaLogros;
     private FirebaseUser usuario;
     public StorageReference referenciaSBD;
 
@@ -46,6 +51,7 @@ public class Acceso_Base_Datos {
         storageBD = FirebaseStorage.getInstance();
         autenticacionFB = new Autenticacion_Firebase();
         this.listaActividades = new ArrayList<>();
+        this.listaLogros=new ArrayList<>();
         usuario = autenticacionFB.getUsuario();
     }
 
@@ -96,6 +102,7 @@ public class Acceso_Base_Datos {
 
         return  listaActividades;
     }
+
 
     public boolean guardarFotoPerfil(Uri uriFotoPerfil, String userID) {
 

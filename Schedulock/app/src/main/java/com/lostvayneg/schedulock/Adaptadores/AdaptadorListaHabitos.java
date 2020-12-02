@@ -83,7 +83,6 @@ public class AdaptadorListaHabitos extends RecyclerView.Adapter<AdaptadorListaHa
             sabado= itemView.findViewById(R.id.checkB_sabado_ver_habito);
             domingo= itemView.findViewById(R.id.checkB_domingo_ver_habito);
             this.onHabitoListener=onHabitoListener;
-            lunes.setonc
         }
     }
     public void setOnClickListener(View.OnClickListener listener)

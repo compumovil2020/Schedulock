@@ -32,6 +32,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.UploadTask;
 import com.lostvayneg.schedulock.ActividadPrincipal;
+import com.lostvayneg.schedulock.Entidades.Logro;
 import com.lostvayneg.schedulock.Entidades.Usuario;
 import com.lostvayneg.schedulock.R;
 import com.lostvayneg.schedulock.Utilidades.Acceso_Base_Datos;
@@ -39,6 +40,7 @@ import com.lostvayneg.schedulock.Utilidades.Permisos;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 public class RegistrarUsuario extends AppCompatActivity {
     private EditText email_Registrarse;
@@ -49,12 +51,16 @@ public class RegistrarUsuario extends AppCompatActivity {
     private EditText nombre_Registrarse;
     private EditText edad_Registrarse;
     private RadioGroup genero_Registrarse;
-    private Acceso_Base_Datos baseDatos;
+    private Acceso_Base_Datos acceso_base_datos;
     private ImageView imagen_perfil;
     private static final int IMAGE_PICKER_REQUEST = 2;
     private Permisos permisos;
     private Uri uriFotoPerfil;
     private ProgressDialog progresoRegistro;
+    private DatabaseReference referenciaBD;
+    public FirebaseDatabase baseDatos;
+    private FirebaseUser usuario;
+    public static final String RUTA_LOGROS = "logros/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +70,7 @@ public class RegistrarUsuario extends AppCompatActivity {
         password_Registrarse=findViewById(R.id.password_registrarse);
         confirmar_Password=findViewById(R.id.confirmar_Password);
         this.autenticacionFB = FirebaseAuth.getInstance();
-        baseDatos = new Acceso_Base_Datos();
+        acceso_base_datos = new Acceso_Base_Datos();
         btnRegistrarse=findViewById(R.id.btn_registrar_nuevo_usuario);
         nombre_Registrarse=findViewById(R.id.nombre_usuario_registrarse);
         edad_Registrarse = findViewById(R.id.edad_usuario_registrarse);
@@ -74,7 +80,7 @@ public class RegistrarUsuario extends AppCompatActivity {
         uriFotoPerfil = null;
         permisos = new Permisos();
         progresoRegistro = new ProgressDialog(this);
-
+        baseDatos= FirebaseDatabase.getInstance();
         btnRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -140,20 +146,21 @@ public class RegistrarUsuario extends AppCompatActivity {
                                 else
                                     generoIn = "Otro";
                                 nuevoUsuario.setGenero(generoIn);
+                                guardarLogrosBD(user.getUid());
                                 if(uriFotoPerfil != null){
-                                    baseDatos.guardarFotoPerfil(uriFotoPerfil, user.getUid());
-                                    baseDatos.referenciaSBD = baseDatos.storageBD.getReference(baseDatos.RUTA_IMAGENES).child(user.getUid());
-                                    baseDatos.referenciaSBD.putFile(uriFotoPerfil).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    acceso_base_datos.guardarFotoPerfil(uriFotoPerfil, user.getUid());
+                                    acceso_base_datos.referenciaSBD = acceso_base_datos.storageBD.getReference(acceso_base_datos.RUTA_IMAGENES).child(user.getUid());
+                                    acceso_base_datos.referenciaSBD.putFile(uriFotoPerfil).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                         @Override
                                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                            baseDatos.registrarNuevoUsuario(nuevoUsuario, user.getUid());
+                                            acceso_base_datos.registrarNuevoUsuario(nuevoUsuario, user.getUid());
                                             progresoRegistro.dismiss();
                                             updateUI(user);
                                         }
                                     });
                                 }
                                 else{
-                                    baseDatos.registrarNuevoUsuario(nuevoUsuario, user.getUid());
+                                    acceso_base_datos.registrarNuevoUsuario(nuevoUsuario, user.getUid());
                                     progresoRegistro.dismiss();
                                     updateUI(user);
                                 }
@@ -235,7 +242,22 @@ public class RegistrarUsuario extends AppCompatActivity {
             return false;
         return true;
     }
+    private void guardarLogrosBD(String id){
+        ArrayList<Logro> listaLogros = new ArrayList<Logro>();
+        Logro logro1= new Logro("Agenda de actividades actualizada","Se registraron al menos tres actividades",200,false);
+        Logro logro2= new Logro("Si lo anoto, no se me olvida","Se registraron al menos tres notas",150,false);
+        Logro logro3= new Logro("El más sociable","se ha invitado a otro usuario a una actividad",250,false);
+        Logro logro4= new Logro("Mi primer Calendario","Se ha registrado un calendario",250,false);
+        Logro logro5= new Logro("Persona de hábitos","Se han completado al menos tres hábitos",300,false);
+        listaLogros.add(logro1);
+        listaLogros.add(logro2);
+        listaLogros.add(logro3);
+        listaLogros.add(logro4);
+        listaLogros.add(logro5);
+        referenciaBD = baseDatos.getReference(RUTA_LOGROS + id+ "/");
+        referenciaBD.setValue(listaLogros);
 
+    }
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults)
     {

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="1dp"
+    app:cardUseCompatPadding="true">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/fondo_barra_lateral_superior">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <ImageView
+            android:id="@+id/imagen_premio_logro_ver_logro"
+            android:layout_width="400dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="0.5"
+            android:src="@drawable/ic_trofeo_logro"
+            android:gravity="center_horizontal"
+            android:textStyle="bold" />
+        <TextView
+
+            android:id="@+id/titulo_logro_ver_logro"
+            android:layout_width="550dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="0.5"
+            android:gravity="center_horizontal"
+            android:text="Título del Logro"
+            android:textColor="@color/color_blanco"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/puntos_logro_ver_logro"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="+ 990 pts"
+            android:layout_weight="0.5"
+            android:textColor="@color/color_blanco"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+        <TextView
+            android:id="@+id/descripcion_logro_ver_logro"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Descripción cómo completar logro"
+            android:textAlignment="center"
+            android:layout_weight="0.5"
+            android:textColor="@color/color_blanco"
+            android:textSize="16sp"
+            android:paddingLeft="25dp"
+            android:layout_marginTop="-25dp"
+            android:gravity="center_horizontal" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

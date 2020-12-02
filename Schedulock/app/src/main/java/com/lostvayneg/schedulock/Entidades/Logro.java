@@ -1,10 +1,17 @@
 package com.lostvayneg.schedulock.Entidades;
 
 public class Logro {
+    public Logro(String titulo, String descripcion, long puntos, boolean completado) {
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.puntos = puntos;
+        this.completado = completado;
+    }
+
     private String titulo;
     private String descripcion;
-    private long expPremio;
-    private boolean estaCompletado;
+    private long puntos;
+    private boolean completado;
 
     public Logro() {
     }
@@ -25,19 +32,19 @@ public class Logro {
         this.descripcion = descripcion;
     }
 
-    public long getExpPremio() {
-        return expPremio;
+    public long getPuntos() {
+        return puntos;
     }
 
     public void setExpPremio(long expPremio) {
-        this.expPremio = expPremio;
+        this.puntos = puntos;
     }
 
     public boolean isEstaCompletado() {
-        return estaCompletado;
+        return completado;
     }
 
     public void setEstaCompletado(boolean estaCompletado) {
-        this.estaCompletado = estaCompletado;
+        this.completado = estaCompletado;
     }
 }
