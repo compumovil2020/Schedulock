@@ -220,19 +220,18 @@ public class FragmentoVerPerfil extends Fragment {
     }
 
     private void cargarCantidadCalendarios(){
-        List<Calendario> calendarios = new ArrayList<>();
-        referenciaBD = baseDatos.getReference(Acceso_Base_Datos.RUTA_CALENDARIOS);
-        referenciaBD.addValueEventListener(new ValueEventListener() {
+        final ArrayList<Calendario> listaCalendarios = new ArrayList<>();
+        referenciaBD=baseDatos.getReference(Acceso_Base_Datos.RUTA_CALENDARIOS);
+        referenciaBD.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                int cantidad = 0;
-                for (DataSnapshot dataSnap: dataSnapshot.getChildren()) {
-                    Calendario dato = dataSnap.getValue(Calendario.class);
-                    if(dato.getUserId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
-                        cantidad++;
+                for (DataSnapshot actividadBD: dataSnapshot.getChildren()) {
+                    Calendario cal = actividadBD.getValue(Calendario.class);
+                    if(cal.getUserId().equals(FirebaseAuth.getInstance().getUid())){
+                        listaCalendarios.add(cal);
                     }
                 }
-                cantidad_calendarios.setText(""+calendarios.size());
+                cantidad_calendarios.setText(""+listaCalendarios.size());
             }
 
             @Override

@@ -309,7 +309,7 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
     public void obtenerActividadesUsuario() {
         final FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
-            refDBUser = database.getReference(Acceso_Base_Datos.RUTA_USUARIOS+user.getUid());
+            refDBUser = database.getReference(Acceso_Base_Datos.RUTA_USUARIOS);
             suscripcionAct = refDBActv.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

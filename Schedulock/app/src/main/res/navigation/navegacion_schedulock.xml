@@ -187,5 +187,5 @@
     <fragment
         android:id="@+id/fragmentVerMapaUnico"
         android:name="com.lostvayneg.schedulock.Controladores_de_Eventos.FragmentVerMapaUnico"
-        android:label="FragmentVerMapaUnico" />
+        android:label="Ubicacion Actividad" />
 </navigation>
