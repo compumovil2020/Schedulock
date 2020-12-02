@@ -309,7 +309,7 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
     public void obtenerActividadesUsuario() {
         final FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
-            refDBUser = database.getReference(Acceso_Base_Datos.RUTA_USUARIOS);
+            refDBUser = database.getReference(Acceso_Base_Datos.RUTA_USUARIOS+user.getUid());
             suscripcionAct = refDBActv.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -375,22 +375,13 @@ public class FragmentoVerMapa extends Fragment implements RoutingListener {
         }
 
         for (int i = 0; i < listaActividadesFiltradas.size(); i++) {
-            Marker aux = mMap.addMarker(new MarkerOptions().position(new LatLng(listaActividadesFiltradas.get(i).getLocalizacion().getLatitud(), listaActividadesFiltradas.get(i).getLocalizacion().getLongitud())).title(listaActividadesFiltradas.get(i).getNombre()));
-            idsMarkerActv.put(aux.getId(), listaActividadesFiltradas.get(i));
+            if(listaActividadesFiltradas != null){
+                if(listaActividadesFiltradas.get(i).getLocalizacion() != null){
+                    Marker aux = mMap.addMarker(new MarkerOptions().position(new LatLng(listaActividadesFiltradas.get(i).getLocalizacion().getLatitud(), listaActividadesFiltradas.get(i).getLocalizacion().getLongitud())).title(listaActividadesFiltradas.get(i).getNombre()));
+                    idsMarkerActv.put(aux.getId(), listaActividadesFiltradas.get(i));
+                }
+            }
         }
-
-        /*Actividad act1 = new Actividad();
-        act1.setNombre("Nombre vacio");
-        act1.setFrencuenciaR("Una vez");
-        act1.setPrioridad("Alta");
-        act1.setDescripcion("Ejemplo");
-        act1.setRecordatorio("30 Minutos Antes");
-        act1.setCategoria("1");
-        act1.setInicio(new Date());
-        act1.setFin(new Date());
-        act1.setLocalizacion(new Localizacion(2.1867, -75.6233));*/
-
-        //mMap.addMarker(new MarkerOptions().position(new LatLng(act1.getLocalizacion().getLatitud(), act1.getLocalizacion().getLongitud())).title(act1.getNombre()));
     }
 
     @Override

@@ -55,6 +55,9 @@
             android:name=".ActividadPrincipal"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Controladores_de_Eventos.ActividadRecordatorios"
+            android:label="Recordatorio Actividad"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

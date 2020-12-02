@@ -164,31 +164,34 @@ public class ActividadPrincipal extends AppCompatActivity implements NavigationV
                     cargaDatosUsuario.setCancelable(false);
                     cargaDatosUsuario.show();
                     Usuario usuarioConsultado = dataSnapshot.getValue(Usuario.class);
-                    txt_nombre_usuario.setText(usuarioConsultado.getNombre());
-                    usuario_conectado = usuarioConsultado;
-                    txt_correo_usuario.setText(currentUser.getEmail());
-                    final File localFile;
-                    try {
-                        localFile = File.createTempFile("images", "jpg");
-                        referenciaSBD = storageBD.getReference(Acceso_Base_Datos.RUTA_IMAGENES).child(currentUser.getUid());
-                        referenciaSBD.getFile(localFile)
-                                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                                    @Override
-                                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                        file_img_usuario = localFile;
-                                        final Bitmap selectedImage = BitmapFactory.decodeFile(localFile.getPath());
-                                        img_perfil_usuario.setImageBitmap(selectedImage);
-                                        cargaDatosUsuario.dismiss();
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception exception) {
-                                cargaDatosUsuario.dismiss();
-                            }
-                        });
-                    } catch (IOException e) {
+                    if(usuarioConsultado != null){
+                        txt_nombre_usuario.setText(usuarioConsultado.getNombre());
+                        usuario_conectado = usuarioConsultado;
+                        txt_correo_usuario.setText(currentUser.getEmail());
+                        final File localFile;
+                        try {
+                            localFile = File.createTempFile("images", "jpg");
+                            referenciaSBD = storageBD.getReference(Acceso_Base_Datos.RUTA_IMAGENES).child(currentUser.getUid());
+                            referenciaSBD.getFile(localFile)
+                                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                            file_img_usuario = localFile;
+                                            final Bitmap selectedImage = BitmapFactory.decodeFile(localFile.getPath());
+                                            img_perfil_usuario.setImageBitmap(selectedImage);
+                                            cargaDatosUsuario.dismiss();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception exception) {
+                                    cargaDatosUsuario.dismiss();
+                                }
+                            });
+                        } catch (IOException e) {
 
+                        }
                     }
+
 
 
                 }

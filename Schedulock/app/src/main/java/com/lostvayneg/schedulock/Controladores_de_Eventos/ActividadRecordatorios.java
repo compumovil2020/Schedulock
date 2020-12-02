@@ -48,6 +48,7 @@ public class ActividadRecordatorios extends AppCompatActivity {
                     AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
                     alarmManager.cancel(pendingIntent);
                     Log.i("Alarma", "Se cancelo la alarma creada con el id " + id_intent);
+                    finish();
                 }
             }
         });
